@@ -1,0 +1,64 @@
+﻿<include file="Public:header" />
+<div class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标签名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<{$data.name}>" placeholder="" id="name" name="name">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">状态：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box">
+				<select class="select" name="status" id="status">
+					<option value="" selected>请选择状态</option>
+					<option value="1" <if condition="$data.status eq 1">selected</if>>启用</option>
+					<option value="2" <if condition="$data.status eq 2">selected</if>>禁用</option>
+
+				</select>
+				</span>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input type="hidden" name="id" value="<{$Think.get.id}>">
+				<input class="btn btn-primary radius" type="button" id="saveBtn" onclick="tag_edit();" value="&nbsp;&nbsp;修改&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	function tag_edit(){
+		if($.trim($('#name').val()) == ''){
+			layer.msg('版块名称不能为空',{icon:2,time:1000});
+			return false;
+		}
+
+		if($.trim($('#status').val()) == ''){
+			layer.msg('请选择版块状态',{icon:2,time:1000});
+			return false;
+		}
+		$.ajax({
+			url:'<{:U("Tag/update")}>',
+			data:$('form').serialize(),
+			type:'post',
+			dataType:'json',
+			success:function(_data){
+				if(_data.status == 1){
+					setTimeout(function(){
+						layer.msg(_data.message,{icon:1,time:1000});
+						var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+						parent.layer.close(index);
+					}, 1000);
+					parent.location.reload();
+				}else{
+					layer.msg(_data.message,{icon:2,time:1000});
+				}
+			}
+		})
+	}
+
+</script>
