@@ -129,13 +129,17 @@ class BaseAction extends Action {
         $type = explode('.', $_FILES['file']['name']);
        // print_r( $_FILES['file']);
         $type = $type[1];
-        $fileName = $file_dir . '/' . date('Ymd').mt_rand() .'.' . $type;
+        //$fileName = $file_dir . '/' . date('Ymd').mt_rand() .'.' . $type;
+        $fileName = $file_dir . '/' . $_FILES['file']['name'];
        // echo "<br/>";
        /// echo $fileName;
+        if(file_exists($uploadDir . $fileName)){
+            unlink($uploadDir . $fileName);
+        }
         if(!move_uploaded_file($_FILES['file']['tmp_name'], $uploadDir . $fileName)){
             $result = ['status'=>0 , 'message'=>'上传失败'];
         }else{
-            $result = ['status'=>1 , 'message'=>'上传成功', 'url'=>$fileName];
+            $result = ['status'=>1 , 'message'=>'上传成功', 'url'=>$fileName, 'title'=>$_FILES['file']['name']];
         }
 
         $this->ajaxReturn($result);

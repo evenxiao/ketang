@@ -15,8 +15,8 @@ class ContentModel extends RelationModel
      * @param bool|false $limit
      * @return mixed
      */
-    public function getContentList($field, $where=array(), $limit=false){
-        $data = $this->field($field)->where($where)->select();
+    public function getContentList($where=array(), $field='content.*, cate.name', $limit=false){
+        $data = $this->field($field)->alias('content')->join('tb_cate as cate on content.cate_id = cate.id', 'left')->where($where)->select();
         return $data;
     }
 
@@ -27,9 +27,9 @@ class ContentModel extends RelationModel
      * @param bool|false $limit
      * @return mixed
      */
-    public function getVideoList($field = true, $param=array(), $limit = false){
-        $param['type'] = 1;
-        return $this->getContentList($field, $param, $limit);
+    public function getVideoList($param=array(), $limit = false){
+        $param['content.type'] = 1;
+        return $this->getContentList($param);
 
     }
 
@@ -40,9 +40,9 @@ class ContentModel extends RelationModel
      * @param bool|false $limit
      * @return mixed
      */
-    public function getNewsList($field = true, $param=array(), $limit = false){
-        $param['type'] = 2;
-        return $this->getContentList($field, $param, $limit);
+    public function getNewsList($param=array(), $limit = false){
+        $param['content.type'] = 2;
+        return $this->getContentList($param);
 
     }
 

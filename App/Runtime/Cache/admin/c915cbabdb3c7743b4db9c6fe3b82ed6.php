@@ -1,4 +1,61 @@
-﻿<include file="Public:header" />
+<?php if (!defined('THINK_PATH')) exit();?>﻿﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <LINK rel="Bookmark" href="/favicon.ico" >
+  <LINK rel="Shortcut Icon" href="/favicon.ico" />
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/html5.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/respond.min.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/PIE_IE678.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" type="text/css" href="__ROOT__/Resources/static/h-ui/css/H-ui.min.css" />
+  <link rel="stylesheet" type="text/css" href="__ROOT__/Resources/static/h-ui.admin/css/H-ui.admin.css" />
+  <link rel="stylesheet" type="text/css" href="__ROOT__/Resources/lib/Hui-iconfont/1.0.7/iconfont.css" />
+  <link rel="stylesheet" type="text/css" href="__ROOT__/Resources/lib/icheck/icheck.css" />
+  <link rel="stylesheet" type="text/css" href="__ROOT__/Resources/static/h-ui.admin/skin/default/skin.css" id="skin" />
+  <link rel="stylesheet" type="text/css" href="__ROOT__/Resources/static/h-ui.admin/css/style.css" />
+  <!--[if IE 6]>
+  <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+  <script>DD_belatedPNG.fix('*');</script>
+  <![endif]-->
+
+  <script type="text/javascript" src="__ROOT__/Resources/lib/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/layer/2.1/layer.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/static/h-ui/js/H-ui.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/static/h-ui.admin/js/H-ui.admin.js"></script>
+
+
+
+  <script type="text/javascript" src="__ROOT__/Resources/lib/laypage/1.2/laypage.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/My97DatePicker/WdatePicker.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/ueditor/1.4.3/ueditor.config.js"></script>
+  <script type="text/javascript" src="__ROOT__/Resources/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+
+  <link href="__ROOT__/Resources/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+  <link href="__ROOT__/Resources/lib/kindeditor/themes/default/default.css" rel="stylesheet" type="text/css"/>
+
+  <script type="text/javascript" src="__ROOT__/Resources/lib/webuploader/0.1.5/webuploader.min.js"></script>
+
+  <script type="text/javascript" src="__ROOT__/Resources/lib/kindeditor/kindeditor-min.js"></script>
+
+  <script type="text/javascript" src="__ROOT__/Resources/lib/kindeditor/lang/zh_CN.js"></script>
+
+  <!-- -->
+  <!--<script type="text/javascript" src="__ROOT__/Resources/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>-->
+
+  <title>微课堂-后台管理系统</title>
+  <meta name="keywords" content="微课堂-后台管理系统">
+  <meta name="description" content="微课堂-后台管理系统">
+</head>
+<body>
+
+
 <!--<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 视频管理<span class="c-gray en">&gt;</span> 添加视频 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>-->
 <div class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-member-add" enctype="multipart/form-data">
@@ -15,9 +72,7 @@
 				<select class="input-text" id="cate" name="cate_id">
 
 					<option value="">-请选择版块-</option>
-					<volist name="data.cates" id="vo">
-						<option value="<{$vo.id}>"><{$vo.name}></option>
-					</volist>
+					<?php if(is_array($data["cates"])): $i = 0; $__LIST__ = $data["cates"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
 				</select>
 			</div>
 		</div>
@@ -145,12 +200,10 @@
 									<!--栏目管理</label>-->
 							<!--</dt>-->
 							<dd   style=" margin-left: 0px;">
-								<volist name="data.tags" id="vo">
-								<label class="">
-									<input type="checkbox" value="<{$vo.id}>" name="taglist[]">
-									<{$vo.name}>
-								</label>
-								</volist>
+								<?php if(is_array($data["tags"])): $i = 0; $__LIST__ = $data["tags"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><label class="">
+									<input type="checkbox" value="<?php echo ($vo["id"]); ?>" name="taglist[]">
+									<?php echo ($vo["name"]); ?>
+								</label><?php endforeach; endif; else: echo "" ;endif; ?>
 								<!--<label class="">-->
 									<!--<input type="checkbox" value="" name="user-Character-0-0-0" id="user-Character-0-0-1">-->
 									<!--修改</label>-->
@@ -293,7 +346,7 @@
 		 //return false;
 
 		$.ajax({
-			url:'<{:U("Video/add")}>',
+			url:'<?php echo U("Video/add");?>',
 			data:$('form').serialize(),
 			type:'post',
 			dataType:'json',
@@ -355,7 +408,7 @@
 
 			// 文件接收服务端。
 			//server: '__ROOT__/Resources/lib/webuploader/0.1.5/server/fileupload.php',
-			server: '<{:U("Base/upload?type=video")}>',
+			server: '<?php echo U("Base/upload?type=video");?>',
 
 			// 选择文件的按钮。可选。
 			// 内部根据当前运行是创建，可能是input元素，也可能是flash.

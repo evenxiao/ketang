@@ -8,7 +8,19 @@
 				<input type="text" class="input-text" value="<{$data.info.title}>" placeholder="" id="title" name="title">
 			</div>
 		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>版块：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<!--<input type="text" class="input-text" value="" placeholder="" id="cate" name="cate_id">-->
+				<select class="input-text" id="cate" name="cate_id">
 
+					<option value="">-请选择版块-</option>
+					<volist name="data.cates" id="vo">
+						<option value="<{$vo.id}>" <if condition="$data['info']['cate_id'] eq $vo['id']">selected="selected"</if>><{$vo.name}></option>
+					</volist>
+				</select>
+			</div>
+		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>作者：</label>
 			<div class="formControls col-xs-8 col-sm-9">
@@ -26,8 +38,8 @@
 		<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3">封面图片：</label>
 		<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
-		<input class="input-text upload-url" type="text" name="thumb_img" id="thumb_img" readonly nullmsg="请添加附件！" style="width:200px">
-		<a href="javascript:void();" class="btn btn-primary radius upload-btn" id="thumb_btn"><i class="Hui-iconfont">&#xe642;</i> 浏览图片</a>
+		<input class="input-text upload-url" type="text" name="thumb_img" id="thumb_img" readonly nullmsg="请添加附件！" style="width:200px" value="<{$data.info.thumb_img}>">
+		<a href="javascript:;" class="btn btn-primary radius upload-btn" id="thumb_btn"><i class="Hui-iconfont">&#xe642;</i> 浏览图片</a>
 		<!--<input type="file" multiple name="file-2" class="input-file">-->
 		</span>
 			<!--<script type="text/plain" id="upload_ue"></script>-->
@@ -37,8 +49,8 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">视频：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
-		<input class="input-text upload-url" type="text" name="source_file" id="url" readonly nullmsg="请添加附件！" style="width:200px">
-		<a href="javascript:void();" class="btn btn-primary radius upload-btn" id="insertfile"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+		<input class="input-text upload-url" type="text" name="source_file" id="url" readonly nullmsg="请添加附件！" style="width:200px" value="<{$data.info.source_file}>">
+		<a href="javascript:;" class="btn btn-primary radius upload-btn" id="insertfile"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
 		<!--<input type="file" multiple name="file-2" class="input-file">-->
 		</span>
 				<!--<script type="text/plain" id="upload_ue"></script>-->
@@ -56,11 +68,11 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>来源：</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 				<div class="radio-box">
-					<input name="source_from" type="radio" id="source_from-1" checked value="1">
+					<input name="source_from" type="radio" id="source_from-1" <if condition="$data['info']['source_from'] eq 1">checked</if> value="1">
 					<label for="source_from-1">上传</label>
 				</div>
 				<div class="radio-box">
-					<input  name="source_from" type="radio" id="source_from-2" value="2">
+					<input  name="source_from" type="radio" id="source_from-2"  <if condition="$data['info']['source_from'] eq 2">checked</if> value="2">
 					<label for="source_from-2">外链</label>
 				</div>
 			</div>
@@ -69,11 +81,11 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否最新：</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 			<div class="radio-box">
-				<input name="is_new" type="radio" id="is_new-1" checked value="1">
+				<input name="is_new" type="radio" id="is_new-1"  <if condition="$data['info']['is_new'] eq 1">checked</if> value="1">
 				<label for="is_new-1">是</label>
 			</div>
 			<div class="radio-box">
-				<input  name="is_new" type="radio" id="is_new-2" value="2">
+				<input  name="is_new" type="radio" id="is_new-2" <if condition="$data['info']['is_new'] eq 2">checked</if> value="2">
 				<label for="is_new-2">否</label>
 			</div>
 
@@ -83,11 +95,11 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否热门：</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 				<div class="radio-box">
-					<input name="is_hot" type="radio" id="is_hot-1" checked value="1">
+					<input name="is_hot" type="radio" id="is_hot-1" <if condition="$data['info']['is_hot'] eq 1">checked</if> value="1">
 					<label for="is_hot-1">是</label>
 				</div>
 				<div class="radio-box">
-					<input  name="is_hot" type="radio" id="is_hot-2" value="2">
+					<input  name="is_hot" type="radio" id="is_hot-2" <if condition="$data['info']['is_hot'] eq 2">checked</if> value="2">
 					<label for="is_hot-2">否</label>
 				</div>
 
@@ -97,11 +109,11 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发布状态：</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 				<div class="radio-box">
-					<input name="status" type="radio" id="status-1" checked value="1">
+					<input name="status" type="radio" id="status-1" <if condition="$data['info']['status'] eq 1">checked</if> value="1">
 					<label for="status-1">立即生效</label>
 				</div>
 				<div class="radio-box">
-					<input  name="status" type="radio" id="status-2" value="3">
+					<input  name="status" type="radio" id="status-2" <if condition="$data['info']['status'] eq 3">checked</if> value="3">
 					<label for="status-2">暂存草稿</label>
 				</div>
 
@@ -148,6 +160,7 @@
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input type="hidden" value="<{$Think.get.id}>" name="id">
 				<input class="btn btn-primary radius" type="button" onclick="video_add();" id="uploadBtn" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 			</div>
 		</div>
@@ -195,11 +208,11 @@
 		editor.sync();
 		//var html = editor.html();
 		$('#content').html(editor.html());
-		//console.log($('#content').html());
+
 		 //return false;
 
 		$.ajax({
-			url:'<{:U("Video/add")}>',
+			url:'<{:U("Video/edit")}>',
 			data:$('form').serialize(),
 			type:'post',
 			dataType:'json',
@@ -249,4 +262,91 @@
 		});
 	});
 
+</script>
+
+
+<script type="application/javascript">
+	$(function() {
+		var $list = $("#fileList"), $btn = $("#btn-star"), state = "pending";
+		var uploader = WebUploader.create({
+
+			// swf文件路径
+			swf: '__ROOT__/Resources/lib/webuploader/0.1.5/Uploader.swf',
+
+			// 文件接收服务端。
+			//server: '__ROOT__/Resources/lib/webuploader/0.1.5/server/fileupload.php',
+			server: '<{:U("Base/upload?type=video")}>',
+
+			// 选择文件的按钮。可选。
+			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+			pick: '#picker',
+
+			// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+			resize: false
+		});
+		// 当有文件被添加进队列的时候
+		uploader.on('fileQueued', function (file) {
+			$list.append('<div id="' + file.id + '" class="item">' +
+					'<h4 class="info">' + file.name + '</h4>' +
+					'<p class="state">等待上传...</p>' +
+					'</div>');
+		});
+
+		// 文件上传过程中创建进度条实时显示。
+		uploader.on('uploadProgress', function (file, percentage) {
+			var $li = $('#' + file.id),
+					$percent = $li.find('.progress .progress-bar');
+
+			// 避免重复创建
+			if (!$percent.length) {
+				$percent = $('<div class="progress progress-striped active">' +
+						'<div class="progress-bar" role="progressbar" style="width: 0%">' +
+						'</div>' +
+						'</div>').appendTo($li).find('.progress-bar');
+			}
+
+			$li.find('p.state').text('上传中');
+
+			$percent.css('width', percentage * 100 + '%');
+		});
+		uploader.on('uploadSuccess', function (file, response) {
+			$('#' + file.id).find('p.state').text('已上传');
+			if(response.status == 1){
+				var html = '<input type="hidden" name="attach[]" value="'+response.url+'"><input type="hidden" name="attach_name[]" value="'+response.title+'">';
+				$('#' + file.id).append(html);
+			}
+
+		});
+
+		uploader.on('uploadError', function (file) {
+			$('#' + file.id).find('p.state').text('上传出错');
+		});
+
+		uploader.on('uploadComplete', function (file) {
+			$('#' + file.id).find('.progress').fadeOut();
+		});
+		uploader.on('all', function (type) {
+			if (type === 'startUpload') {
+				state = 'uploading';
+			} else if (type === 'stopUpload') {
+				state = 'paused';
+			} else if (type === 'uploadFinished') {
+				state = 'done';
+			}
+
+			if (state === 'uploading') {
+				$btn.text('暂停上传');
+			} else {
+				$btn.text('开始上传');
+			}
+		});
+
+		$btn.on('click', function () {
+			if (state === 'uploading') {
+				uploader.stop();
+			} else {
+				uploader.upload();
+			}
+		});
+	});
 </script>

@@ -8,37 +8,22 @@ class VideoAction extends BaseAction {
     }
     public function videoList(){
         $param = array();
-        if(trim(I('post.keyword'))){
-            $param['title'] = array('like', '%' . trim(I('post.keyword')) . '%');
+        if(trim(I('param.keyword'))){
+            $param['title'] = array('like', '%' . trim(I('param.keyword')) . '%');
         }
-        $data['data'] = D('Content')->getVideoList(true, $param);
+        $cate_id = intval(I('param.cate_id', 0));
+        if($cate_id){
+            $param['cate_id'] = $cate_id;
+        }
+        $data['data'] = D('Content')->getVideoList($param);
+        $data['keyword']= trim(I('param.keyword'));
+        $data['cate_id']= $cate_id;
+        $data['cates'] = D('Cate')->getCateList(array('type'=>1, 'status'=>1));
+
         $this->assign('data', $data);
         $this->display();
     }
 
-    /**
-     * 修改视频
-     */
-    public function update(){
-        $id = I('post.id', 0);
-        $pwd = trim(I('post.new_pwd', ''));
-        if($id && $pwd){
-            $data = array(
-                'password'=>$pwd,
-                'update_time'=>date('Y-m-d H:i:s'),
-            );
-            $status = D('Admin')->where("id = {$id}")->save($data);
-            if($status){
-                $result = array('status'=> 1, 'message'=>'修改成功！');
-            }else{
-                $result = array('status'=> 0, 'message'=>'修改失败！');
-            }
-
-        }else{
-            $result = array('status'=> 0, 'message'=>'参数有误！');
-        }
-        $this->ajaxReturn($result);
-    }
     /**
      * 添加视频
      */
@@ -47,26 +32,42 @@ class VideoAction extends BaseAction {
         if(IS_AJAX){
             $data = I('post.');
             $tags = I('post.taglist');
+            $attachs = I('post.attach');
+            $attach_names = I('post.attach_name');
             if(!empty($data)){
                 unset($data['beizhu']);
                 unset($data['editorValue']);
                 unset($data['taglist']);
+                unset($data['attach']);
+                unset($data['attach_name']);
 
                 $data['create_time'] = date('Y-m-d H:i:s');
                 $result = $this->contentModel->addVideo($data);
                 //$content_id =  $this->contentModel->getInsertId();
-                if($tags){
-                    //print_r($tags);
-                    $tagData = array();
-                    foreach($tags as $key=>$val){
-                        $tmp['tag_id'] = $val;
-                        $tmp['content_id'] = $result['content_id'];
-                        $tmp['create_time'] = date('Y-m-d H:i:s');
-                        $tagData[] = $tmp;
+                if($result['status'] == 1){
+                    if($tags){
+
+                        $tagData = array();
+                        foreach($tags as $key=>$val){
+                            $tmp['tag_id'] = $val;
+                            $tmp['content_id'] = $result['content_id'];
+                            $tmp['create_time'] = date('Y-m-d H:i:s');
+                            $tagData[] = $tmp;
+                        }
+
+                        D('TagContent')->addAll($tagData);
                     }
-//                    print_r($tagData);
-//                    exit;
-                    D('TagContent')->addAll($tagData);
+                    if($attachs){
+                        foreach($attachs as $key=>$val){
+                            ///$info = ;
+                            $tmp['title'] = $attach_names[$key];
+                            $tmp['attach_url'] = $val;
+                            $tmp['content_id'] = $result['content_id'];
+                            $tmp['create_time'] = date('Y-m-d H:i:s');
+                            $attachData[] = $tmp;
+                        }
+                        D('Attach')->addAll($attachData);
+                    }
                 }
                 $this->ajaxReturn($result);
             }else{
@@ -75,6 +76,7 @@ class VideoAction extends BaseAction {
                 $this->ajaxReturn($result);
             }
         }
+        $data['cates'] = D('Cate')->getCateList(array('type'=>1, 'status'=>1));
         $data['tags'] = D('Tag')->where(array('status'=>1))->select();
         $this->assign('data', $data);
         $this->display();
@@ -84,31 +86,34 @@ class VideoAction extends BaseAction {
      * 添加视频
      */
     public function edit(){
-        $id = intval(I('get.id',0));
+        $id = intval(I('param.id',0));
         if(IS_AJAX){
             $data = I('post.');
             $tags = I('post.taglist');
+            $attachs = I('post.attach');
             if(!empty($data) || !$id){
                 unset($data['beizhu']);
                 unset($data['editorValue']);
                 unset($data['taglist']);
+                unset($data['attach']);
 
                 $data['create_time'] = date('Y-m-d H:i:s');
                 $status = $this->contentModel->editContent($id, $data);
-                if($tags){
-                    //print_r($tags);
-                    $tagData = array();
-                    foreach($tags as $key=>$val){
-                        $tmp['tag_id'] = $val;
-                        $tmp['content_id'] = $id;
-                        $tmp['create_time'] = date('Y-m-d H:i:s');
-                        $tagData[] = $tmp;
-                    }
-                    //删除原来的
-                    D('TagContent')->where(array('status'=>1, 'content_id'=>$id))->save(array('status'=>2));
-                    //插入新的
-                    D('TagContent')->addAll($tagData);
-                }
+//                if($tags){
+//                    //print_r($tags);
+//                    $tagData = array();
+//                    foreach($tags as $key=>$val){
+//                        $tmp['tag_id'] = $val;
+//                        $tmp['content_id'] = $id;
+//                        $tmp['create_time'] = date('Y-m-d H:i:s');
+//                        $tagData[] = $tmp;
+//                    }
+//                    //删除原来的
+//                    D('TagContent')->where(array('status'=>1, 'content_id'=>$id))->save(array('status'=>2));
+//                    //插入新的
+//                    D('TagContent')->addAll($tagData);
+//                }
+
                 $result['status'] = $status ? 1 : 0;
                 $result['message'] = $result['status'] ? '修改成功' : '修改失败';
                 $this->ajaxReturn($result);
@@ -122,7 +127,7 @@ class VideoAction extends BaseAction {
         //echo $id;
         $where['id'] = $id;
         $data['info'] = $this->contentModel->getVideoInfo($where);
-        //print_r( $data['info']);
+        $data['cates'] = D('Cate')->getCateList(array('type'=>1, 'status'=>1));
         $data['tags'] = D('Tag')->where(array('status'=>1))->select();
         $this->assign('data', $data);
         $this->display();
