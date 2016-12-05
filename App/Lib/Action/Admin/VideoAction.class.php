@@ -15,11 +15,16 @@ class VideoAction extends BaseAction {
         if($cate_id){
             $param['cate_id'] = $cate_id;
         }
+        //print_r(I('param.tag_id', ''));
+        if(I('param.tag_id', '')){
+            $param['tag']
+        }
         $data['data'] = D('Content')->getVideoList($param);
         $data['keyword']= trim(I('param.keyword'));
         $data['cate_id']= $cate_id;
         $data['cates'] = D('Cate')->getCateList(array('type'=>1, 'status'=>1));
 
+        $data['tags'] = D('Tag')->where(array('status'=>1, 'type'=>1))->select();
         $this->assign('data', $data);
         $this->display();
     }
@@ -83,7 +88,7 @@ class VideoAction extends BaseAction {
     }
 
     /**
-     * 添加视频
+     * 修改视频
      */
     public function edit(){
         $id = intval(I('param.id',0));
@@ -118,6 +123,7 @@ class VideoAction extends BaseAction {
                 $result['message'] = $result['status'] ? '修改成功' : '修改失败';
                 $this->ajaxReturn($result);
             }else{
+                $this->
                 $result['status'] = 0;
                 $result['message'] = '参数有误，请重试';
                 $this->ajaxReturn($result);
@@ -132,4 +138,30 @@ class VideoAction extends BaseAction {
         $this->assign('data', $data);
         $this->display();
     }
+
+    /**
+     * 附件列表
+     */
+    public function attachList(){
+        $id = intval(I('param.id', 0));
+        $data['info'] = $this->contentModel->where(array('id'=>$id))->find();
+        $data['attachList'] = D('Content')->getVideoAttach($id);
+        $this->assign('data', $data);
+
+        $this->display();
+    }
+
+    /**
+     * 删除附件
+     */
+    public function delAttach(){
+        if(IS_AJAX){
+            $id = intval(I('post.id', 0));
+            $data = $this->contentModel->delVideoAttach($id);
+
+            $this->ajaxReturn($data);
+        }
+
+    }
+
 }

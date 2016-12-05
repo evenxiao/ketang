@@ -133,4 +133,29 @@ class ContentModel extends RelationModel
         //$where['status'] = 1;
         return $this->field(true)->where($where)->find();
     }
+
+    /**
+     * 返回视频附件
+     */
+    public function getVideoAttach($id){
+        $data =  D('Attach')->where(array('content_id'=>$id, 'status'=>1))->select();
+        return $data;
+    }
+
+
+    /**
+     * 返回视频附件
+     */
+    public function delVideoAttach($id){
+        $status =  D('Attach')->where(array('id'=>$id))->save(array('status'=>2, 'update_time'=>date('Y-m-d H:i:s')));
+        //echo D('Attach')->getLastSql();
+        if($status){
+            $data['status'] = 1;
+            $data['message'] = '删除成功';
+        }else{
+            $data['status'] = 2;
+            $data['message'] = '删除失败';
+        }
+        return $data;
+    }
 }

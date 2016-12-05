@@ -1,4 +1,11 @@
 ﻿<include file="Public:header" />
+
+<script type="text/javascript" src="__ROOT__/Resources/lib/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Resources/lib/select2/js/i18n/zh-CN.js"></script></span>
+
+
+<link rel="stylesheet" type="text/css" href="__ROOT__/Resources/lib/select2/css/select2.min.css" />
+
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 视频管理<span class="c-gray en">&gt;</span>视频列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c">
@@ -12,6 +19,15 @@
 				<option value="<{$vo.id}>" <if condition="$data['cate_id'] eq $vo['id']">selected</if>><{$vo.name}></option>
 			</volist>
 		</select>
+
+		</span>
+		<span class="select-box inline">
+			<select class="select" name="tag_id[]" id="tag_id" multiple style="width: 100%;">
+				<option value="">--请选择标签--</option>
+				<volist name="data.tags" id="vo">
+					<option value="<{$vo.id}>"><{$vo.name}></option>
+				</volist>
+			</select>
 		</span>
 		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜视频</button>
 		</form>
@@ -59,6 +75,7 @@
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
 					<a style="text-decoration:none" class="ml-5" onClick="change_password('查看','<{$vo.id}>','600','270')" href="<{:U('Home/Video/view')}>?id=<{$vo.id}>" title="<{$vo.title}>" target="_blank">查看</a>
 					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<{:U(\'Video/edit\')}>?id=<{$vo.id}>','800','600')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('附件','<{:U(\'Video/attachList\')}>?id=<{$vo.id}>','900','600')" href="javascript:;" title="编辑">附件</a>
 					<a style="text-decoration:none" class="ml-5" onClick="change_password('评论','<{:U(\'Video/update\')}>?id=<{$vo.id}>','800','600')" href="javascript:;" title="评论">评论</a>
 				</td>
 			</tr>
@@ -138,5 +155,10 @@
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
 	}
+
+	$("#tag_id").select2({
+		placeholder: "请选择标签",
+		language: "zh-CN"
+	});
 </script>
 <include file="Public:footer" />
