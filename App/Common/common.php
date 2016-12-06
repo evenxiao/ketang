@@ -91,7 +91,7 @@ function adminMenuList()
                             'level' => 2
                         ),
                         array(
-                            'name' => '添加视频',
+                            'name' => '添加资讯',
                             'url' => U('News/add'),
                             'level' => 2
                         ),
