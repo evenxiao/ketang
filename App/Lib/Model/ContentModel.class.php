@@ -8,6 +8,10 @@
  */
 class ContentModel extends RelationModel
 {
+    public $tagContentModel;
+    public function _initialize(){
+        $this->tagContentModel = D('TagContent');
+    }
     /**
      * 返回内容列表
      * @param $field
@@ -17,6 +21,14 @@ class ContentModel extends RelationModel
      */
     public function getContentList($where=array(), $field='content.*, cate.name', $limit=false){
         $data = $this->field($field)->alias('content')->join('tb_cate as cate on content.cate_id = cate.id', 'left')->where($where)->select();
+        if($data){
+            foreach ($data as $key => $value) {
+                $tag_ids = $this->tagContentModel->where(array('content_id'=>$value['id'], 'status'=>1))->getField('tag_id', true);
+                $tag_names = D('Tag')->where(array('id'=>array('in', $tag_ids)))->getField('name', true);
+            
+                $data[$key]['tags_name'] = implode(',', $tag_names);
+            }
+        }
         return $data;
     }
 

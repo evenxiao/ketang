@@ -21,12 +21,13 @@
 		</select>
 
 		</span>
-		<span class="select-box inline">
-			<select class="select" name="tag_id[]" id="tag_id" multiple style="width: 100%;">
-				<option value="">--请选择标签--</option>
+		<span class="select-box inline" style="width: 200px;">
+			<select class="select" name="tag_id[]" id="tag_id" multiple style="width: 190px;" >
+				<optgroup label="标签列表">
 				<volist name="data.tags" id="vo">
 					<option value="<{$vo.id}>"><{$vo.name}></option>
 				</volist>
+				</optgroup>
 			</select>
 		</span>
 		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜视频</button>
@@ -45,6 +46,7 @@
 				<th width="100">版块</th>
 				<th width="80">时长(分钟)</th>
 				<th width="80">作者</th>
+				<th width="80">标签</th>
 				<th width="50">点击量</th>
 				<th width="50">来源</th>
 				<th width="30">最新</th>
@@ -63,6 +65,7 @@
 				<td><{$vo.name}></td>
 				<td><{$vo.total_time}></td>
 				<td><{$vo.author}></td>
+				<td><{$vo.tags_name}></td>
 				<td><{$vo.click_num}></td>
 				<td><{$vo.source_from}></td>
 				<td><{$vo.is_new}></td>
@@ -156,9 +159,13 @@
 		});
 	}
 
-	$("#tag_id").select2({
+	var select2_tags = $("#tag_id").select2({
 		placeholder: "请选择标签",
 		language: "zh-CN"
 	});
+	var selected_tags = '<{$data.tags_select}>';
+	selected_tags = eval("(" + selected_tags+ ")");
+	console.log(selected_tags);
+	select2_tags.val(selected_tags).trigger('change');
 </script>
 <include file="Public:footer" />
