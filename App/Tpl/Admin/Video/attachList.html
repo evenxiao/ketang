@@ -1,4 +1,4 @@
-﻿<include file="Public:header" />
+<include file="Public:header" />
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 视频管理<span class="c-gray en">&gt;</span>附件列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c">
@@ -35,7 +35,7 @@
 				<td><{$vo.create_time}></td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-					<a style="text-decoration:none" class="ml-5" href="/Uploads/<{$vo.attach_url}>" title="<{$vo.title}>" target="_blank" charset="utf-8">下载</a>
+					<a style="text-decoration:none" class="ml-5" href="__ROOT__/Uploads/<{$vo.attach_url}>" title="<{$vo.title}>" charset="utf-8">下载</a>
 					<a style="text-decoration:none" class="ml-5" onClick="member_del(this,'<{$vo.id}>')" href="javascript:;" title="删除">删除</a>
 
 				</td>

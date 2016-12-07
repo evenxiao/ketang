@@ -1,4 +1,4 @@
-﻿<include file="Public:header" />
+<include file="Public:header" />
 <!--<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 视频管理<span class="c-gray en">&gt;</span> 添加视频 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>-->
 <div class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-member-add" enctype="multipart/form-data">
@@ -28,13 +28,13 @@
 			</div>
 		</div>
 
-		<div class="row cl">
+		<!-- <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>时长：</label>
 			<div class="formControls col-xs-6 col-sm-7">
 				<input type="text" class="input-text" placeholder="" name="total_time" id="total_time">
 			</div>
 			<label class="form-label col-xs-2 col-sm-2">(单位：分钟)</label>
-		</div>
+		</div> -->
 		<!--<div class="row cl">-->
 			<!--<label class="form-label col-xs-4 col-sm-3">封面图片：</label>-->
 			<!--<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">-->
@@ -54,25 +54,15 @@
 		</div>
 
 		</div>
+		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">视频：</label>
-			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
-		<input class="input-text upload-url" type="text" name="source_file" id="url" readonly nullmsg="请添加附件！" style="width:200px">
-		<a href="javascript:;" class="btn btn-primary radius upload-btn" id="insertfile"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
-		<!--<input type="file" multiple name="file-2" class="input-file">-->
-		</span>
-				<!--<script type="text/plain" id="upload_ue"></script>-->
-			</div>
-
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">视频介绍：</label>
+			<label class="form-label col-xs-4 col-sm-3">资讯内容：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<!--<script id="editor" type="text/plain" style="height:300px;"></script>-->
-				<textarea name="content" style="height:300px;visibility:hidden; width:500px;" placeholder="请输入视频介绍..."></textarea>
+				<textarea name="content" style="height:300px;visibility:hidden; width:500px;" placeholder="请输入资讯内容..."></textarea>
 			</div>
 		</div>
-		<div class="row cl">
+		<!-- <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>来源：</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 				<div class="radio-box">
@@ -84,7 +74,7 @@
 					<label for="source_from-2">外链</label>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否最新：</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
@@ -273,17 +263,17 @@
 			return false;
 		}
 		if($.trim($('#cate').val()) == ''){
-			layer.msg('请选择视频版块',{icon:2,time:1000});
+			layer.msg('请选择版块',{icon:2,time:1000});
 			return false;
 		}
 		if($.trim($('#thumb_img').val()) == ''){
 			layer.msg('请上传封面图片',{icon:2,time:1000});
 			return false;
 		}
-		if($.trim($('#url').val()) == ''){
-			layer.msg('请上传视频',{icon:2,time:1000});
-			return false;
-		}
+		// if($.trim($('#url').val()) == ''){
+		// 	layer.msg('请上传视频',{icon:2,time:1000});
+		// 	return false;
+		// }
 		$('#uploadBtn').attr('disabled', true).val('处理中');
 		//var html = ue.getContent();
 		editor.sync();
@@ -293,7 +283,7 @@
 		 //return false;
 
 		$.ajax({
-			url:'<{:U("Video/add")}>',
+			url:'<{:U("News/add")}>',
 			data:$('form').serialize(),
 			type:'post',
 			dataType:'json',
@@ -355,7 +345,7 @@
 
 			// 文件接收服务端。
 			//server: '__ROOT__/Resources/lib/webuploader/0.1.5/server/fileupload.php',
-			server: '<{:U("Base/upload?type=video")}>',
+			server: '<{:U("Base/upload?type=news")}>',
 
 			// 选择文件的按钮。可选。
 			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
