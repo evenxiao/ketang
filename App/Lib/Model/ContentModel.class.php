@@ -98,6 +98,7 @@ class ContentModel extends RelationModel
 
         $data_content = $data;
         $status = $this->where("id = $id")->save($data_content);
+        //echo $this->getLastSql();
         return $status;
     }
 
