@@ -1,6 +1,647 @@
-﻿<include file="Public:header" />
+<include file="Public:header" />
 
-<h2>首页</h2>
+	<!-- 首页广告图 -->
+	<div class="fullSlide">
+	  	<div class="bd">
+	   		 <ul>
+	      		<li style="background:url(__ROOT__/Resources/static/home/images/banner3.jpg) center 0 no-repeat;"><a target="_blank" href="#"></a></li>
+	     		 <li style="background:url(__ROOT__/Resources/static/home/images/banner4.jpg) center 0 no-repeat;"><a target="_blank" href="#"></a></li>
+	      		<li style="background:url(__ROOT__/Resources/static/home/images/banner5.jpg) center 0 no-repeat;"><a target="_blank" href="#"></a></li>
+	    	</ul>
+	  	</div>
+		  <div class="hd">
+		    <ul>
+		    </ul>
+		  </div>
+		  <span class="prev"></span> 
+		  <span class="next"></span> 
+	  </div>
+	  <script type="text/javascript">
+	  $('.common-header').addClass('index-header').removeClass('common-header');
+		jQuery(".fullSlide").hover(function() {
+		    jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+		},
+		function() {
+		    jQuery(this).find(".prev,.next").fadeOut()
+		});
+		jQuery(".fullSlide").slide({
+		    titCell: ".hd ul",
+		    mainCell: ".bd ul",
+		    effect: "fold",
+		    autoPlay: true,
+		    autoPage: true,
+		    trigger: "click",
+		    interTime: 5500,
+		    startFun: function(i) {
+		        var curLi = jQuery(".fullSlide .bd li").eq(i);
+		        if ( !! curLi.attr("_src")) {
+		            curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+		        }
+		    }
+		});
+		</script>
 
-<include file="Public:footer" />
+	<!-- content -->
+	<div class="outwrap bg-white">
+		<div class="wrap">
+			<div class="index-rcommend-box">
+				<div class="common-hd bd-bm-1 clearfix">
+					<h1 class="c-black l">精彩推荐</h1>
+				</div>
+				<div class="rcommend-box mr-25 clearfix">
+					<!--推荐视频-->
+					<div class="rcommend-mv-box l">
 
+						<a class="mv-link" href="#">
+							<div class="mv-link-img">
+								<img src="__ROOT__/Resources/static/home/images/img1.png">
+							</div>
+							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<div class="mv-link-bottom">
+								<span class="score l">评分4.9</span>
+								<span class="number	r">1898人学习</span>
+							</div>
+						</a>
+
+						<a class="mv-link" href="#">
+							<div class="mv-link-img">
+								<img src="__ROOT__/Resources/static/home/images/img1.png">
+							</div>
+							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<div class="mv-link-bottom">
+								<span class="score l">评分4.9</span>
+								<span class="number	r">1898人学习</span>
+							</div>
+						</a>
+
+						<a class="mv-link" href="#">
+							<div class="mv-link-img">
+								<img src="__ROOT__/Resources/static/home/images/img1.png">
+							</div>
+							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<div class="mv-link-bottom">
+								<span class="score l">评分4.9</span>
+								<span class="number	r">1898人学习</span>
+							</div>
+						</a>
+
+						<a class="mv-link" href="#">
+							<div class="mv-link-img">
+								<img src="__ROOT__/Resources/static/home/images/img1.png">
+							</div>
+							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<div class="mv-link-bottom">
+								<span class="score l">评分4.9</span>
+								<span class="number	r">1898人学习</span>
+							</div>
+						</a>
+
+						<a class="mv-link" href="#">
+							<div class="mv-link-img">
+								<img src="__ROOT__/Resources/static/home/images/img1.png">
+							</div>
+							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<div class="mv-link-bottom">
+								<span class="score l">评分4.9</span>
+								<span class="number	r">1898人学习</span>
+							</div>
+						</a>
+
+						<a class="mv-link" href="#">
+							<div class="mv-link-img">
+								<img src="__ROOT__/Resources/static/home/images/img1.png">
+							</div>
+							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<div class="mv-link-bottom">
+								<span class="score l">评分4.9</span>
+								<span class="number	r">1898人学习</span>
+							</div>
+						</a>
+					</div>
+
+				<!--推荐文章-->
+
+					<div class="rcommend-news-box l">
+						<div class="rcommend-top-new bd-bm-1">
+							<h1><a href="#">军改一周年：解放军那些上过联播的震撼画面</a></h1>
+							<p>外媒称越南在南海被孤立：美国已开始抽身新加坡淡化装甲车事件 称不许
+								任何事挟持新中关系中国海军战舰演习凶猛追杀潜艇 观战记者看得心惊.</p>
+						</div>
+						<div class="rcommend-bottom-news">
+							<ul vaule="compact">
+								<li><a href="#" title="">外媒称越南在南海被孤立：美国已开始抽身新加坡淡化装甲车事件 称不许
+								任何事挟持新中关系中国海军战舰演习凶猛追杀潜艇 观战记者看得心惊.</a></li>
+								<li><a href="#" title="">杜特尔特遭袭谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>
+								<li><a href="#" title="">杜特凶手 为何与CIA没有直接联系凶手 ...</a></li>
+								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 A没有直接联系凶手 ...</a></li>
+								<li><a href="#" title="">杜特尔特遭袭击谁是凶是凶手 为何与CIA没有直接联系凶手 ...</a></li>
+								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>
+								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>
+								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 视频tab框架-->
+
+	<div class="outwrap bg-gray clearfix">
+		<div class="wrap">
+			<div class="index-tab-wrap l">
+
+				<div class="mv-slideTxtBox">
+					<div class="hd clearfix">
+						<div class="common-tab-hd clearfix">
+							<h1 class="c-black l">视频课程</h1>
+						</div>
+						<ul>
+							<li class="on">最新视频</li>
+							<li>最新视频</li>
+							<li>最新视频</li>
+							<li>最新视频</li>
+							<li>最新视频</li>	
+							<li>最新视频</li>
+						</ul>
+						<div class="tab-more">
+							<a href="#">更多>></a>
+						</div>
+					</div>
+					<div class="bd clearfix">
+						<ul><!-- 视频每项最多显示8条 -->
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+						</ul>
+
+						<ul>
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+						</ul>
+
+						<ul>
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+						</ul>
+
+						<ul>
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+						</ul>
+
+						<ul>
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+
+						</ul>
+
+						<ul>
+							<a class="mv-link" href="#">
+								<div class="mv-link-img">
+									<img src="__ROOT__/Resources/static/home/images/img1.png">
+								</div>
+								<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+								<div class="mv-link-bottom">
+									<span class="score l">评分4.9</span>
+									<span class="number	r">1898人学习</span>
+								</div>
+							</a>
+						</ul>
+
+					</div>
+				</div>
+
+				<script>
+				 	$(".mv-slideTxtBox").slide({effect:"fade",trigger:"click",delayTime:500,pnLoop:false});
+				</script>
+
+			</div>
+	
+			<div class="index-rank-wrap r">
+				<div class="common-hd">
+					<h1 class="c-black">视频点击排行榜</h1>
+				</div>
+				<div class="common-rank-list">
+					<ul>
+						<li><em class="no1">1</em><a href="#" title="">张老师叫你如的制服张老师叫你如的制服张老师叫你如的制服</a></li>
+						<li><em class="no2">2</em><a href="#" title="">日媒称战后日本将被...</a></li>
+						<li><em class="no3">3</em><a href="#" title="">中国布局作战 辽宁舰...</a></li>
+						<li><em>4</em><a href="#" title="">中国布局作战 辽宁舰...</a></li>
+						<li><em>5</em><a href="#" title="">缅甸木姐地有所缓...</a></li>
+						<li><em>6</em><a href="#" title="">缅甸军方奉行以打促谈 ...</a></li>
+						<li><em>7</em><a href="#" title="">法国防长冀特朗普府...</a></li>
+						<li><em>8</em><a href="#" title="">爱神的箭所大所大所大所多</a></li>
+						<li><em>9</em><a href="#" title="">爱神的箭所大所大所大...</a></li>
+						<li><em>10</em><a href="#" title="">张老师叫你如何快速...</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 新闻tab框架-->
+
+	<div class="outwrap bai clearfix">
+		<div class="wrap">
+			<div class="index-tab-wrap l">
+				<div class="new-slideTxtBox">
+					<div class="hd clearfix">
+						<div class="common-tab-hd clearfix">
+							<h1 class="c-black l">视频课程</h1>
+						</div>
+						<ul>
+							<li class="on">最新资讯</li>
+							<li>调研文案</li>
+							<li>调研文章</li>
+							<li>学习感悟</li>	
+						</ul>
+						<div class="tab-more">
+							<a href="#">更多>></a>
+						</div>
+					</div>
+					<div class="bd clearfix">
+						<ul><!-- 资讯首页每项最多显示16条 -->
+							<div class="news-link">
+								<a href="#">中国一次齐射10枚东风21 释放5大信号警告川普收敛点中国一次齐射10枚东风21 释放5大信号警告川普收敛点</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">美国准国防部长曾对华强硬表态：若冲突奉陪到底</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">中国打破惯例用模块化猛造新战舰 规模足以碾压日本</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">
+								片中称，中美两国今年在中国南海上呈现紧张态势，双方都举行了大规模的军事演习...[详细]
+								</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">专家：主张中日之间必有一战定强弱是幼稚想法中国打破惯例用模块化猛造新战舰 规模足以碾压日本</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">中国军队改革后不认可军人优先权将成历史</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">美防长访亚太却不来华释放重要信号 将对中国更强硬</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">001A航母为何是高层要求加建的：可节约5年宝贵时间</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">蒙古屡次触犯我核心利益逼 中国出手将致其经济崩溃</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">深度：中国潜艇将配特殊铝合金环隐身 美日束手无策</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">外国网友：为何其他穷国不能复制中国的成功？</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">朝鲜爆大事时机正临近 大家被韩国神逻辑搞笑了</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">普京为何“恭维”特朗普？或认为中国已成“出头鸟”</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">媒美惊呼：美国正在把全球领袖地位让给中国？</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">重拳出击！向世界宣告：这就是得罪中国的下场</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">官曝东风-31A洲际导弹最新伪装，信息含量好大</a>
+								<b>11-30 16:30</b>
+							</div>
+
+							<div class="news-link">
+								<a href="#">台湾不能不自量力妄想挑战中美关系</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">
+								防务文章预判，到2020年中国海军将增加部署30艘以上的潜艇力量……[详细]
+								</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">
+								中国专家推断，B21轰炸机将装备“智能”副驾驶，帮助测绘航线……[详细]
+								</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">中国航母发展经历美国三次战略忽悠！还好没上当</a>
+								<b>11-30 16:30</b>
+							</div>
+						</ul>
+						<ul>
+							<div class="news-link">
+								<a href="#">30多年后中国武器终于凭实力在这个国家重新上位</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">普京为何“恭维”特朗普？或认为中国已成“出头</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">普京为何“恭维”特朗普？或认为中国已成“出头鸟”</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">中国“神秘列车”已经启动 五角大楼“惶恐不安”</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">朝鲜核武达到啥水平了? 美国追击中国核潜艇悲剧了</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">媒美惊呼：美国正在把全球领袖地位让给中国？</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">重拳出击！向世界宣告：这就是得罪中国的下场</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">官曝东风-31A洲际导弹最新伪装，信息含量好大</a>
+								<b>11-30 16:30</b>
+							</div>
+
+							<div class="news-link">
+								<a href="#">台湾不能不自量力妄想挑战中美关系</a>
+								<b>11-30 16:30</b>
+							</div>
+						</ul>
+						<ul>
+							<div class="news-link">
+								<a href="#">普京为何“恭维”特朗普？或认为中国已成“出头鸟”</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">中国“神秘列车”已经启动 五角大楼“惶恐不安”</a>
+								<b>11-30 16:30</b>
+							</div>
+							<div class="news-link">
+								<a href="#">朝鲜核武达到啥水平了? 美国追击中国核潜艇悲剧了</a>
+								<b>11-30 16:30</b>
+							</div>
+						</ul>
+						<ul>
+							<div class="news-link">
+								<a href="#">普京为何“恭维”特朗普？或认为中国已成“出头鸟”</a>
+								<b>11-30 16:30</b>
+							</div>
+						</ul>
+					</div>
+				</div>
+				<script>
+					jQuery(".new-slideTxtBox").slide({effect:"fade",trigger:"click",delayTime:0,pnLoop:false});
+				</script>
+			</div>
+			<div class="index-rank-wrap r">
+				<div class="common-hd">
+					<h1 class="c-black">资讯点击排行榜</h1>
+				</div>
+				<div class="common-rank-list">
+					<ul>
+						<li><em class="no1">1</em><a href="#" title="">张老师叫你如的制服张老师叫你如的制服张老师叫你如的制服张老师叫你如的制服...</a></li>
+						<li><em class="no2">2</em><a href="#" title="">日媒称战后日本将被...</a></li>
+						<li><em class="no3">3</em><a href="#" title="">中国布局作战 辽宁舰...</a></li>
+						<li><em>4</em><a href="#" title="">中国布局作战 辽宁舰...</a></li>
+						<li><em>5</em><a href="#" title="">缅甸木姐地有所缓...</a></li>
+						<li><em>6</em><a href="#" title="">缅甸军方奉行以打促谈 ...</a></li>
+						<li><em>7</em><a href="#" title="">法国防长冀特朗普府...</a></li>
+						<li><em>8</em><a href="#" title="">爱神的箭所大所大所大所多</a></li>
+						<li><em>9</em><a href="#" title="">爱神的箭所大所大所大...</a></li>
+						<li><em>10</em><a href="#" title="">张老师叫你如何快速...</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 快捷标签-->
+	<div class="outwrap banner-img clearfix">
+		<div class="wrap">
+			<div class="common-hd clearfix">
+				<h1 class="c-white l">资讯点击排行榜</h1>
+				<a class="common-more c-white r" href="#">更多>></a>
+			</div>
+			<div class="label-box">
+				<a href="#">便民服务</a>
+				<a href="#">快看飞机</a>
+				<a href="#">很关键</a>
+				<a href="#">厉害了我的哥</a>
+				<a href="#">吊炸</a>
+				<a href="#">我勒个去</a>
+				<a href="#">可以</a>
+				<a href="#">哈哈哈</a>
+				<a href="#">谢啥子谢</a>
+				<a href="#">滚犊子</a>
+				<a href="#">靠这也行</a>
+				<a href="#">快看飞机</a>
+				<a href="#">很关键</a>
+				<a href="#">厉害了我的哥</a>
+				<a href="#">吊炸</a>
+			</div>
+			<div class="common-hd clearfix">
+				<h1 class="c-white l">资讯点击排行榜</h1>
+			</div>
+			<div class="hot-banner-box clearfix">
+				<div class="hot-banner-item l">
+					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner1.png"></a>
+				</div>
+				<div class="hot-banner-item l">
+					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner2.png"></a>
+				</div>
+				<div class="hot-banner-item l">
+					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 友情链接-->
+	<div class="outwrap bai">
+		<div class="wrap">
+			<div class="common-hd clearfix bd-bm-1">
+				<h1 class="c-black l">友情链接</h1>
+			</div>
+			<div class="friend-link">
+				<ul>
+					<li><a href="#">机场公安政治处</a></li>
+					<li><a href="#">分局官网</a></li>
+					<li><a href="#">食堂官网</a></li>
+					<li><a href="#">上海公安网</a></li>
+					<li><a href="#">机场公安网</a></li>
+					<li><a href="#">机场公安政治处</a></li>
+					<li><a href="#">分局官网</a></li>
+					<li><a href="#">食堂官网</a></li>
+					<li><a href="#">上海公安网</a></li>
+					<li><a href="#">机场公安网</a></li>
+					<li><a href="#">机场公安政治处</a></li>
+					<li><a href="#">分局官网</a></li>
+					<li><a href="#">食堂官网</a></li>
+					<li><a href="#">上海公安网</a></li>
+					<li><a href="#">机场公安政治处</a></li>
+					<li><a href="#">分局官网</a></li>
+					<li><a href="#">食堂官网</a></li>
+					<li><a href="#">上海公安网</a></li>
+					<li><a href="#">机场公安网</a></li>
+					<li><a href="#">机场公安政治处</a></li>
+					<li><a href="#">分局官网</a></li>
+					<li><a href="#">食堂官网</a></li>
+					<li><a href="#">上海公安网</a></li>
+					<li><a href="#">机场公安网</a></li>
+					<li><a href="#">机场公安政治处</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+<include file="Public:footer"/>
