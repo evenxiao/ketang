@@ -1,5 +1,5 @@
 <include file="Public:header" />
-
+<script type="text/javascript" src="__PUBLIC__/CKplayer/ckplayer/ckplayer.js" charset="utf-8"></script>
 	
 	<div id="main">
 		<div class="mv-top-box">
@@ -17,16 +17,17 @@
 			<div class="mv-kv-bd">
 				<div class="mv-kv-content">
 					<div id="kv-main"></div>
-				<script type="text/javascript" src="ckplayer/ckplayer.js" charset="utf-8"></script>
+			
 				<script type="text/javascript">
 				    var flashvars={
-				        f:'video/1.mp4',
+				        f:'__ROOT__/Uploads/video/1.mp4',
+						s:'0',
 				        c:0,
 				        v:40
 				    };
 				    var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};
-				    var video=['video/1.mp4->video/mp4'];
-				    CKobject.embed('/ckplayer/ckplayer.swf','kv-main','ckplayer_kv-main','100%','100%',true,flashvars,video,params);
+				    var video=['__ROOT__/Uploads/video/1.mp4->video/mp4'];
+				    CKobject.embed('__ROOT__/Public/CKplayer/ckplayer/ckplayer.swf','kv-main','ckplayer_kv-main','100%','100%',false,flashvars,video,params);
 				</script>
 			</div>
 		</div>
