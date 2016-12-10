@@ -95,8 +95,24 @@ class SysAction extends BaseAction {
      */
     public function cate(){
 
+        $keyword = trim(I('param.keyword', ''));
+        $type = trim(I('param.type', ''));
+        $status = trim(I('param.status', ''));
         $where = [];
+        if($keyword){
+            $where['name'] = $keyword;
+        }
+        if($type){
+            $where['type'] = $type;
+        }
+        if($status){
+            $where['status'] = $status;
+        }
         $data['cateList'] = $this->CateModel->where($where)->select();
+        $data['param'] = [
+            'keyword'=>$keyword,
+            'type'=>$type,
+        ];
         $this->assign('data', $data);
         $this->display();
     }
@@ -232,13 +248,62 @@ class SysAction extends BaseAction {
 
         $this->display();
     }
+    /**
+     * 导航管理 添加
+     */
+    public function editNav(){
 
+        $id = intval(I('param.id', 0));
+        if(IS_AJAX){
+
+            if($id) {
+
+                $data['config_name'] = I('post.config_name');
+                $data['config_value'] = I('post.config_value');
+                $show = I('post.show');
+                $dataCate = array();
+
+                $dataCate['config_name'] =  $data['config_name'];
+                $dataCate['config_value'] = $data['config_value'];
+                $dataCate['is_show'] = $show;
+                $dataCate['update_time'] = date('Y-m-d H:i:s');
+                $status = $this->ConfigModel->where(array('id'=>$id, 'type'=>4))->save($dataCate);
+
+                if ($status) {
+                    $result = array(
+                        'status' => 1,
+                        'message' => '编辑成功',
+                    );
+                } else {
+                    $result = array(
+                        'status' => 0,
+                        'message' => '编辑失败',
+                    );
+                }
+
+            }else{
+                $result = array(
+                    'status' => 0,
+                    'message' => '参数有误，ID无法获取',
+                );
+            }
+
+            $this->ajaxReturn($result);
+
+        }
+
+        $data['info'] = $this->ConfigModel->where(array('id'=>$id, 'type'=>4))->find();
+
+        $this->assign('data', $data);
+        $this->display();
+
+    }
     /**
      * 友情链接管理
      */
     public function links(){
         $where['type'] = 3;
-        //$where['status'] = 1;
+        $where['status'] = 1;
         $data['data'] = $this->ConfigModel->getConfigList($where);
         $this->assign($data);
         $this->display();
@@ -322,5 +387,36 @@ class SysAction extends BaseAction {
             }
             $this->ajaxReturn($result);
         }
+    }
+    /**
+     * 焦点图管理
+     */
+    public function ads(){
+        $where['type']=5;
+        $data['adsList'] = $this->ConfigModel->getConfigList($where);
+
+        $this->assign('data', $data);
+        $this->display();
+    }
+
+    /**
+     * 删除配置项
+     */
+    public function delConfig(){
+        $id = intval(I('param.id', 0));
+        if(IS_AJAX){
+            if(!id){
+                $this->ajaxReturn(array('status'=>0, 'message'=>'参数有误！'));
+            }
+            $status = $this->ConfigModel->where(array('id'=>$id))->save(array('status'=>2, 'update_time'=>date('Y-m-d H:i:s')));
+            if($status){
+                $result = array('status'=>1, 'message'=>'删除成功！');
+            }else{
+                $result = array('status'=>0, 'message'=>'删除失败！');
+            }
+
+            $this->ajaxReturn($result);
+        }
+
     }
 }

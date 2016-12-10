@@ -22,7 +22,7 @@ class BaseAction extends Action {
     public function isLogin(){
         $adminInfo = session('adminInfo');
         if(!$adminInfo){
-            $this->redirect('Base/login',[],3, '登陆跳转中...');
+            $this->redirect('Base/login');
         }
 
     }

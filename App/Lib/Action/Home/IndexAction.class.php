@@ -1,14 +1,87 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
-class IndexAction extends Action {
+class IndexAction extends BaseAction {
     public function index(){
-        //echo THINK_VERSION;
-	    //$this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px }</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p></div><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+
+        $data = [];
+
+        $data['tag'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->limit(15)->select();
+        $data['config'] = D('Config')->where(array('status'=>1, 'is_show'=>1))->select();
+        if($data['config']){
+            //$typeArr = array_keys(configType());
+            foreach($data['config'] as $key=>$val){
+                if($val['type'] == 3){
+                    $data['links'][] = $val;
+                }
+            }
+        }
+        $data['tuijian'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->select();
+
+        $cate = D('Cate')->where(array('status'=>1))->select();
+        if($cate){
+            foreach($cate as $key=>$val){
+                if($val['type'] == 1 && count($data['video']) < 6){
+                    $data['video'][$val['id']] = $val;
+                    $video_cate_ids[] = $val['id'];
+                }else if($val['type'] == 2  && count($data['news']) < 6){
+                    $data['news'][] = $val;
+                    $news_cate_ids[] = $val['id'];
+                }
+
+            }
+            //首页版块视频
+            if($video_cate_ids){
+                $video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
+                if($video_list){
+                    foreach($video_list as $key=>$value){
+                        if(count($data['video'][$value['cate_id']]['content']) < 8){
+                            $data['video'][$value['cate_id']]['content'][] = $value;
+                        }
+
+                    }
+                }
+            }
+
+            if($news_cate_ids){
+                $video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
+                if($video_list){
+                    foreach($video_list as $key=>$value){
+                        if(count($data['news'][$value['cate_id']]['content']) < 16){
+                            $data['news'][$value['cate_id']]['content'][] = $value;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        //$data['video'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->select();
+        //$data['news'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->select();
+        //print_r($data);
+        $this->assign('data', $data);
 
         $this->display();
     }
 
     public function tag(){
+        $id = intval(I('get.id', 0));
+        //echo $id;
+        $content = D('TagContent')->alias('tc')->field('c.*, tc.tag_id')->where(array('tc.tag_id'=>$id, 'tc.status'=>1))->join('tb_content as c on tc.content_id = c.id')->select();
+        $data = array();
+        if($content){
+            foreach($content as $key=>$value){
+                if($value['type'] == 1){
+                    //$value['thumb_img'] = $value['thumb_img'] == '' ? '__ROOT__/Resources/static/home/images/img2.png' : $value['thumb_img'];
+                    $value['thumb_img'] ='__ROOT__/Resources/static/home/images/img2.png';
+                    $data['videoList'][] = $value;
+                }elseif($value['type'] == 2){
+                    $data['newsList'][] = $value;
+                }
+            }
+        }
+        //print_r($data);
+
+        $this->assign('data', $data);
         $this->display();
     }
 

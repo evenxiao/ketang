@@ -5,7 +5,7 @@
  * Date: 2016/11/6
  * Time: 0:50
  */
-
+load('@.extend');
 /**
  * 过滤输入字符
  * @param $str
@@ -142,6 +142,7 @@ function configType($type = ''){
         2 =>'焦点图',
         3 =>'友情链接',
         4 =>'导航配置',
+        5 =>'广告图',
     );
     if($type){
         return $arr[$type];

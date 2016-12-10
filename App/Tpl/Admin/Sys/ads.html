@@ -1,56 +1,41 @@
 <include file="Public:header" />
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 版块管理<span class="c-gray en">&gt;</span>版块列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 广告图管理<span class="c-gray en">&gt;</span>广告图列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="text-c">
-		<form action="__SELF__" method="get">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入版块名称" id="keyword" name="keyword" value="<{$data.param.keyword}>">
-		<span class="select-box inline">
-			<select name="type" class="select">
-				<option value="" <if condition="$data['param']['type'] eq ''">selected</if>>--请选择版块类型--</option>
-				<option value="1" <if condition="$data['param']['type'] eq 1">selected</if> >视频</option>
-				<option value="2" <if condition="$data['param']['type'] eq 2">selected</if>>资讯</option>
-			</select>
-		</span>
-		<span class="select-box inline">
-			<select name="status" class="select">
-				<option value="" <if condition="$data['param']['status'] eq ''">selected</if>>--请选择状态--</option>
-				<option value="1" <if condition="$data['param']['status'] eq 1">selected</if> >已启用</option>
-				<option value="2" <if condition="$data['param']['status'] eq 2">selected</if>>已禁用</option>
-			</select>
-		</span>
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜版块</button>
-		</form>
-	</div>
+
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
-		<a href="javascript:;" onclick="member_add('添加版块','<{:U(\'Sys/addCate\')}>','','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加版块</a></span> </div>
+		<a href="javascript:;" onclick="member_add('添加广告图','<{:U(\'Sys/addAds\')}>','','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加广告图</a></span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">ID</th>
-				<th width="100">版块名称</th>
+				<th width="100">图片</th>
 				<th width="100">类型</th>
+				<th width="100">链接地址</th>
 				<th width="100">添加时间</th>
 				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
 			</thead>
 			<tbody>
-			<volist name="data.cateList" id="vo">
+			<volist name="data" id="vo">
 			<tr class="text-c">
 				<td><input type="checkbox" value="<{$vo.id}>" name=""></td>
 				<td><{$vo.id}></td>
-				<td><{$vo.name}></td>
-				<td><if condition="$vo.type eq 1">视频<else/>资讯</if></td>
+				<td><{$vo.config_name}></td>
+				<td>
+					<{$vo.type|configType}>
+				</td>
+				<td><{$vo.config_value}></td>
 				<td><{$vo.create_time}></td>
 				<td class="td-status">
-					<if condition="$vo['status'] eq 1"><span class="label label-success radius">已启用</span><else/><span class="label radius">已禁用</span></if>
+					<if condition="$vo['is_show'] eq 1"><span class="label label-success radius"> 显示</span><else/><span class="label radius">不显示</span></if>
 				</td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<{:U(\'Sys/updateCate\')}>','<{$vo.id}>','800','400')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<{:U(\'Sys/Nav\')}>','<{$vo.id}>','800','400')" href="javascript:;" title="编辑">编辑</a>
 				</td>
 			</tr>
 			</volist>

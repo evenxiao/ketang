@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>网上课堂</title>
+<title><{$web_name}></title>
 <link rel="stylesheet" href="__ROOT__/Resources/static/home/css/global.css" />
 <script type="text/javascript" src="__ROOT__/Resources/static/home/js/jquery.min.js"></script>
 <script type="text/javascript" src="__ROOT__/Resources/static/home/js/jquery.SuperSlide.2.1.1.js"></script>
@@ -13,19 +13,19 @@
 <body>
 	<div class="common-header">
 		<div class="wrap">
-			<a href="#" class="header-logo" title="logo">
+			<a href="__APP__" class="header-logo" title="logo">
 				<img src="__ROOT__/Resources/static/home/images/logo.png" alt="网上课堂" />
 			</a>
 			<ul class="header-nav">
-				<li><a href="#">首页</a></li>
-				<li><a href="#">视频课程</a></li>
-				<li><a href="#">新闻资讯</a></li>
+				<li><a href="__APP__">首页</a></li>
+				<li><a href="<{:U('Video/videoList')}>">视频课程</a></li>
+				<li><a href="<{:U('News/newsList')}>">新闻资讯</a></li>
 			</ul>
 			<div class="header-login"><a href="<{:U('Admin/Index/index')}>" title="管理平台" target="_blank">管理平台</a></div>
 
 			<div class="header-search-wrap">
 				<div class="header-search-area">
-	                <input class="header-search-input" type="text" placeholder="输入搜索关键字">
+	                <input class="header-search-input" type="text" placeholder="输入搜索关键字" id="search_keyword">
            		</div>
 				<em class="header-search-icon"></em>
 			</div>

@@ -32,5 +32,7 @@ return array(
 
     'APP_GROUP_LIST' => 'Home,Admin', //项目分组设定
     'DEFAULT_GROUP'  => 'Home', //默认分组
+
+    'WEB_NAME'  => '网上课堂', //默认分组
 );
 ?>
