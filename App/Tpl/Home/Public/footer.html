@@ -1,11 +1,22 @@
-﻿	<!-- foorer -->
+	<!-- foorer -->
 <div class="footer">
 	<div class="logo"></div>
 	<p>技术支持  上海嘉麟信息科技股份有限公司</p>
 </div>
+	<script>
+		function searchInfo(){
+			var keyword = $.trim($('input[name="keyword"]').val());
 
+			if(!keyword){
+				//layer.alert('请输入搜索关键字！');
+				alert('请输入搜索关键字！');
+				return false;
+			}
 
+			window.location.href = "<{:U('Index/search')}>" + '?keyword='+keyword;
+		}
+	</script>
 
-
+	<!--<script type="text/javascript" src="__ROOT__/Resources/static/home/js/home.js"></script>-->
 </body>
 </html>

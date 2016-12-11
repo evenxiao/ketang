@@ -1,13 +1,7 @@
-﻿<div class="index-rank-wrap r">
-	<div class="common-hd">
-		<h1 class="c-black">视频点击排行榜</h1>
-	</div>
-	<div class="common-rank-list">
+
 		<ul>
 			<volist name="bang.bang_video" id="vo">
 			<li><em class="no<{$key+1}>"><{$key+1}></em><a href="<{:U('Video/view',array('id'=>$vo['id']))}>" title=""><{$vo.title}></a></li>
 			</volist>
 
 		</ul>
-	</div>
-</div>

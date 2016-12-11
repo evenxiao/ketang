@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,9 +25,9 @@
 
 			<div class="header-search-wrap">
 				<div class="header-search-area">
-	                <input class="header-search-input" type="text" placeholder="输入搜索关键字" id="search_keyword">
+	                <input class="header-search-input" type="text" placeholder="输入搜索关键字" id="search_keyword" name="keyword">
            		</div>
-				<em class="header-search-icon"></em>
+				<em class="header-search-icon" onclick="searchInfo();"></em>
 			</div>
 		</div>
 	</div>
@@ -375,17 +375,19 @@
 
 			</div>
 			<!--视频点击排行榜-->
-			﻿<div class="index-rank-wrap r">
-	<div class="common-hd">
-		<h1 class="c-black">视频点击排行榜</h1>
-	</div>
-	<div class="common-rank-list">
+			<div class="index-rank-wrap r">
+				<div class="common-hd">
+					<h1 class="c-black">视频点击排行榜</h1>
+				</div>
+				<div class="common-rank-list">
+					
 		<ul>
 			<?php if(is_array($bang["bang_video"])): $i = 0; $__LIST__ = $bang["bang_video"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><em class="no<?php echo ($key+1); ?>"><?php echo ($key+1); ?></em><a href="<?php echo U('Video/view',array('id'=>$vo['id']));?>" title=""><?php echo ($vo["title"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
 
 		</ul>
-	</div>
-</div>
+				</div>
+			</div>
+
 
 		</div>
 	</div>
@@ -539,11 +541,13 @@
 				</script>
 			</div>
 			<!--资讯点击排行榜-->
-			﻿<div class="index-rank-wrap r">
-	<div class="common-hd">
-		<h1 class="c-black">资讯点击排行榜</h1>
-	</div>
-	<div class="common-rank-list">
+
+			<div class="index-rank-wrap r">
+				<div class="common-hd">
+					<h1 class="c-black">资讯点击排行榜</h1>
+				</div>
+				<div class="common-rank-list">
+					
 		<ul>
 			<?php if(is_array($bang["bang_news"])): $i = 0; $__LIST__ = $bang["bang_news"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><em class="no<?php echo ($key+1); ?>"><?php echo ($key+1); ?></em><a href="<?php echo U('Video/view',array('id'=>$vo['id']));?>" title=""><?php echo ($vo["title"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
 			<!--<li><em class="no2">2</em><a href="#" title="">日媒称战后日本将被...</a></li>-->
@@ -556,8 +560,9 @@
 			<!--<li><em>9</em><a href="#" title="">爱神的箭所大所大所大...</a></li>-->
 			<!--<li><em>10</em><a href="#" title="">张老师叫你如何快速...</a></li>-->
 		</ul>
-	</div>
-</div>
+
+				</div>
+			</div>
 		</div>
 	</div>
 	
@@ -607,14 +612,25 @@
 		</div>
 	</div>
 	
-﻿	<!-- foorer -->
+	<!-- foorer -->
 <div class="footer">
 	<div class="logo"></div>
 	<p>技术支持  上海嘉麟信息科技股份有限公司</p>
 </div>
+	<script>
+		function searchInfo(){
+			var keyword = $.trim($('input[name="keyword"]').val());
 
+			if(!keyword){
+				//layer.alert('请输入搜索关键字！');
+				alert('请输入搜索关键字！');
+				return false;
+			}
 
+			window.location.href = "<?php echo U('Index/search');?>" + '?keyword='+keyword;
+		}
+	</script>
 
-
+	<!--<script type="text/javascript" src="__ROOT__/Resources/static/home/js/home.js"></script>-->
 </body>
 </html>

@@ -85,7 +85,28 @@ class IndexAction extends BaseAction {
         $this->display();
     }
 
+    /**
+     * 搜索结果页
+     */
     public function search(){
+
+        $keyword = trim(I('param.keyword', ''));
+        $data = [];
+        if($keyword){
+            $result = D('Content')->where(array('status'=>1,'title'=>array('like', '%'.$keyword.'%')))->select();
+            if($result){
+                foreach($result as $key=>$value){
+                    if($value['type'] == 1){
+                        $data['result']['video'][] = $value;
+                    }else if($value['type'] == 2){
+                        $data['result']['news'][] = $value;
+                    }
+
+                }
+            }
+        }
+        $data['keyword'] = $keyword;
+        $this->assign('data', $data);
         $this->display();
     }
 }

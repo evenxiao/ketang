@@ -9,7 +9,19 @@ class VideoAction extends BaseAction {
     }
 
     public function view(){
+        $id = intval(I('param.id', 0));
+        $data = [];
+        if($id){
+            $where = array(
+                'id' => $id,
+                'type' => 1,
+                'status' => 1,
+            );
+            $data = D('Content')->getContentInfo($where);
+        }
+        $this->assign('data',$data);
         $this->display();
+
     }
 
     public function sysConfig(){

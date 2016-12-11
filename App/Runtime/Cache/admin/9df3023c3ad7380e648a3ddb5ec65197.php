@@ -1,5 +1,5 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿
-﻿<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -135,7 +135,7 @@
 
 
 </script>
-﻿<footer class="footer mt-20">
+<footer class="footer mt-20">
   <div class="container">
     <!--<p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>-->
      <p>
