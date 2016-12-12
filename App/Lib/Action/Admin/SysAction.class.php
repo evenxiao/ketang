@@ -336,7 +336,7 @@ class SysAction extends BaseAction {
     public function addBanner(){
 
         if(IS_AJAX){
-            $this->addConfig(3);
+            $this->addConfig(2);
         }
         $this->display();
     }

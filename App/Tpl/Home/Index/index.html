@@ -51,93 +51,93 @@
 				<div class="rcommend-box mr-25 clearfix">
 					<!--推荐视频-->
 					<div class="rcommend-mv-box l">
-
+						<volist name="data.hotVideo" id="vo">
 						<a class="mv-link" href="#">
 							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
+								<img src='<if condition="$vo[thumb_img] eq ''">__ROOT__/Resources/static/home/images/img1.png<else/><{$vo['thumb_img']}></if>'/>
 							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<h4><{$vo.title}></h4>
 							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
+								<span class="score l">评分<{$vo['score']}></span>
+								<span class="number	r"><{$vo['click_num']}>人学习</span>
 							</div>
 						</a>
+						</volist>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
-
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 					</div>
 
 				<!--推荐文章-->
 
 					<div class="rcommend-news-box l">
 						<div class="rcommend-top-new bd-bm-1">
-							<h1><a href="#">军改一周年：解放军那些上过联播的震撼画面</a></h1>
-							<p>外媒称越南在南海被孤立：美国已开始抽身新加坡淡化装甲车事件 称不许
-								任何事挟持新中关系中国海军战舰演习凶猛追杀潜艇 观战记者看得心惊.</p>
+							<h1><a href="<{:U('News/view', array('id'=>$data['hotNews'][0]['id']))}>" title="<{$data['hotNews'][0]['title']}>" target="_blank"><{$data['hotNews'][0]['title']}></a></h1>
+							<p><{$data['hotNews'][0]['content']|msubstr=###, 0, 50}></p>
 						</div>
 						<div class="rcommend-bottom-news">
 							<ul vaule="compact">
-								<li><a href="#" title="">外媒称越南在南海被孤立：美国已开始抽身新加坡淡化装甲车事件 称不许
-								任何事挟持新中关系中国海军战舰演习凶猛追杀潜艇 观战记者看得心惊.</a></li>
-								<li><a href="#" title="">杜特尔特遭袭谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 A没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶是凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>
+								<volist name="data.hotNews" id="vo" offset="1">
+								<li><a href="<{:U('News/view', array('id'=>$vo['id']))}>" title="<{$vo.title}>" target="_blank"><{$vo.title}></a></li>
+								</volist>
+								<!--<li><a href="#" title="">杜特尔特遭袭谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 A没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>-->
 							</ul>
 						</div>
 					</div>

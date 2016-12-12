@@ -1,16 +1,20 @@
 <include file="Public:header" />
 <div class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-member-add">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add" enctype="multipart/form-data">
 		<div class="row cl tag">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上传图片：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder=""  name="config_name[]">
+				<span class="btn-upload form-group">
+					<input class="input-text upload-url" type="text" name="config_name" id="thumb_img" readonly nullmsg="请添加附件！" style="width:200px">
+					<a href="javascript:;" class="btn btn-primary radius upload-btn" id="thumb_btn"><i class="Hui-iconfont">&#xe642;</i> 浏览图片</a>
+				</span>
+
 			</div>
 		</div>
 		<div class="row cl tag">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>链接地址：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder=""  name="config_value[]">
+				<input type="text" class="input-text" value="" placeholder=""  name="config_value">
 			</div>
 		</div>
 		<div class="row cl">
@@ -27,47 +31,12 @@
 
 			</div>
 		</div>
-		<div class="row cl" id="add-input">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<input class="btn btn-primary radius" type="button" id="addMore" onclick="add_More();" value="&nbsp;&nbsp;再增加一个&nbsp;&nbsp;">
-			</div>
-		</div>
-		<!--<div class="row cl">-->
-			<!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上级版块：</label>-->
-			<!--<div class="formControls col-xs-8 col-sm-9">-->
-				<!--<select name="pid" id="pid">-->
-					<!--<option value="0">一级版块</option>-->
-					<!--<option value="1">二级版块</option>-->
-					<!--<option value="2">三级版块</option>-->
-				<!--</select>-->
+		<!--<div class="row cl" id="add-input">-->
+			<!--<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">-->
+				<!--<input class="btn btn-primary radius" type="button" id="addMore" onclick="add_More();" value="&nbsp;&nbsp;再增加一个&nbsp;&nbsp;">-->
 			<!--</div>-->
 		<!--</div>-->
-		<!--<div class="row cl">-->
-			<!--<label class="form-label col-xs-4 col-sm-3">附件：</label>-->
-			<!--<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">-->
-				<!--<input class="input-text upload-url" type="text" name="uploadfile" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">-->
-				<!--<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>-->
-				<!--<input type="file" multiple name="file-2" class="input-file">-->
-				<!--</span> </div>-->
-		<!--</div>-->
-		<!--<div class="row cl">-->
-			<!--<label class="form-label col-xs-4 col-sm-3">所在城市：</label>-->
-			<!--<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">-->
-				<!--<select class="select" size="1" name="city">-->
-					<!--<option value="" selected>请选择城市</option>-->
-					<!--<option value="1">北京</option>-->
-					<!--<option value="2">上海</option>-->
-					<!--<option value="3">广州</option>-->
-				<!--</select>-->
-				<!--</span> </div>-->
-		<!--</div>-->
-		<!--<div class="row cl">-->
-			<!--<label class="form-label col-xs-4 col-sm-3">备注：</label>-->
-			<!--<div class="formControls col-xs-8 col-sm-9">-->
-				<!--<textarea name="beizhu" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" onKeyUp="textarealength(this,100)"></textarea>-->
-				<!--<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>-->
-			<!--</div>-->
-		<!--</div>-->
+
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 				<input class="btn btn-primary radius" type="button" id="saveBtn" onclick="tag_add();" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -111,13 +80,14 @@
 		$('#add-input').before(tag_input);
 	}
 	function tag_add(){
-		if($.trim($("form input[name='config_name[]']").val()) == ''){
-			layer.msg('导航名称不能为空',{icon:2,time:1000});
+		if($.trim($("form input[name='config_name']").val()) == ''){
+			layer.msg('请上传焦点图',{icon:2,time:1000});
 			return false;
 		}
 
+
 		$.ajax({
-			url:'<{:U("Sys/addLinks")}>',
+			url:'<{:U("Sys/addBanner")}>',
 			data:$('form').serialize(),
 			type:'post',
 			dataType:'json',
@@ -137,5 +107,22 @@
 			}
 		})
 	}
+	KindEditor.ready(function(K) {
+		var _editor = K.editor({
+			allowFileManager : true
+		});
+		K('#thumb_btn').click(function() {
+			_editor.loadPlugin('image', function() {
+				_editor.plugin.imageDialog({
+					imageUrl : K('#thumb_img').val(),
+					clickFn : function(url, title, width, height, border, align) {
+						K('#thumb_img').val(url);
+						_editor.hideDialog();
+					}
+				});
+			});
+		});
 
+
+	});
 </script>

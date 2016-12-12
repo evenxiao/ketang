@@ -83,93 +83,89 @@
 				<div class="rcommend-box mr-25 clearfix">
 					<!--推荐视频-->
 					<div class="rcommend-mv-box l">
-
-						<a class="mv-link" href="#">
+						<?php if(is_array($data["hotVideo"])): $i = 0; $__LIST__ = $data["hotVideo"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><a class="mv-link" href="#">
 							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
+								<img src='<?php if($vo[thumb_img] == ''): ?>__ROOT__/Resources/static/home/images/img1.png<?php else: echo ($vo['thumb_img']); endif; ?>'/>
 							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+							<h4><?php echo ($vo["title"]); ?></h4>
 							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
+								<span class="score l">评分<?php echo ($vo['score']); ?></span>
+								<span class="number	r"><?php echo ($vo['click_num']); ?>人学习</span>
 							</div>
-						</a>
+						</a><?php endforeach; endif; else: echo "" ;endif; ?>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
-
-						<a class="mv-link" href="#">
-							<div class="mv-link-img">
-								<img src="__ROOT__/Resources/static/home/images/img1.png">
-							</div>
-							<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分4.9</span>
-								<span class="number	r">1898人学习</span>
-							</div>
-						</a>
+						<!--<a class="mv-link" href="#">-->
+							<!--<div class="mv-link-img">-->
+								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+							<!--</div>-->
+							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+							<!--<div class="mv-link-bottom">-->
+								<!--<span class="score l">评分4.9</span>-->
+								<!--<span class="number	r">1898人学习</span>-->
+							<!--</div>-->
+						<!--</a>-->
 					</div>
 
 				<!--推荐文章-->
 
 					<div class="rcommend-news-box l">
 						<div class="rcommend-top-new bd-bm-1">
-							<h1><a href="#">军改一周年：解放军那些上过联播的震撼画面</a></h1>
-							<p>外媒称越南在南海被孤立：美国已开始抽身新加坡淡化装甲车事件 称不许
-								任何事挟持新中关系中国海军战舰演习凶猛追杀潜艇 观战记者看得心惊.</p>
+							<h1><a href="<?php echo U('News/view', array('id'=>$data['hotNews'][0]['id']));?>" title="<?php echo ($data['hotNews'][0]['title']); ?>" target="_blank"><?php echo ($data['hotNews'][0]['title']); ?></a></h1>
+							<p><?php echo (msubstr($data['hotNews'][0]['content'], 0, 50)); ?></p>
 						</div>
 						<div class="rcommend-bottom-news">
 							<ul vaule="compact">
-								<li><a href="#" title="">外媒称越南在南海被孤立：美国已开始抽身新加坡淡化装甲车事件 称不许
-								任何事挟持新中关系中国海军战舰演习凶猛追杀潜艇 观战记者看得心惊.</a></li>
-								<li><a href="#" title="">杜特尔特遭袭谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 A没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶是凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>
-								<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>
+								<?php if(is_array($data["hotNews"])): $i = 0; $__LIST__ = array_slice($data["hotNews"],1,null,true);if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('News/view', array('id'=>$vo['id']));?>" title="<?php echo ($vo["title"]); ?>" target="_blank"><?php echo ($vo["title"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+								<!--<li><a href="#" title="">杜特尔特遭袭谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 A没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>-->
+								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>-->
 							</ul>
 						</div>
 					</div>

@@ -15,23 +15,16 @@ class IndexAction extends BaseAction {
                 }
             }
         }
-        $hotContent = D('Content')->where(array('status'=>1))->order('is_hot desc, create_time desc')->select();
-        $data['top'] = array();
-        if($hotContent){
-            foreach($hotContent as $key=>$val){
-                if($val['type'] == 1){
-                    $data['type']['video'][] = $val;
-                }else{
-                    $data['type']['news'][] = $val;
-                }
+        //推荐视频
+        $data['hotVideo'] = D('Content')->where(array('status'=>1, 'type'=>1))->order('is_hot desc, create_time desc')->limit(8)->select();
+        //推荐资讯
+        $data['hotNews'] = D('Content')->where(array('status'=>1, 'type'=>2))->order('is_hot desc, create_time desc')->limit(9)->select();
 
-            }
-        }
         $cate = D('Cate')->where(array('status'=>1))->select();
         if($cate){
             foreach($cate as $key=>$val){
                 if($val['type'] == 1 && count($data['video']) < 6){
-                    $data['video'][$val['id']] = $val;
+                    $data['video'][] = $val;
                     $video_cate_ids[] = $val['id'];
                 }else if($val['type'] == 2  && count($data['news']) < 6){
                     $data['news'][] = $val;
@@ -41,27 +34,34 @@ class IndexAction extends BaseAction {
             }
             //首页版块视频
             if($video_cate_ids){
-                $video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
-                if($video_list){
-                    foreach($video_list as $key=>$value){
-                        if(count($data['video'][$value['cate_id']]['content']) < 8){
-                            $data['video'][$value['cate_id']]['content'][] = $value;
-                        }
-
-                    }
+                foreach($video_cate_ids as $k=>$v){
+                    $data['video'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>1))->limit(8)->select();
                 }
+
+                //$video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
+//                if($video_list){
+//                    foreach($video_list as $key=>$value){
+//                        if(count($data['video'][$value['cate_id']]['content']) < 8){
+//                            $data['video'][$value['cate_id']]['content'][] = $value;
+//                        }
+//
+//                    }
+//                }
             }
 
             if($news_cate_ids){
-                $video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
-                if($video_list){
-                    foreach($video_list as $key=>$value){
-                        if(count($data['news'][$value['cate_id']]['content']) < 16){
-                            $data['news'][$value['cate_id']]['content'][] = $value;
-                        }
-
-                    }
+                foreach($news_cate_ids as $k=>$v){
+                    $data['news'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>2))->limit(16)->select();
                 }
+//                $video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
+//                if($video_list){
+//                    foreach($video_list as $key=>$value){
+//                        if(count($data['news'][$value['cate_id']]['content']) < 16){
+//                            $data['news'][$value['cate_id']]['content'][] = $value;
+//                        }
+//
+//                    }
+//                }
             }
         }
 
