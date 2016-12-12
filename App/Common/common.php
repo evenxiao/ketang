@@ -98,22 +98,36 @@ function adminMenuList()
 
                     ),
                 ),
+            array(
+                'name' => '评论管理',
+                'url' => '#',
+                'level' => 1,
+                'icon'=>'&#xe622;',
+                'sub' => array(
+                    array(
+                        'name' => '评论列表',
+                        'url' => U('Comment/commentList'),
+                        'level' => 2
+                    ),
+//                    array(
+//                        'name' => '添加资讯',
+//                        'url' => U('News/add'),
+//                        'level' => 2
+//                    ),
+
+                ),
+            ),
                 array(
                     'name' => '标签管理',
                     'url' => '#',
                     'level' => 1,
-                    'icon'=>'&#xe622;',
+                    'icon'=>'&#xe61a;',
                     'sub' => array(
                         array(
                             'name' => '标签列表',
                             'url' => U('Tag/tagList'),
                             'level' => 2
                         ),
-//                        array(
-//                            'name' => '添加标签',
-//                            'url' => U('Tag/add'),
-//                            'level' => 2
-//                        ),
 
                     ),
                 ),
@@ -124,13 +138,18 @@ function adminMenuList()
 
 /**
  * 版块类型
+ * @param int $type 类型1 视频 2 资讯
  * @return array
  */
-function getCateType(){
-    return array(
+function getCateType($type){
+    $data = array(
         1 => '视频',
         2 => '资讯',
     );
+    if($type){
+        return $data[$type];
+    }
+    return $data;
 }
 
 /**
