@@ -1,0 +1,140 @@
+﻿<include file="Public:header" />
+ <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 评论管理<span class="c-gray en">&gt;</span>评论列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c">
+		<form action="__SELF__" method="get">
+		<input type="text" class="input-text" style="width:250px" placeholder="输入关键字搜索视频/资讯" id="keyword" name="keyword" value="<{$data.param.keyword}>">
+		<span class="select-box inline">
+			<select class="select" name="type" id="type">
+				<option value="">--请选择类型--</option>
+				<volist name="data.contentType" id="vo">
+					<option value="<{$key}>" <if condition="$data['param']['type'] eq $key">selected</if>><{$vo}></option>
+				</volist>
+			</select>
+		</span>
+		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜评论</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+		<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
+		<!--<a href="javascript:;" onclick="member_add('添加评论','<{:U(\'Video/addComment\')}>','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加评论</a></span> </div>-->
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+			<tr class="text-c">
+				<th width="25"><input type="checkbox" name="" value=""></th>
+				<th width="80">ID</th>
+				<th width="100">昵称</th>
+				<th width="100">内容标题</th>
+				<th width="100">类型</th>
+				<th width="100">评论内容</th>
+				<th width="90">状态</th>
+				<th width="130">发布时间</th>
+
+				<th width="100">操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<volist name="data.commentList" id="vo">
+			<tr class="text-c">
+				<td><input type="checkbox" value="<{$vo.id}>" name=""></td>
+				<td><{$vo.id}></td>
+				<td><{$vo.nick_name}></td>
+				<td><{$vo.title}></td>
+				<td><{$vo.type|getCateType}></td>
+				<td><{$vo.content}></td>
+				<td><{$vo.status}></td>
+				<td><{$vo.create_time}></td>
+				<td class="td-manage">
+					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
+					<if condition="$vo['status'] == 0">
+					<a style="text-decoration:none" class="ml-5" onClick="member_check(this,'<{$vo.id}>', 1)" href="javascript:;" title="审核">通过</a>
+
+					<a style="text-decoration:none" class="ml-5" onClick="member_check(this,'<{$vo.id}>', 2)" href="javascript:;" title="审核驳回">驳回</a>
+					</if>
+
+					<if condition="$vo['type'] eq 1">
+						<a style="text-decoration:none" class="ml-5" href="<{:U('Home/Video/view', array('id'=>$vo['content_id']))}>" title="<{$vo.title}>" target="_blank">查看视频</a>
+					<else/>
+						<a style="text-decoration:none" class="ml-5" href="<{:U('Home/News/view', array('id'=>$vo['content_id']))}>" title="<{$vo.title}>" target="_blank">查看资讯</a>
+					</if>
+
+				</td>
+			</tr>
+			</volist>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var table = $('.table-sort').dataTable({
+			"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+			"bStateSave": true,//状态保存
+			"aoColumnDefs": [
+				//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+				{"orderable":false,"aTargets":[0,3,4]}// 制定列不参与排序
+			]
+		});
+		$('.table-sort tbody').on( 'click', 'tr', function () {
+			if ( $(this).hasClass('selected') ) {
+				$(this).removeClass('selected');
+			}
+			else {
+				table.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		});
+	});
+	/*用户-添加*/
+	function member_add(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+	/*用户-查看*/
+	function member_show(title,url,id,w,h){
+		layer_show(title,url,w,h);
+	}
+	
+
+	/*用户-启用*/
+	function member_start(obj,id){
+		layer.confirm('确认要启用吗？',function(index){
+			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+			$(obj).remove();
+			layer.msg('已启用!',{icon: 6,time:1000});
+		});
+	}
+	/*用户-编辑*/
+	function member_edit(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+
+
+	/*审核*/
+	function member_check(obj,id,is_pass){
+		var title = is_pass == 1 ? '通过' : '驳回';
+		layer.confirm('确认要审核'+title+'吗？',function(index){
+			$.ajax({
+				url:'<{:U("Video/checkComment")}>',
+				type:'post',
+				data:{id:id},
+				dataType:'json',
+				success:function(_data){
+					if(_data.status == 1){
+						///$(obj).parents("tr").remove();
+						$('.table-sort tbody tr.selected').remove();
+						layer.msg('审核成功!',{icon:1,time:1000});
+						//window.location.reload();
+						return false;
+					}else{
+						layer.msg('审核成功!',{icon:1,time:1000});
+						return false;
+					}
+				}
+			})
+
+		});
+	}
+</script>
+<include file="Public:footer" />

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿﻿<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?>﻿<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -56,6 +56,13 @@
 <body>
 
 
+
+<script type="text/javascript" src="__ROOT__/Resources/lib/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Resources/lib/select2/js/i18n/zh-CN.js"></script></span>
+
+
+<link rel="stylesheet" type="text/css" href="__ROOT__/Resources/lib/select2/css/select2.min.css" />
+
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 视频管理<span class="c-gray en">&gt;</span>视频列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c">
@@ -67,13 +74,21 @@
 			<option value="">--请选择版块--</option>
 			<?php if(is_array($data["cates"])): $i = 0; $__LIST__ = $data["cates"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>" <?php if($data['cate_id'] == $vo['id']): ?>selected<?php endif; ?>><?php echo ($vo["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
 		</select>
+
+		</span>
+		<span class="select-box inline" style="width: 300px;">
+			<select class="select" name="tag_id[]" id="tag_id" multiple style="width: 290px;" >
+				<optgroup label="标签列表">
+				<?php if(is_array($data["tags"])): $i = 0; $__LIST__ = $data["tags"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+				</optgroup>
+			</select>
 		</span>
 		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜视频</button>
 		</form>
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
-		<a href="javascript:;" onclick="member_add('添加视频','<?php echo U('Video/add');?>','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加视频</a></span> </div>
+		<a href="javascript:;" onclick="member_add('添加视频','<?php echo U('Video/add');?>','900','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加视频</a></span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
@@ -84,6 +99,7 @@
 				<th width="100">版块</th>
 				<th width="80">时长(分钟)</th>
 				<th width="80">作者</th>
+				<th width="80">标签</th>
 				<th width="50">点击量</th>
 				<th width="50">来源</th>
 				<th width="30">最新</th>
@@ -101,6 +117,7 @@
 				<td><?php echo ($vo["name"]); ?></td>
 				<td><?php echo ($vo["total_time"]); ?></td>
 				<td><?php echo ($vo["author"]); ?></td>
+				<td><?php echo ($vo["tags_name"]); ?></td>
 				<td><?php echo ($vo["click_num"]); ?></td>
 				<td><?php echo ($vo["source_from"]); ?></td>
 				<td><?php echo ($vo["is_new"]); ?></td>
@@ -111,9 +128,10 @@
 				</td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-					<a style="text-decoration:none" class="ml-5" onClick="change_password('查看','<?php echo ($vo["id"]); ?>','600','270')" href="<?php echo U('Home/Video/view');?>?id=<?php echo ($vo["id"]); ?>" title="<?php echo ($vo["title"]); ?>" target="_blank">查看</a>
-					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<?php echo U('Video/edit');?>?id=<?php echo ($vo["id"]); ?>','800','600')" href="javascript:;" title="编辑">编辑</a>
-					<a style="text-decoration:none" class="ml-5" onClick="change_password('评论','<?php echo U('Video/update');?>?id=<?php echo ($vo["id"]); ?>','800','600')" href="javascript:;" title="评论">评论</a>
+					<a style="text-decoration:none" class="ml-5" href="<?php echo U('Home/Video/view');?>?id=<?php echo ($vo["id"]); ?>" title="<?php echo ($vo["title"]); ?>" target="_blank">查看</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<?php echo U('Video/edit');?>?id=<?php echo ($vo["id"]); ?>','900','500')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('附件','<?php echo U('Video/attachList');?>?id=<?php echo ($vo["id"]); ?>','900','500')" href="javascript:;" title="编辑">附件</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_show('评论','<?php echo U('Video/commentList');?>?id=<?php echo ($vo["id"]); ?>','900','500')" href="javascript:;" title="评论">评论</a>
 				</td>
 			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 			</tbody>
@@ -145,7 +163,7 @@
 		layer_show(title,url,w,h);
 	}
 	/*用户-查看*/
-	function member_show(title,url,id,w,h){
+	function member_show(title,url,w,h){
 		layer_show(title,url,w,h);
 	}
 	/*用户-停用*/
@@ -191,8 +209,17 @@
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
 	}
+
+	var select2_tags = $("#tag_id").select2({
+		placeholder: "请选择标签",
+		language: "zh-CN"
+	});
+	var selected_tags = '<?php echo ($data["tags_select"]); ?>';
+	selected_tags = eval("(" + selected_tags+ ")");
+	console.log(selected_tags);
+	select2_tags.val(selected_tags).trigger('change');
 </script>
-﻿<footer class="footer mt-20">
+<footer class="footer mt-20">
   <div class="container">
     <!--<p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>-->
      <p>

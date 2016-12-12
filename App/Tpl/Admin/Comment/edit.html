@@ -1,0 +1,352 @@
+<include file="Public:header" />
+<!--<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 视频管理<span class="c-gray en">&gt;</span> 添加视频 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>-->
+<div class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-member-add" enctype="multipart/form-data">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<{$data.info.title}>" placeholder="" id="title" name="title">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>版块：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<!--<input type="text" class="input-text" value="" placeholder="" id="cate" name="cate_id">-->
+				<select class="input-text" id="cate" name="cate_id">
+
+					<option value="">-请选择版块-</option>
+					<volist name="data.cates" id="vo">
+						<option value="<{$vo.id}>" <if condition="$data['info']['cate_id'] eq $vo['id']">selected="selected"</if>><{$vo.name}></option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>作者：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="<{$data.info.author}>" placeholder="" id="author" name="author">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>时长：</label>
+			<div class="formControls col-xs-6 col-sm-7">
+				<input type="text" class="input-text" value="<{$data.info.total_time}>" placeholder="" name="total_time" id="total_time">
+			</div>
+			<label class="form-label col-xs-2 col-sm-2">(单位：分钟)</label>
+		</div>
+
+		<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">封面图片：</label>
+		<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+		<input class="input-text upload-url" type="text" name="thumb_img" id="thumb_img" readonly nullmsg="请添加附件！" style="width:200px" value="<{$data.info.thumb_img}>">
+		<a href="javascript:;" class="btn btn-primary radius upload-btn" id="thumb_btn"><i class="Hui-iconfont">&#xe642;</i> 浏览图片</a>
+		<!--<input type="file" multiple name="file-2" class="input-file">-->
+		</span>
+			<!--<script type="text/plain" id="upload_ue"></script>-->
+		</div>
+
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">视频：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+		<input class="input-text upload-url" type="text" name="source_file" id="url" readonly nullmsg="请添加附件！" style="width:200px" value="<{$data.info.source_file}>">
+		<a href="javascript:;" class="btn btn-primary radius upload-btn" id="insertfile"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+		<!--<input type="file" multiple name="file-2" class="input-file">-->
+		</span>
+				<!--<script type="text/plain" id="upload_ue"></script>-->
+			</div>
+
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">视频介绍：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<!--<script id="editor" type="text/plain" style="height:300px;"></script>-->
+				<textarea name="content" style="height:300px;visibility:hidden;"><{$data.info.content}></textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>来源：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="source_from" type="radio" id="source_from-1" <if condition="$data['info']['source_from'] eq 1">checked</if> value="1">
+					<label for="source_from-1">上传</label>
+				</div>
+				<div class="radio-box">
+					<input  name="source_from" type="radio" id="source_from-2"  <if condition="$data['info']['source_from'] eq 2">checked</if> value="2">
+					<label for="source_from-2">外链</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否最新：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+			<div class="radio-box">
+				<input name="is_new" type="radio" id="is_new-1"  <if condition="$data['info']['is_new'] eq 1">checked</if> value="1">
+				<label for="is_new-1">是</label>
+			</div>
+			<div class="radio-box">
+				<input  name="is_new" type="radio" id="is_new-2" <if condition="$data['info']['is_new'] eq 2">checked</if> value="2">
+				<label for="is_new-2">否</label>
+			</div>
+
+		</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否热门：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="is_hot" type="radio" id="is_hot-1" <if condition="$data['info']['is_hot'] eq 1">checked</if> value="1">
+					<label for="is_hot-1">是</label>
+				</div>
+				<div class="radio-box">
+					<input  name="is_hot" type="radio" id="is_hot-2" <if condition="$data['info']['is_hot'] eq 2">checked</if> value="2">
+					<label for="is_hot-2">否</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>发布状态：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input name="status" type="radio" id="status-1" <if condition="$data['info']['status'] eq 1">checked</if> value="1">
+					<label for="status-1">立即生效</label>
+				</div>
+				<div class="radio-box">
+					<input  name="status" type="radio" id="status-2" <if condition="$data['info']['status'] eq 3">checked</if> value="3">
+					<label for="status-2">暂存草稿</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">标签：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<dl class="permission-list">
+					<dt>
+						<label>
+							<!--<input type="checkbox" value="" name="user-Character-0" id="user-Character-0">-->
+							全部标签</label>
+					</dt>
+
+					<dd   style="margin-left: 0px;">
+						<dl class="cl permission-list2">
+
+							<dd   style=" margin-left: 0px;">
+								<volist name="data.tags" id="vo">
+								<label class="">
+									<input type="checkbox" value="<{$vo.id}>" name="taglist[]" <in name="vo.id" value="$data.tag_ids">checked</in>>
+									<{$vo.name}></label>
+
+								</volist>
+							</dd>
+						</dl>
+
+					</dd>
+				</dl>
+
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">附件：</label>
+			<div id="uploader" class="wu-example col-xs-8 col-sm-9">
+				<!--用来存放文件信息-->
+				<div id="fileList" class="uploader-list"></div>
+				<div class="btns">
+					<div id="picker">选择文件</div>
+					<a id="btn-star" class="btn btn-default" href="javascript:;">开始上传</a>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input type="hidden" value="<{$Think.get.id}>" name="id">
+				<input class="btn btn-primary radius" type="button" onclick="video_add();" id="uploadBtn" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+
+	//var ue = UE.getEditor('editor');
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : false,
+			width:"100%",
+			items : [
+				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+		});
+	});
+
+
+
+
+	/*用户-编辑*/
+	function member_edit(title,url,id,w,h){
+		layer_show(title,url,w,h);
+	}
+	function video_add(){
+		if($.trim($('#title').val()) == ''){
+			layer.msg('标题不能为空',{icon:2,time:1000});
+			return false;
+		}
+		if($.trim($('#thumb_img').val()) == ''){
+			layer.msg('请上传封面图片',{icon:2,time:1000});
+			return false;
+		}
+		if($.trim($('#url').val()) == ''){
+			layer.msg('请上传视频',{icon:2,time:1000});
+			return false;
+		}
+		$('#uploadBtn').attr('disabled', true).val('处理中');
+		//var html = ue.getContent();
+		editor.sync();
+		//var html = editor.html();
+		$('#content').html(editor.html());
+
+		 //return false;
+
+		$.ajax({
+			url:'<{:U("Video/edit")}>',
+			data:$('form').serialize(),
+			type:'post',
+			dataType:'json',
+			success:function(_data){
+				if(_data.status == 1){
+					setTimeout(function(){
+						layer.msg(_data.message,{icon:1,time:1000});
+						var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+						//parent.layer.close(index);
+						parent.location.reload();
+						//layer.closeAll();
+					}, 2000);
+
+				}else{
+					$('#uploadBtn').attr('disabled', false).val('提交');
+					layer.msg(_data.message,{icon:2,time:1000});
+				}
+			}
+		})
+	}
+	KindEditor.ready(function(K) {
+		var _editor = K.editor({
+			allowFileManager : true
+		});
+		K('#thumb_btn').click(function() {
+			_editor.loadPlugin('image', function() {
+				_editor.plugin.imageDialog({
+					imageUrl : K('#thumb_img').val(),
+					clickFn : function(url, title, width, height, border, align) {
+						K('#thumb_img').val(url);
+						_editor.hideDialog();
+					}
+				});
+			});
+		});
+
+		K('#insertfile').click(function() {
+			_editor.loadPlugin('insertfile', function() {
+				_editor.plugin.fileDialog({
+					fileUrl : K('#url').val(),
+					clickFn : function(url, title) {
+						K('#url').val(url);
+						_editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+
+</script>
+
+
+<script type="application/javascript">
+	$(function() {
+		var $list = $("#fileList"), $btn = $("#btn-star"), state = "pending";
+		var uploader = WebUploader.create({
+
+			// swf文件路径
+			swf: '__ROOT__/Resources/lib/webuploader/0.1.5/Uploader.swf',
+
+			// 文件接收服务端。
+			//server: '__ROOT__/Resources/lib/webuploader/0.1.5/server/fileupload.php',
+			server: '<{:U("Base/upload?type=video")}>',
+
+			// 选择文件的按钮。可选。
+			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+			pick: '#picker',
+
+			// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+			resize: false
+		});
+		// 当有文件被添加进队列的时候
+		uploader.on('fileQueued', function (file) {
+			$list.append('<div id="' + file.id + '" class="item">' +
+					'<h4 class="info">' + file.name + '</h4>' +
+					'<p class="state">等待上传...</p>' +
+					'</div>');
+		});
+
+		// 文件上传过程中创建进度条实时显示。
+		uploader.on('uploadProgress', function (file, percentage) {
+			var $li = $('#' + file.id),
+					$percent = $li.find('.progress .progress-bar');
+
+			// 避免重复创建
+			if (!$percent.length) {
+				$percent = $('<div class="progress progress-striped active">' +
+						'<div class="progress-bar" role="progressbar" style="width: 0%">' +
+						'</div>' +
+						'</div>').appendTo($li).find('.progress-bar');
+			}
+
+			$li.find('p.state').text('上传中');
+
+			$percent.css('width', percentage * 100 + '%');
+		});
+		uploader.on('uploadSuccess', function (file, response) {
+			$('#' + file.id).find('p.state').text('已上传');
+			if(response.status == 1){
+				var html = '<input type="hidden" name="attach[]" value="'+response.url+'"><input type="hidden" name="attach_name[]" value="'+response.title+'">';
+				$('#' + file.id).append(html);
+			}
+
+		});
+
+		uploader.on('uploadError', function (file) {
+			$('#' + file.id).find('p.state').text('上传出错');
+		});
+
+		uploader.on('uploadComplete', function (file) {
+			$('#' + file.id).find('.progress').fadeOut();
+		});
+		uploader.on('all', function (type) {
+			if (type === 'startUpload') {
+				state = 'uploading';
+			} else if (type === 'stopUpload') {
+				state = 'paused';
+			} else if (type === 'uploadFinished') {
+				state = 'done';
+			}
+
+			if (state === 'uploading') {
+				$btn.text('暂停上传');
+			} else {
+				$btn.text('开始上传');
+			}
+		});
+
+		$btn.on('click', function () {
+			if (state === 'uploading') {
+				uploader.stop();
+			} else {
+				uploader.upload();
+			}
+		});
+	});
+</script>

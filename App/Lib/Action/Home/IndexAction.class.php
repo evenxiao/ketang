@@ -15,8 +15,18 @@ class IndexAction extends BaseAction {
                 }
             }
         }
-        $data['tuijian'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->select();
+        $hotContent = D('Content')->where(array('status'=>1))->order('is_hot desc, create_time desc')->select();
+        $data['top'] = array();
+        if($hotContent){
+            foreach($hotContent as $key=>$val){
+                if($val['type'] == 1){
+                    $data['type']['video'][] = $val;
+                }else{
+                    $data['type']['news'][] = $val;
+                }
 
+            }
+        }
         $cate = D('Cate')->where(array('status'=>1))->select();
         if($cate){
             foreach($cate as $key=>$val){
