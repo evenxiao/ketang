@@ -549,16 +549,8 @@
 				<div class="common-rank-list">
 					
 		<ul>
-			<?php if(is_array($bang["bang_news"])): $i = 0; $__LIST__ = $bang["bang_news"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><em class="no<?php echo ($key+1); ?>"><?php echo ($key+1); ?></em><a href="<?php echo U('Video/view',array('id'=>$vo['id']));?>" title=""><?php echo ($vo["title"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
-			<!--<li><em class="no2">2</em><a href="#" title="">日媒称战后日本将被...</a></li>-->
-			<!--<li><em class="no3">3</em><a href="#" title="">中国布局作战 辽宁舰...</a></li>-->
-			<!--<li><em>4</em><a href="#" title="">中国布局作战 辽宁舰...</a></li>-->
-			<!--<li><em>5</em><a href="#" title="">缅甸木姐地有所缓...</a></li>-->
-			<!--<li><em>6</em><a href="#" title="">缅甸军方奉行以打促谈 ...</a></li>-->
-			<!--<li><em>7</em><a href="#" title="">法国防长冀特朗普府...</a></li>-->
-			<!--<li><em>8</em><a href="#" title="">爱神的箭所大所大所大所多</a></li>-->
-			<!--<li><em>9</em><a href="#" title="">爱神的箭所大所大所大...</a></li>-->
-			<!--<li><em>10</em><a href="#" title="">张老师叫你如何快速...</a></li>-->
+			<?php if(is_array($bang["bang_news"])): $i = 0; $__LIST__ = $bang["bang_news"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><em class="no<?php echo ($key+1); ?>"><?php echo ($key+1); ?></em><a href="<?php echo U('News/view',array('id'=>$vo['id']));?>" title=""><?php echo ($vo["title"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+
 		</ul>
 
 				</div>
