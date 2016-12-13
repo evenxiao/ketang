@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿﻿<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -189,7 +189,7 @@
 
 							<dd   style=" margin-left: 0px;">
 								<?php if(is_array($data["tags"])): $i = 0; $__LIST__ = $data["tags"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><label class="">
-									<input type="checkbox" value="<?php echo ($vo["id"]); ?>" name="taglist[]">
+									<input type="checkbox" value="<?php echo ($vo["id"]); ?>" name="taglist[]" <?php if(in_array(($vo["id"]), is_array($data["tag_ids"])?$data["tag_ids"]:explode(',',$data["tag_ids"]))): ?>checked<?php endif; ?>>
 									<?php echo ($vo["name"]); ?></label><?php endforeach; endif; else: echo "" ;endif; ?>
 							</dd>
 						</dl>

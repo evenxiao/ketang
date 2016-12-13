@@ -39,7 +39,7 @@
 						<h1>视频简介</h1>
 					</div>
 					<div class="crticle-bd">
-						<{$data.content}>
+						<{$data.content|html_entity_decode}>
 						<!--<p>腾讯体育12月5日讯 98-92，魔术客场战胜活塞，终结了对手的三连胜。魔术方面，伊巴卡表现全面，贡献21分7篮板4助攻3抢断4盖帽，武切维奇16分8篮板2盖帽，格林14分5篮板3助攻。活塞方面，雷吉-杰克逊伤愈复出，迎来赛季首秀，拿下18分4助攻，马库斯-莫里斯21分5篮板2抢断，德拉蒙德10分10篮板3助攻3抢断2盖帽。</p>-->
 						<!--<p>伊巴卡全场砍下21分7篮板4助攻3抢断4盖帽的全面数据，内线两次封盖庄神的强攻，成为场上最大的亮点。经过一段时间的适应和调整，伊巴卡已经完全融入魔术的战术体系，成为全队发挥最稳定的那个人。</p>-->
 						<!--<p>雷吉-杰克逊伤愈复出，在主场迎来赛季首秀。比赛一开始，杰克逊就在外线命中三分，为活塞先拔头筹。戈登投中两分还以颜色。双方陷入拉锯战，魔术方面，伊巴卡表现出色，三分球和内线进攻都有斩获；活塞方面，莫里斯成为首节手感最热的那个人，先后投进4个三分球，单节拿下14分。首节战罢，活塞27-23领先魔术。</p>-->
@@ -192,7 +192,7 @@
 
  	$.fn.raty.defaults.path = '__ROOT__/Resources/static/home/images';
 
-
+	var msg = '';
       $('#stars').raty({
 
       	score: 5,
@@ -216,8 +216,59 @@
         targetKeep: true,
 
         precision : true,
+		click:function(score, evt){
+			setScore(score);
+//			var id = '<{$Think.get.id}>';
+//
+//			if(id){
+//				$.ajax({
+//					url:'<{:U("Base/setScore")}>',
+//					data:{id:id,score:score},
+//					type:'post',
+//					dataType:'json',
+//					//async:false,
+//					success:function(_data){
+//						console.log(_data);
+//						msg = _data.message;
+//						if(_data.status == 1){
+//							console.log(_data);
+//							alert('评分成功');
+//							//$('#stars').raty({ readOnly: true, score: score });
+//						}else{
+//							alert('评分失败');
+//						}
+//					}
+//
+//				});
+//				alert(msg);
+//			}
+		}
 
       });
+
+	function setScore(score){
+		var id = '<{$Think.get.id}>';
+
+		if(id){
+			$.ajax({
+				url:'<{:U("Base/setScore")}>',
+				data:{id:id,score:score},
+				type:'post',
+				dataType:'json',
+				async:false,
+				success:function(_data){
+					if(_data.status == 1){
+						//console.log(_data);
+						alert(_data.message);
+						//$('#stars').raty({ readOnly: true, score: score });
+					}else{
+						alert(_data.message);
+					}
+				}
+
+			});
+		}
+	}
 
 </script>
 

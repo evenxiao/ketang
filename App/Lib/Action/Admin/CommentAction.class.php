@@ -37,8 +37,9 @@ class CommentAction extends BaseAction {
     */
     public function checkComment(){
         if(IS_AJAX){
-             $id = I('param.id', 0);
-             $info = D('Comment')->where(array('id'=>$id))->find(); 
+             $id = intval(I('param.id', 0));
+             $info = D('Comment')->where(array('id'=>$id))->find();
+             $status = intval(I('param.status',0));
              if($info['status'] != 0){
                 $this->ajaxReturn(array('status'=>0, 'message'=>'该评论已审核,无须重新审核！'));
              }

@@ -168,3 +168,15 @@ function configType($type = ''){
     }
     return $arr;
 }
+function commentStatus($status = -1){
+    $arr = array(
+        0 =>'未审核',
+        1 =>'通过',
+        2 =>'驳回',
+
+    );
+    if($status >= 0){
+        return $arr[$status];
+    }
+    return $arr;
+}

@@ -73,6 +73,8 @@
       <!--</nav>-->
       <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
         <ul class="cl">
+          <li><a href="__APP__" target="_blank" title="网站主页">网站主页</a></li>
+
           <li>超级管理员</li>
           <li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
             <ul class="dropDown-menu menu radius box-shadow">

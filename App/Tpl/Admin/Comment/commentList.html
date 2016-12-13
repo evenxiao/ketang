@@ -43,7 +43,7 @@
 				<td><{$vo.title}></td>
 				<td><{$vo.type|getCateType}></td>
 				<td><{$vo.content}></td>
-				<td><{$vo.status}></td>
+				<td><{$vo.status|commentStatus}></td>
 				<td><{$vo.create_time}></td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
@@ -116,16 +116,17 @@
 		var title = is_pass == 1 ? '通过' : '驳回';
 		layer.confirm('确认要审核'+title+'吗？',function(index){
 			$.ajax({
-				url:'<{:U("Video/checkComment")}>',
+				url:'<{:U("Comment/checkComment")}>',
 				type:'post',
-				data:{id:id},
+				data:{id:id,status:is_pass},
 				dataType:'json',
 				success:function(_data){
 					if(_data.status == 1){
 						///$(obj).parents("tr").remove();
-						$('.table-sort tbody tr.selected').remove();
 						layer.msg('审核成功!',{icon:1,time:1000});
-						//window.location.reload();
+						//$('.table-sort tbody tr.selected').remove();
+
+						window.location.reload();
 						return false;
 					}else{
 						layer.msg('审核成功!',{icon:1,time:1000});

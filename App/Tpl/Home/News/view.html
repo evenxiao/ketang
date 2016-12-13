@@ -166,7 +166,33 @@
 
         precision : true,
 
+		  click:function(score, evt){
+			  setScore(score);
+		  }
+
       });
+
+	function setScore(score){
+		var id = '<{$Think.get.id}>';
+
+		if(id){
+			$.ajax({
+				url:'<{:U("Base/setScore")}>',
+				data:{id:id,score:score},
+				type:'post',
+				dataType:'json',
+				success:function(_data){
+					if(_data.status == 1){
+						alert('评分成功');
+						$('#stars').raty({ readOnly: true, score: score });
+					}else{
+						alert('评分失败');
+					}
+				}
+
+			});
+		}
+	}
 	
 </script>
 

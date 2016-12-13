@@ -14,5 +14,33 @@ class BaseAction extends Action {
         $this->assign('tag', $tag);
 
     }
+    public function setScore(){
+        $id = intval(I('param.id',0));
+        $score = intval(I('param.score',0));
+
+        if($id && $score){
+			$result = array();
+            $ip = get_client_ip();
+
+            $time = time();
+
+            if($_COOKIE['person'] == $ip && (($time-$_COOKIE['raty_time']) < 60)){
+                $result['status'] =  0;
+                $result['message'] = '您已经评过分了';
+            }else{
+                $info = D('Content')->find($id);
+                $status = D('Content')->where(array('id'=>$id))->save(array('score'=>$info['score']+$score, 'score_times'=>$info['score_times']+1, 'update_time'=>date('Y-m-d H:i:s')));
+
+                $result['status'] = $status ? 1 : 0;
+                $result['message'] = $result['status'] ? '评分成功' : '评分失败';
+                cookie('person', $ip);
+                cookie('raty_time', time());
+
+            }
+
+
+        }
+        $this->ajaxReturn($result);
+    }
 
 }
