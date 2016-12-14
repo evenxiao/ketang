@@ -13,6 +13,12 @@ class IndexAction extends BaseAction {
                 if($val['type'] == 3){
                     $data['links'][] = $val;
                 }
+                if($val['type'] == 5){
+                    $data['ads'][] = $val;
+                }
+                if($val['type'] == 2){
+                    $data['banner'][] = $val;
+                }
             }
         }
         //推荐视频
@@ -101,6 +107,8 @@ class IndexAction extends BaseAction {
     public function search(){
 
         $keyword = trim(I('param.keyword', ''));
+        $type = trim(I('param.type', ''));
+
         $data = [];
         if($keyword){
             $result = D('Content')->where(array('status'=>1,'title'=>array('like', '%'.$keyword.'%')))->select();

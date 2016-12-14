@@ -124,7 +124,7 @@
 					<div class="rcommend-news-box l">
 						<div class="rcommend-top-new bd-bm-1">
 							<h1><a href="<{:U('News/view', array('id'=>$data['hotNews'][0]['id']))}>" title="<{$data['hotNews'][0]['title']}>" target="_blank"><{$data['hotNews'][0]['title']}></a></h1>
-							<p><{$data['hotNews'][0]['content']|msubstr=###, 0, 50}></p>
+							<p><{$data['hotNews'][0]['content']|html_entity_decode|msubstr=###, 0, 50}></p>
 						</div>
 						<div class="rcommend-bottom-news">
 							<ul vaule="compact">
@@ -548,15 +548,17 @@
 				<h1 class="c-white l">热点事件</h1>
 			</div>
 			<div class="hot-banner-box clearfix">
+				<volist name="data.ads" id="vo">
 				<div class="hot-banner-item l">
-					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner1.png"></a>
+					<a href="<{$vo.config_value}>"><img src="<{$vo.config_name}>"></a>
 				</div>
-				<div class="hot-banner-item l">
-					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner2.png"></a>
-				</div>
-				<div class="hot-banner-item l">
-					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png"></a>
-				</div>
+				</volist>
+				<!--<div class="hot-banner-item l">-->
+					<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/banner2.png"></a>-->
+				<!--</div>-->
+				<!--<div class="hot-banner-item l">-->
+					<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png"></a>-->
+				<!--</div>-->
 			</div>
 		</div>
 	</div>

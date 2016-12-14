@@ -154,7 +154,7 @@
 					<div class="rcommend-news-box l">
 						<div class="rcommend-top-new bd-bm-1">
 							<h1><a href="<?php echo U('News/view', array('id'=>$data['hotNews'][0]['id']));?>" title="<?php echo ($data['hotNews'][0]['title']); ?>" target="_blank"><?php echo ($data['hotNews'][0]['title']); ?></a></h1>
-							<p><?php echo (msubstr($data['hotNews'][0]['content'], 0, 50)); ?></p>
+							<p><?php echo (msubstr(html_entity_decode($data['hotNews'][0]['content']), 0, 50)); ?></p>
 						</div>
 						<div class="rcommend-bottom-news">
 							<ul vaule="compact">
@@ -569,15 +569,15 @@
 				<h1 class="c-white l">热点事件</h1>
 			</div>
 			<div class="hot-banner-box clearfix">
-				<div class="hot-banner-item l">
-					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner1.png"></a>
-				</div>
-				<div class="hot-banner-item l">
-					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner2.png"></a>
-				</div>
-				<div class="hot-banner-item l">
-					<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png"></a>
-				</div>
+				<?php if(is_array($data["ads"])): $i = 0; $__LIST__ = $data["ads"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="hot-banner-item l">
+					<a href="<?php echo ($vo["config_value"]); ?>"><img src="<?php echo ($vo["config_name"]); ?>"></a>
+				</div><?php endforeach; endif; else: echo "" ;endif; ?>
+				<!--<div class="hot-banner-item l">-->
+					<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/banner2.png"></a>-->
+				<!--</div>-->
+				<!--<div class="hot-banner-item l">-->
+					<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png"></a>-->
+				<!--</div>-->
 			</div>
 		</div>
 	</div>

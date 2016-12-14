@@ -56,41 +56,47 @@
 <body>
 
 
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 标签管理<span class="c-gray en">&gt;</span>标签列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 友情链接管理<span class="c-gray en">&gt;</span>友情链接列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="text-c">
-		<form action="__SELF__" method="get">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入标签名称" id="keyword" name="keyword" value="<?php echo ($keyword); ?>">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜标签</button>
-		</form>
-	</div>
+	<!--<div class="text-c">-->
+		<!--<form action="__SELF__" method="get">-->
+		<!--<input type="text" class="input-text" style="width:250px" placeholder="输入版块友情链接" id="keyword" name="keyword" value="<?php echo ($keyword); ?>">-->
+		<!--<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜友情链接</button>-->
+		<!--</form>-->
+	<!--</div>-->
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
-		<a href="javascript:;" onclick="member_add('添加标签','<?php echo U('Tag/add');?>','','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加标签</a></span> </div>
+		<a href="javascript:;" onclick="member_add('添加友情链接','<?php echo U('Sys/addLinks');?>','','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加友情链接</a></span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="80">ID</th>
-				<th width="100">标签名称</th>
+				<th width="100">链接名称</th>
+				<th width="100">类型</th>
+				<th width="100">链接地址</th>
 				<th width="100">添加时间</th>
 				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
 			</thead>
 			<tbody>
-			<?php if(is_array($data["tagList"])): $i = 0; $__LIST__ = $data["tagList"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="text-c">
+			<?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="text-c">
 				<td><input type="checkbox" value="<?php echo ($vo["id"]); ?>" name=""></td>
 				<td><?php echo ($vo["id"]); ?></td>
-				<td><?php echo ($vo["name"]); ?></td>
+				<td><?php echo ($vo["config_name"]); ?></td>
+				<td>
+					<?php echo (configtype($vo["type"])); ?>
+				</td>
+				<td><?php echo ($vo["config_value"]); ?></td>
 				<td><?php echo ($vo["create_time"]); ?></td>
 				<td class="td-status">
-					<?php if($vo['status'] == 1): ?><span class="label label-success radius">已启用</span><?php else: ?><span class="label radius">已禁用</span><?php endif; ?>
+					<?php if($vo['is_show'] == 1): ?><span class="label label-success radius"> 显示</span><?php else: ?><span class="label radius">不显示</span><?php endif; ?>
 				</td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<?php echo U('Tag/update');?>','<?php echo ($vo["id"]); ?>','800','400')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_del(this,'<?php echo ($vo["id"]); ?>','800','400')" href="javascript:;" title="删除">删除</a>
 				</td>
 			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 			</tbody>
@@ -198,8 +204,27 @@
 	/*用户-删除*/
 	function member_del(obj,id){
 		layer.confirm('确认要删除吗？',function(index){
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!',{icon:1,time:1000});
+			$.ajax({
+				url:'<?php echo U("Sys/delConfig");?>',
+				data:{id:id},
+				type:'post',
+				dataType:'json',
+				success:function(_data){
+					if(_data.status == 1){
+						layer.msg('已删除!',{icon:1,time:1000});
+						setTimeout(function(){
+							$(obj).parents("tr").remove();
+							layer.closeAll('dialog');
+						}, 1000);
+
+					}else{
+						layer.msg('删除失败!',{icon:2,time:1000});
+						return false;
+					}
+
+				}
+			});
+
 		});
 	}
 </script>

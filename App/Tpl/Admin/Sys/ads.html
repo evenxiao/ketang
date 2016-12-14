@@ -20,13 +20,13 @@
 			</tr>
 			</thead>
 			<tbody>
-			<volist name="data" id="vo">
+			<volist name="data.adsList" id="vo">
 			<tr class="text-c">
 				<td><input type="checkbox" value="<{$vo.id}>" name=""></td>
 				<td><{$vo.id}></td>
-				<td><{$vo.config_name}></td>
+				<td><a href="<{$vo.config_name}>" target="_blank"><img src="<{$vo.config_name}>" width="50" height="30px" ></a> </td>
 				<td>
-					<{$vo.type|configType}>
+					<if condition="$vo['type'] neq ''"><{$vo.type|configType}></if>
 				</td>
 				<td><{$vo.config_value}></td>
 				<td><{$vo.create_time}></td>

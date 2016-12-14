@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿﻿<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -60,7 +60,21 @@
 <div class="page-container">
 	<div class="text-c">
 		<form action="__SELF__" method="get">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入版块名称" id="keyword" name="keyword" value="<?php echo ($keyword); ?>">
+		<input type="text" class="input-text" style="width:250px" placeholder="输入版块名称" id="keyword" name="keyword" value="<?php echo ($data["param"]["keyword"]); ?>">
+		<span class="select-box inline">
+			<select name="type" class="select">
+				<option value="" <?php if($data['param']['type'] == ''): ?>selected<?php endif; ?>>--请选择版块类型--</option>
+				<option value="1" <?php if($data['param']['type'] == 1): ?>selected<?php endif; ?> >视频</option>
+				<option value="2" <?php if($data['param']['type'] == 2): ?>selected<?php endif; ?>>资讯</option>
+			</select>
+		</span>
+		<span class="select-box inline">
+			<select name="status" class="select">
+				<option value="" <?php if($data['param']['status'] == ''): ?>selected<?php endif; ?>>--请选择状态--</option>
+				<option value="1" <?php if($data['param']['status'] == 1): ?>selected<?php endif; ?> >已启用</option>
+				<option value="2" <?php if($data['param']['status'] == 2): ?>selected<?php endif; ?>>已禁用</option>
+			</select>
+		</span>
 		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜版块</button>
 		</form>
 	</div>
@@ -205,7 +219,7 @@
 		});
 	}
 </script>
-﻿<footer class="footer mt-20">
+<footer class="footer mt-20">
   <div class="container">
     <!--<p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>-->
      <p>

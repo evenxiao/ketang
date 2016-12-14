@@ -331,7 +331,7 @@ class SysAction extends BaseAction {
         $this->display();
     }
     /**
-     * 添加友情链接
+     * 添加轮播图
      */
     public function addBanner(){
 
@@ -394,8 +394,22 @@ class SysAction extends BaseAction {
     public function ads(){
         $where['type']=5;
         $data['adsList'] = $this->ConfigModel->getConfigList($where);
+        //print_r($data);
 
         $this->assign('data', $data);
+        $this->display();
+    }
+
+    /**
+     * 添加广告图片
+     */
+    public function addAds(){
+
+        if(IS_AJAX){
+            $this->addConfig(5);
+        }
+
+        //$this->assign('data', $data);
         $this->display();
     }
 

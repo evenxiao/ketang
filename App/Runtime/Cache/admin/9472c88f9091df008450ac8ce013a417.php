@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?>﻿<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -56,47 +56,87 @@
 <body>
 
 
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 标签管理<span class="c-gray en">&gt;</span>标签列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<script type="text/javascript" src="__ROOT__/Resources/lib/select2/js/select2.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Resources/lib/select2/js/i18n/zh-CN.js"></script></span>
+
+
+<link rel="stylesheet" type="text/css" href="__ROOT__/Resources/lib/select2/css/select2.min.css" />
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯管理<span class="c-gray en">&gt;</span>资讯列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c">
 		<form action="__SELF__" method="get">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入标签名称" id="keyword" name="keyword" value="<?php echo ($keyword); ?>">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜标签</button>
+		<input type="text" class="input-text" style="width:250px" placeholder="输入视频名称" id="keyword" name="keyword" value="<?php echo ($data["keyword"]); ?>">
+
+		<span class="select-box inline">
+		<select class="select" name="cate_id" id="cate_id">
+			<option value="">--请选择版块--</option>
+			<?php if(is_array($data["cates"])): $i = 0; $__LIST__ = $data["cates"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>" <?php if($data['cate_id'] == $vo['id']): ?>selected<?php endif; ?>><?php echo ($vo["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+		</select>
+
+		</span>
+		<span class="select-box inline" style="width: 300px;">
+			<select class="select" name="tag_id[]" id="tag_id" multiple style="width: 290px;" >
+				<optgroup label="标签列表">
+				<?php if(is_array($data["tags"])): $i = 0; $__LIST__ = $data["tags"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+				</optgroup>
+			</select>
+		</span>
+		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜资讯</button>
 		</form>
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
-		<a href="javascript:;" onclick="member_add('添加标签','<?php echo U('Tag/add');?>','','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加标签</a></span> </div>
+		<a href="javascript:;" onclick="member_add('添加资讯','<?php echo U('News/add');?>','900','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a></span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="80">ID</th>
-				<th width="100">标签名称</th>
-				<th width="100">添加时间</th>
+				<th width="60">ID</th>
+				<th width="100">标题</th>
+				<th width="100">版块</th>
+				<th width="80">作者</th>
+				<th width="80">标签</th>
+				<th width="50">点击量</th>
+				<th width="50">来源</th>
+				<th width="30">最新</th>
+				<th width="30">最热</th>
+				<th width="110">发布时间</th>
 				<th width="70">状态</th>
 				<th width="100">操作</th>
 			</tr>
 			</thead>
 			<tbody>
-			<?php if(is_array($data["tagList"])): $i = 0; $__LIST__ = $data["tagList"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="text-c">
+			<?php if(is_array($data["data"])): $i = 0; $__LIST__ = $data["data"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr class="text-c">
 				<td><input type="checkbox" value="<?php echo ($vo["id"]); ?>" name=""></td>
 				<td><?php echo ($vo["id"]); ?></td>
-				<td><?php echo ($vo["name"]); ?></td>
+				<td><?php echo ($vo["title"]); ?></td>
+				<td><?php echo ($vo["name"]); ?></td>			
+				<td><?php echo ($vo["author"]); ?></td>
+				<td><?php echo ($vo["tags_name"]); ?></td>
+				<td><?php echo ($vo["click_num"]); ?></td>
+				<td><?php echo ($vo["source_from"]); ?></td>
+				<td><?php echo ($vo["is_new"]); ?></td>
+				<td><?php echo ($vo["is_hot"]); ?></td>
 				<td><?php echo ($vo["create_time"]); ?></td>
 				<td class="td-status">
-					<?php if($vo['status'] == 1): ?><span class="label label-success radius">已启用</span><?php else: ?><span class="label radius">已禁用</span><?php endif; ?>
+					<?php if($vo['status'] == 1): ?><span class="label label-success radius">已发布</span><?php elseif($vo['status'] == 2): ?><span class="label radius">已取消</span><?php else: ?><span class="label radius">草稿</span><?php endif; ?>
 				</td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<?php echo U('Tag/update');?>','<?php echo ($vo["id"]); ?>','800','400')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" href="<?php echo U('Home/News/view');?>?id=<?php echo ($vo["id"]); ?>" title="<?php echo ($vo["title"]); ?>" target="_blank">查看</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<?php echo U('News/edit');?>?id=<?php echo ($vo["id"]); ?>','900','500')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('附件','<?php echo U('News/attachList');?>?id=<?php echo ($vo["id"]); ?>','900','500')" href="javascript:;" title="编辑">附件</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_show('评论','<?php echo U('Video/commentList');?>?id=<?php echo ($vo["id"]); ?>','900','500')" href="javascript:;" title="评论">评论</a>
 				</td>
 			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 			</tbody>
 		</table>
 	</div>
 </div>
+
 <script type="text/javascript">
 	$(function(){
 		var table = $('.table-sort').dataTable({
@@ -122,7 +162,7 @@
 		layer_show(title,url,w,h);
 	}
 	/*用户-查看*/
-	function member_show(title,url,id,w,h){
+	function member_show(title,url,w,h){
 		layer_show(title,url,w,h);
 	}
 	/*用户-停用*/
@@ -145,8 +185,7 @@
 		});
 	}
 	/*用户-编辑*/
-	function member_edit(title,url,id,w,h){
-		url = url + '?id=' +id;
+	function member_edit(title,url,w,h){
 		layer_show(title,url,w,h);
 	}
 	/*密码-修改*/
@@ -157,44 +196,11 @@
 			type: 1,
 			skin: 'layui-layer-rim', //加上边框
 			area: ['420px', '240px'], //宽高
-			content: '<div><div style="padding:  30px;"><input type="hidden" name="manager_id" id="manager_id" value="'+id+'">' +
-			//'<input type="text" name="user_name" value="" id="new_user_name" class="form-control input-text" style="padding-bottom: 30px;padding: 10px" placeholder="请输入新用户名"/>'+
-			'<input type="password" name="password" value="" id="new_pwd" class="form-control input-text" style="padding-bottom: 30px;padding: 10px" placeholder="请输入新密码"/></div>' +
-			//'<input type="text" name="phone" value="" id="new_phone" class="form-control input-text" style="padding-bottom: 30px;padding: 10px" placeholder=""/>'+
-			//'<input type="text" name="email" value="" id="new_email" class="form-control input-text" style="padding-bottom: 30px;padding: 10px" placeholder=""/>'+
-			//'<radio value=>'+
-			'<p style="width: 100px; margin: 0 auto; text-align: center;"><input type="button" value="修改" onclick="update_pwd('+id+')" class="btn btn-primary" style=" line-height: 240px;"></p></div>'
+			content: '<div><div style="padding:  30px;"><input type="hidden" name="manager_id" id="manager_id" value="'+id+'"><input type="password" name="password" value="" id="new_pwd" class="form-control input-text" style="padding-bottom: 30px;padding: 10px" placeholder="请输入新密码"/></div><p style="width: 100px; margin: 0 auto; text-align: center;"><input type="button" value="修改" onclick="update_pwd('+id+')" class="btn btn-primary" style=" line-height: 240px;"></p></div>'
 		});
 	}
 
-	function update_pwd(id){
-		layer.confirm('确认要修改密码吗？',function(index){
-			//$(obj).parents("tr").remove();
-			$.ajax({
-				url:'<?php echo U("Manager/update_pwd");?>',
-				data:{'id': $('#manager_id').val(), 'new_pwd':$('#new_pwd').val()},
-				type:'post',
-				dataType:'json',
-				success:function(_data){
-					if(_data.status == 1){
-						setTimeout(function(){
-							layer.msg(_data.message,{icon:1,time:1000});
-							//var index = parent.layer.getFrameIndex(window.name);
-							//parent.layer.close(index);
-							var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-							parent.layer.close(index);
-							//layer.closeAll();
-						}, 1000);
-						location.reload();
-					}else{
-						layer.msg(_data.message,{icon:2,time:1000});
-					}
-				}
-			})
 
-
-		});
-	}
 	/*用户-删除*/
 	function member_del(obj,id){
 		layer.confirm('确认要删除吗？',function(index){
@@ -202,20 +208,13 @@
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
 	}
+
+	var select2_tags = $("#tag_id").select2({
+		placeholder: "请选择标签",
+		language: "zh-CN"
+	});
+	var selected_tags = '<?php echo ($data["tags_select"]); ?>';
+	selected_tags = eval("(" + selected_tags+ ")");
+	console.log(selected_tags);
+	select2_tags.val(selected_tags).trigger('change');
 </script>
-<footer class="footer mt-20">
-  <div class="container">
-    <!--<p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>-->
-     <p>
-      Copyright ©2015 微课堂 All Rights Reserved.<br>
-      <!--本后台系统由<a href="http://www.h-ui.net/" target="_blank" title="H-ui前端框架">H-ui前端框架</a>提供前端技术支持-->
-     </p>
-  </div>
-</footer>
-
-<script type="text/javascript">
-
-</script>
-
-</body>
-</html>

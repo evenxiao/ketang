@@ -1,16 +1,48 @@
-<include file="Public:header" />
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo ($web_name); ?></title>
+<link rel="stylesheet" href="__ROOT__/Resources/static/home/css/global.css" />
+<script type="text/javascript" src="__ROOT__/Resources/static/home/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Resources/static/home/js/jquery.SuperSlide.2.1.1.js"></script>
+
+<script type="text/javascript" src="__ROOT__/Resources/static/home/js/jquery.raty.min.js"></script>
+</head>
+
+<body>
+	<div class="common-header">
+		<div class="wrap">
+			<a href="__APP__" class="header-logo" title="logo">
+				<img src="__ROOT__/Resources/static/home/images/logo.png" alt="网上课堂" />
+			</a>
+			<ul class="header-nav">
+				<li><a href="__APP__">首页</a></li>
+				<li><a href="<?php echo U('Video/videoList');?>">视频课程</a></li>
+				<li><a href="<?php echo U('News/newsList');?>">新闻资讯</a></li>
+			</ul>
+			<div class="header-login"><a href="<?php echo U('Admin/Index/index');?>" title="管理平台" target="_blank">管理平台</a></div>
+
+			<div class="header-search-wrap">
+				<div class="header-search-area">
+	                <input class="header-search-input" type="text" placeholder="输入搜索关键字" id="search_keyword" name="keyword">
+           		</div>
+				<em class="header-search-icon" onclick="searchInfo();"></em>
+			</div>
+		</div>
+	</div>
 <script type="text/javascript" src="__PUBLIC__/CKplayer/ckplayer/ckplayer.js" charset="utf-8"></script>
 	
 	<div id="main">
 		<div class="mv-top-box">
 			<div class="mv-kv-hd">
 				<div class="wrap">
-					<h1><{$data.title}></h1>
+					<h1><?php echo ($data["title"]); ?></h1>
 					<div class="mv-kv-info">
-						<span><{$data.create_time}></span>
-						<span>作者:<{$data.author}></span>
-						<span>评分:<{$data.score}></span>
-						<span><{$data.score_times}>人已读</span>
+						<span><?php echo ($data["create_time"]); ?></span>
+						<span>作者:<?php echo ($data["author"]); ?></span>
+						<span>评分:<?php echo ($data["score"]); ?></span>
+						<span><?php echo ($data["score_times"]); ?>人已读</span>
 					</div>
 				</div>
 			</div>
@@ -39,7 +71,7 @@
 						<h1>视频简介</h1>
 					</div>
 					<div class="crticle-bd">
-						<{$data.content|html_entity_decode}>
+						<?php echo (html_entity_decode($data["content"])); ?>
 						<!--<p>腾讯体育12月5日讯 98-92，魔术客场战胜活塞，终结了对手的三连胜。魔术方面，伊巴卡表现全面，贡献21分7篮板4助攻3抢断4盖帽，武切维奇16分8篮板2盖帽，格林14分5篮板3助攻。活塞方面，雷吉-杰克逊伤愈复出，迎来赛季首秀，拿下18分4助攻，马库斯-莫里斯21分5篮板2抢断，德拉蒙德10分10篮板3助攻3抢断2盖帽。</p>-->
 						<!--<p>伊巴卡全场砍下21分7篮板4助攻3抢断4盖帽的全面数据，内线两次封盖庄神的强攻，成为场上最大的亮点。经过一段时间的适应和调整，伊巴卡已经完全融入魔术的战术体系，成为全队发挥最稳定的那个人。</p>-->
 						<!--<p>雷吉-杰克逊伤愈复出，在主场迎来赛季首秀。比赛一开始，杰克逊就在外线命中三分，为活塞先拔头筹。戈登投中两分还以颜色。双方陷入拉锯战，魔术方面，伊巴卡表现出色，三分球和内线进攻都有斩获；活塞方面，莫里斯成为首节手感最热的那个人，先后投进4个三分球，单节拿下14分。首节战罢，活塞27-23领先魔术。</p>-->
@@ -79,7 +111,7 @@
 				</div>
 				<div class="comment-list-box">
 					<div class="common-hd bd-bm-1">
-						<h2>共<{$count}>条评论</h2>
+						<h2>共<?php echo ($count); ?>条评论</h2>
 					</div>
 					<div class="comment-list-item">
 						<div class="comment-user clearfix">
@@ -117,9 +149,7 @@
 						<span class="disabled_page">首页</span>
 						<span class="disabled_page">上一页</span>
 						<!--<a href="javascript:void(0)" class="active text-page-tag">1</a>-->
-						<for start="1" end="$count_page">
-							<a class="text-page-tag" href="javascript:;" onclick="ajaxPage(<{$i}>,this);"><{$i}></a>
-						</for>
+						<?php $__FOR_START_32336__=1;$__FOR_END_32336__=$count_page;for($i=$__FOR_START_32336__;$i < $__FOR_END_32336__;$i+=1){ ?><a class="text-page-tag" href="javascript:;" onclick="ajaxPage(<?php echo ($i); ?>,this);"><?php echo ($i); ?></a><?php } ?>
 						<!--<a class="text-page-tag" href="#">3</a>-->
 						<!--<a class="text-page-tag" href="#">4</a>-->
 						<!--<a class="text-page-tag" href="#">5</a>-->
@@ -139,11 +169,37 @@
 						<h1 class="c-black">视频点击排行榜</h1>
 					</div>
 					<div class="common-rank-list">
-						<include file="Public:videoBang"/>
+						
+		<ul>
+			<?php if(is_array($bang["bang_video"])): $i = 0; $__LIST__ = $bang["bang_video"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><em class="no<?php echo ($key+1); ?>"><?php echo ($key+1); ?></em><a href="<?php echo U('Video/view',array('id'=>$vo['id']));?>" title=""><?php echo ($vo["title"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+
+		</ul>
 					</div>
 				</div>
 
-			    <include file="Public:tagSide"/>
+			    <div class="common-label">
+	<div class="common-hd">
+		<h1 class="c-black">定位标签</h1>
+		<a class="common-more" target="_blank" href="<?php echo U('Index/tag');?>">更多>></a>
+	</div>
+	<div class="common-label-list">
+		<ul>
+
+			<?php if(is_array($tag["list"])): $i = 0; $__LIST__ = $tag["list"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('Index/tag', array('id'=>$vo['id']));?>" target="_blank"><?php echo ($vo["name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+			<!--<li><a href="">战前准备</a></li>-->
+			<!--<li><a href="">安保</a></li>-->
+			<!--<li><a href="">个人报告</a></li>-->
+			<!--<li><a href="">最美的太阳</a></li>-->
+			<!--<li><a href="">飞的更高</a></li>-->
+			<!--<li><a href="">机场安保</a></li>-->
+			<!--<li><a href="">战前准备</a></li>-->
+			<!--<li><a href="">安保</a></li>-->
+			<!--<li><a href="">机场安保</a></li>-->
+			<!--<li><a href="">战前准备</a></li>-->
+			<!--<li><a href="">安保</a></li>-->
+		</ul>
+	</div>
+</div>
 				<!--<div class="common-label">-->
 					<!--<div class="common-hd">-->
 						<!--<h1 class="c-black">定位标签</h1>-->
@@ -187,7 +243,28 @@
 
 		</div>
 	</div>
-<include file="Public:footer" />
+	<!-- foorer -->
+<div class="footer">
+	<div class="logo"></div>
+	<p>技术支持  上海嘉麟信息科技股份有限公司</p>
+</div>
+	<script>
+		function searchInfo(){
+			var keyword = $.trim($('input[name="keyword"]').val());
+
+			if(!keyword){
+				//layer.alert('请输入搜索关键字！');
+				alert('请输入搜索关键字！');
+				return false;
+			}
+
+			window.location.href = "<?php echo U('Index/search');?>" + '?keyword='+keyword;
+		}
+	</script>
+
+	<!--<script type="text/javascript" src="__ROOT__/Resources/static/home/js/home.js"></script>-->
+</body>
+</html>
 <!-- 星星打分插件 -->
 <script type="text/javascript">
 	$('.header-nav li').eq(1).addClass('on');
@@ -220,11 +297,11 @@
         precision : true,
 		click:function(score, evt){
 			setScore(score);
-//			var id = '<{$Think.get.id}>';
+//			var id = '<?php echo ($_GET['id']); ?>';
 //
 //			if(id){
 //				$.ajax({
-//					url:'<{:U("Base/setScore")}>',
+//					url:'<?php echo U("Base/setScore");?>',
 //					data:{id:id,score:score},
 //					type:'post',
 //					dataType:'json',
@@ -249,11 +326,11 @@
       });
 
 	function setScore(score){
-		var id = '<{$Think.get.id}>';
+		var id = '<?php echo ($_GET['id']); ?>';
 
 		if(id){
 			$.ajax({
-				url:'<{:U("Base/setScore")}>',
+				url:'<?php echo U("Base/setScore");?>',
 				data:{id:id,score:score},
 				type:'post',
 				dataType:'json',
@@ -277,5 +354,3 @@
 	}
 
 </script>
-
-

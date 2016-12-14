@@ -2,7 +2,9 @@
 // 本类由系统自动生成，仅供测试用途
 class NewsAction extends BaseAction {
     public function newsList(){
-      
+
+        $data = array();
+        $this->assign('data', $data);
         $this->display('list');
     }
 

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿﻿<!DOCTYPE HTML>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -58,12 +58,12 @@
 
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 版块管理<span class="c-gray en">&gt;</span>版块列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="text-c">
-		<form action="__SELF__" method="get">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入版块名称" id="keyword" name="keyword" value="<?php echo ($keyword); ?>">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜版块</button>
-		</form>
-	</div>
+	<!--<div class="text-c">-->
+		<!--<form action="__SELF__" method="get">-->
+		<!--<input type="text" class="input-text" style="width:250px" placeholder="输入版块名称" id="keyword" name="keyword" value="<?php echo ($keyword); ?>">-->
+		<!--<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜版块</button>-->
+		<!--</form>-->
+	<!--</div>-->
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
 		<a href="javascript:;" onclick="member_add('添加导航','<?php echo U('Sys/addNav');?>','','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加导航</a></span> </div>
@@ -97,7 +97,7 @@
 				</td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<?php echo U('Sys/Nav');?>','<?php echo ($vo["id"]); ?>','800','400')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<?php echo U('Sys/editNav');?>','<?php echo ($vo["id"]); ?>','800','400')" href="javascript:;" title="编辑">编辑</a>
 				</td>
 			</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 			</tbody>
@@ -210,7 +210,7 @@
 		});
 	}
 </script>
-﻿<footer class="footer mt-20">
+<footer class="footer mt-20">
   <div class="container">
     <!--<p>感谢jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch<br>-->
      <p>
