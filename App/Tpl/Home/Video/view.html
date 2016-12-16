@@ -65,7 +65,7 @@
 				<div class="common-comment clearfix">
 					<div class="common-hd">
 						<h1>发表评论</h1>
-						<textarea class="comment-text" placeholder="输入您的评论" title="" name=""></textarea>
+						<textarea class="comment-text" placeholder="输入您的评论" title="" name="" id="comment_content"></textarea>
 							<!-- 评分插件 -->
 						<div class="stars-box l">
 					        <div id="stars"></div>
@@ -73,7 +73,7 @@
 					    </div>
 						<!-- 评分插件 end-->
 						<div class="comment-buttom r">
-							<button class="comment-submit">发布</button>
+							<button class="comment-submit" onclick="sendComment(<{$Think.get.id}>);">发布</button>
 						</div>
 					</div>
 				</div>
@@ -274,6 +274,35 @@
 
 	function ajaxPage(page, obj){
 		$(obj).addClass('active').siblings('a').removeClass('active');
+	}
+
+	function sendComment(id){
+		var comment_content = $.trim($('#comment_content').val());
+		if(comment_content == ''){
+			alert('请输入评论');
+			return false;
+		}
+		if(id){
+			console.log(id);
+			$.ajax({
+				url:'<{:U("Base/sendComment")}>',
+				data:{id:id, content:comment_content},
+				type:'post',
+				dataType:'json',
+				async:false,
+				success:function(_data){
+					if(_data.status == 1){
+						//console.log(_data);
+						alert(_data.message);
+						window.location.reload();
+					}else{
+						alert(_data.message);
+						return false;
+					}
+				}
+
+			});
+		}
 	}
 
 </script>

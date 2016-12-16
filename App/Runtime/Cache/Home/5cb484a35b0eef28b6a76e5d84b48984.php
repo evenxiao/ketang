@@ -97,7 +97,7 @@
 				<div class="common-comment clearfix">
 					<div class="common-hd">
 						<h1>发表评论</h1>
-						<textarea class="comment-text" placeholder="输入您的评论" title="" name=""></textarea>
+						<textarea class="comment-text" placeholder="输入您的评论" title="" name="" id="comment_content"></textarea>
 							<!-- 评分插件 -->
 						<div class="stars-box l">
 					        <div id="stars"></div>
@@ -105,7 +105,7 @@
 					    </div>
 						<!-- 评分插件 end-->
 						<div class="comment-buttom r">
-							<button class="comment-submit">发布</button>
+							<button class="comment-submit" onclick="sendComment(<?php echo ($_GET['id']); ?>);">发布</button>
 						</div>
 					</div>
 				</div>
@@ -149,7 +149,7 @@
 						<span class="disabled_page">首页</span>
 						<span class="disabled_page">上一页</span>
 						<!--<a href="javascript:void(0)" class="active text-page-tag">1</a>-->
-						<?php $__FOR_START_32336__=1;$__FOR_END_32336__=$count_page;for($i=$__FOR_START_32336__;$i < $__FOR_END_32336__;$i+=1){ ?><a class="text-page-tag" href="javascript:;" onclick="ajaxPage(<?php echo ($i); ?>,this);"><?php echo ($i); ?></a><?php } ?>
+						<?php $__FOR_START_3623__=1;$__FOR_END_3623__=$count_page;for($i=$__FOR_START_3623__;$i < $__FOR_END_3623__;$i+=1){ ?><a class="text-page-tag" href="javascript:;" onclick="ajaxPage(<?php echo ($i); ?>,this);"><?php echo ($i); ?></a><?php } ?>
 						<!--<a class="text-page-tag" href="#">3</a>-->
 						<!--<a class="text-page-tag" href="#">4</a>-->
 						<!--<a class="text-page-tag" href="#">5</a>-->
@@ -351,6 +351,35 @@
 
 	function ajaxPage(page, obj){
 		$(obj).addClass('active').siblings('a').removeClass('active');
+	}
+
+	function sendComment(id){
+		var comment_content = $.trim($('#comment_content').val());
+		if(comment_content == ''){
+			alert('请输入评论');
+			return false;
+		}
+		if(id){
+			console.log(id);
+			$.ajax({
+				url:'<?php echo U("Base/sendComment");?>',
+				data:{id:id, content:comment_content},
+				type:'post',
+				dataType:'json',
+				async:false,
+				success:function(_data){
+					if(_data.status == 1){
+						//console.log(_data);
+						alert(_data.message);
+						window.location.reload();
+					}else{
+						alert(_data.message);
+						return false;
+					}
+				}
+
+			});
+		}
 	}
 
 </script>
