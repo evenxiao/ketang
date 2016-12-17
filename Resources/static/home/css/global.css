@@ -846,7 +846,14 @@ input,textarea,button{
     color: #fff;
 }
 
-
+.page a.current {
+    background: #217bca;
+    color: #fff;
+}
+.page a:hover{
+    background: #217bca;
+    color: #fff;
+}
 
 /*新闻列表－2*/
 .news-list{
