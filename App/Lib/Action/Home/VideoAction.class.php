@@ -88,6 +88,9 @@ class VideoAction extends BaseAction {
             $data['comment_list'] = D('Comment')->where(array('content_id'=>$id,'status'=>1))->limit($limit)->order('id desc')->select();
             //$count_page= ceil($count/3);
            // $page = new Page($count, 10);
+
+            //附件
+            $data['attach_list'] = D('Attach')->where(array('content_id'=>$id, 'status'=>1))->select();
         }
 
         $this->assign('data',$data);

@@ -1,6 +1,6 @@
 <include file="Public:header" />
 <script type="text/javascript" src="__PUBLIC__/CKplayer/ckplayer/ckplayer.js" charset="utf-8"></script>
-	
+
 	<div id="main">
 		<div class="mv-top-box">
 			<div class="mv-kv-hd">
@@ -17,7 +17,7 @@
 			<div class="mv-kv-bd">
 				<div class="mv-kv-content">
 					<div id="kv-main"></div>
-			
+
 				<script type="text/javascript">
 				    var flashvars={
 				        f:'__ROOT__/Uploads/video/1.mp4',
@@ -57,8 +57,10 @@
 						<h1>附件下载</h1>
 					</div>
 					<ul class="download-list clearfix">
-						<li><a href="#"><em class="zip-icon"></em>机场公安基本条例<em class="download-icon">［点击下载］</em></a></li>
-						<li><a href="#"><em class="zip-icon"></em>2016年最新规定什么什么的<em class="download-icon">［点击下载］</em></a></li>
+						<volist name="attach_list" id="vo">
+						<li><a href="__APP__/Uploads/<{$vo.attach_url}>"><em class="zip-icon"></em><{$vo.title}><em class="download-icon">［点击下载］</em></a></li>
+						</volist>
+						<!--<li><a href="#"><em class="zip-icon"></em>2016年最新规定什么什么的<em class="download-icon">［点击下载］</em></a></li>-->
 					<ul>
 				</div>
 				<!-- 评论模块-->
@@ -177,7 +179,7 @@
 						<!--</ul>-->
 					<!--</div>-->
 				<!--</div>-->
-				
+
 				<div class="common-hot">
 					<div class="common-hd">
 						<h1 class="c-black">热点事件</h1>

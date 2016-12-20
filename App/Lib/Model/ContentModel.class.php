@@ -30,7 +30,7 @@ class ContentModel extends RelationModel
             $data = $obj->select();
         }
 
-        echo $this->getLastSql();
+        //echo $this->getLastSql();
         //$data = $this->field($field)->alias('content')->join('tb_cate as cate on content.cate_id = cate.id', 'left')->where($where)->order($order)->select();
         if($data){
             foreach ($data as $key => $value) {
