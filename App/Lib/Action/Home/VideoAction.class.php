@@ -83,14 +83,16 @@ class VideoAction extends BaseAction {
             );
             $data = D('Content')->getContentInfo($where);
 
-            //import('ORG.Util.Page');
+
             $count = D('Comment')->where(array('content_id'=>$id,'status'=>1))->count();
             $data['comment_list'] = D('Comment')->where(array('content_id'=>$id,'status'=>1))->limit($limit)->order('id desc')->select();
+            //import('ORG.Util.Page');
             //$count_page= ceil($count/3);
            // $page = new Page($count, 10);
 
             //附件
             $data['attach_list'] = D('Attach')->where(array('content_id'=>$id, 'status'=>1))->select();
+            //print_r($data['attach_list']);
         }
 
         $this->assign('data',$data);

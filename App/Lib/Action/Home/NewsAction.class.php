@@ -72,6 +72,7 @@ class NewsAction extends BaseAction {
         $id = intval(I('param.id', 0));
         //echo $id;
         $data = [];
+        $limit = 2;
         if($id){
             $where = array(
                 'id' => $id,
@@ -79,17 +80,21 @@ class NewsAction extends BaseAction {
                 'status' => 1,
             );
             $data = D('Content')->getContentInfo($where);
-
-            import('ORG.Util.Page');
             $count = D('Comment')->where(array('content_id'=>$id,'status'=>1))->count();
-            $count_page= ceil($count/3);
-            $page = new Page($count, 10);
+            $data['comment_list'] = D('Comment')->where(array('content_id'=>$id,'status'=>1))->limit($limit)->order('id desc')->select();
+
+            //附件
+            $data['attach_list'] = D('Attach')->where(array('content_id'=>$id, 'status'=>1))->select();
+//            import('ORG.Util.Page');
+//            $count = D('Comment')->where(array('content_id'=>$id,'status'=>1))->count();
+//            $count_page= ceil($count/3);
+//            $page = new Page($count, 10);
         }
 
         $this->assign('data',$data);
-        $this->assign('count_page',$count_page);
+        //$this->assign('count_page',$count_page);
         $this->assign('count',$count);
-        $this->assign('page',$page->show());
+        //$this->assign('page',$page->show());
         $this->display();
 
     }

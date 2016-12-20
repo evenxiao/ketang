@@ -1089,7 +1089,16 @@ input,textarea,button{
 .search-main .href-warp a {
     color: #00a0dc;
 }
-
+.comment-list-box .href-warp{
+    height: 18px;
+    line-height: 18px;
+    font-size: 14px;
+    padding-top: 22px;
+    text-align: center;
+}
+.comment-list-box .href-warp a {
+    color: #00a0dc;
+}
 /*文章搜索列表*/
 .news-item {
     padding: 24px;

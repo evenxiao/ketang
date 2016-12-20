@@ -10,39 +10,41 @@
 						<span class="hd l c-white">定位标签:</span>
 						<div class="bd">
 							<ul class="">
-	                            <li class="filter-nav-item on">
-	                                <a href="#">全部标签</a>
+	                            <li class="filter-nav-item <if condition=\'$data["tag_id"] eq 0 \'>on</if>">
+	                                <a href="<{:U('Index/tag')}>">全部标签</a>
 	                            </li>
-	                             <li class="filter-nav-item">
-	                                <a href="#">机场治安</a>
+								<volist name="data.tag" id="vo">
+	                             <li class="filter-nav-item <if condition=\'$vo["id"] eq $data["tag_id"]\'>on</if>">
+	                                <a href="<{:U('Index/tag', array('tag_id'=>$vo['id']))}>" ><{$vo.name}></a>
 	                            </li>
-	                             <li class="filter-nav-item">
-	                                <a href="#">交通维护</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">机场安检</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">枪战</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">搏击训练</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">张教官</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">星级课程</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">十一大</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">开会内容</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">小视屏</a>
-	                            </li>
+								</volist>
+	                             <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">交通维护</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">机场安检</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">枪战</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">搏击训练</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">张教官</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">星级课程</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">十一大</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">开会内容</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">小视屏</a>-->
+	                            <!--</li>-->
 	                        </ul>
 						</div>
 					</div>
@@ -55,13 +57,13 @@
 			<div class="search-nav-warp">
 				<div class="search-nav">
 					<a href="#" class="active">全站</a>
-					<a href="#">视频</a>
-					<a href="#">资讯</a>
+					<a href="<{:U('Video/videoList')}>">视频</a>
+					<a href="<{:U('News/newsList')}>">资讯</a>
 				</div>
 			</div>
-			<div class="search-related">共找到 2024 个相关内容</div>
+			<div class="search-related">共找到 <{$count}> 个相关内容</div>
 			<h2 class="search-title">相关课程</h2>
-			<volist name="data.videoList" id="vo">
+			<volist name="data.videoList" id="vo" offset="0" length="3">
 				<div class="course-item clearfix">
 					<div class="course-item-left">
 						<a href="<{:U('Video/view', array('id'=>$vo['id']))}>"><img src="<{$vo.thumb_img}>" alt="<{$vo.title}>" /></a>
@@ -80,49 +82,15 @@
 					</div>
 				</div>
 			</volist>
-			<!--<div class="course-item clearfix">-->
-				<!--<div class="course-item-left">-->
-					<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/img2.png" alt="" /></a>-->
-				<!--</div>-->
-				<!--<div class="course-item-right">-->
-					<!--<div class="course-item-title">-->
-						<!--<a href="#">在机场发生特殊情况的时候如何快速疏散群众</a>-->
-					<!--</div>-->
-					<!--<div class="tag">-->
-						<!--<span class="score fl">评分9.6</span>-->
-						<!--<span class="number	fr">1898人学习</span>-->
-					<!--</div>-->
-					<!--<p class="content">-->
-						<!--课程简介：2016年最新交通法规扣分细则是哪些?继续沿用2013年正式实施新交通法规扣分细则。新交通规则提高了违法成本，记分项也由38项增加至52项。接下来有关2016最新交通法扣分规则的相关内容就由华律网小编为您详细介绍，感谢您的阅读!-->
-					<!--</p>-->
-				<!--</div>-->
-			<!--</div>-->
-
-			<!--<div class="course-item clearfix">-->
-				<!--<div class="course-item-left">-->
-					<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/img2.png" alt="" /></a>-->
-				<!--</div>-->
-				<!--<div class="course-item-right">-->
-					<!--<div class="course-item-title">-->
-						<!--<a href="#">在机场发生特殊情况的时候如何快速疏散群众</a>-->
-					<!--</div>-->
-					<!--<div class="tag">-->
-						<!--<span class="score fl">评分9.6</span>-->
-						<!--<span class="number	fr">1898人学习</span>-->
-					<!--</div>-->
-					<!--<p class="content">-->
-						<!--课程简介：2016年最新交通法规扣分细则是哪些?继续沿用2013年正式实施新交通法规扣分细则。新交通规则提高了违法成本，记分项也由38项增加至52项。接下来有关2016最新交通法扣分规则的相关内容就由华律网小编为您详细介绍，感谢您的阅读!-->
-					<!--</p>-->
-				<!--</div>-->
-			<!--</div>-->
 
 			<p class="href-warp">
-				<a href="<{:U('Index/search', array('keyword'=>$Think['get']['keyword'], 'type'=>'video'))}>">更多课程搜索结果</a>
+				<!--<a href="<{:U('Index/search', array('keyword'=>$Think['get']['keyword'], 'type'=>'video'))}>">更多课程搜索结果</a>-->
+				<a href="<{:U('Video/videoList')}>">更多课程搜索结果</a>
 			</p>
 			<!-- -->
 			<h2 class="search-title">相关资讯</h2>
 
-			<volist name="data.newsList" id="vo">
+			<volist name="data.newsList" id="vo" offset="0" length="3">
 			<div class="news-item clearfix">
 				<div class="news-item-title">
 					<a href="<{:U('News/view', array('id'=>$vo['id']))}>"><{$vo.title}></a>
@@ -137,34 +105,10 @@
 			</div>
 
 			</volist>
-			<!--<div class="news-item clearfix">-->
-				<!--<div class="news-item-title">-->
-					<!--<a href="#">十一大四中全会在北京召开</a>-->
-				<!--</div>-->
-				<!--<div class="news-item-tag">-->
-					<!--<span class="time fl">2016-11-29 14:34</span>-->
-					<!--<span class="number	fr">1898人学习</span>-->
-				<!--</div>-->
-				<!--<p class="content">-->
-					<!--课程简介：2016年最新交通法规扣分细则是哪些?继续沿用2013年正式实施新交通法规扣分细则。新交通规则提高了违法成本，记分项也由38项增加至52项。接下来有关2016最新交通法扣分规则的相关内容就由华律网小编为您详细介绍，感谢您的阅读!-->
-				<!--</p>-->
-			<!--</div>-->
 
-			<!--<div class="news-item clearfix">-->
-				<!--<div class="news-item-title">-->
-					<!--<a href="#">十一大四中全会在北京召开</a>-->
-				<!--</div>-->
-				<!--<div class="news-item-tag">-->
-					<!--<span class="time fl">2016-11-29 14:34</span>-->
-					<!--<span class="number	fr">1898人学习</span>-->
-				<!--</div>-->
-				<!--<p class="content">-->
-					<!--课程简介：2016年最新交通法规扣分细则是哪些?继续沿用2013年正式实施新交通法规扣分细则。新交通规则提高了违法成本，记分项也由38项增加至52项。接下来有关2016最新交通法扣分规则的相关内容就由华律网小编为您详细介绍，感谢您的阅读!-->
-				<!--</p>-->
-			<!--</div>-->
-			
 			<p class="href-warp">
-				<a href="<{:U('Index/search', array('keyword'=>$Think['get']['keyword'], 'type'=>'news'))}>">更多资讯搜索结果</a>
+				<!--<a href="<{:U('Index/search', array('keyword'=>$Think['get']['keyword'], 'type'=>'news'))}>">更多资讯搜索结果</a>-->
+				<a href="<{:U('News/newsList')}>">更多资讯搜索结果</a>
 			</p>
 
 		</div>

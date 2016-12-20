@@ -26,17 +26,19 @@
 					</div>
 				</div>
 				<!-- 下载模块-->
+				<notempty name="data.attach_list">
 				<div class="download-box">
 					<div class="common-hd bd-bm-1">
 						<h1>附件下载</h1>
 					</div>
 					<ul class="download-list clearfix">
-						<volist name="attach_list" id="vo">
+						<volist name="data.attach_list" id="vo">
 							<li><a href="__APP__/Uploads/<{$vo.attach_url}>"><em class="zip-icon"></em><{$vo.title}><em class="download-icon">［点击下载］</em></a></li>
 						</volist>
 
 					</ul>
 				</div>
+				</notempty>
 				<!-- 评论模块-->
 				<div class="common-comment clearfix">
 					<div class="common-hd">
@@ -57,20 +59,33 @@
 					<div class="common-hd bd-bm-1">
 						<h2>共<{$count}>条评论</h2>
 					</div>
-					<div id="comment-item-box">
-						<volist name="data.comment_list" id="vo">
-							<div class="comment-list-item">
-								<div class="comment-user clearfix">
-									<span class="l"><{$vo.nick_name}>发布了评论</span>
-									<span class="r"><{$vo.create_time}></span>
+					<if condition="$count gt 0">
+						<div id="comment-item-box">
+							<volist name="data.comment_list" id="vo">
+								<div class="comment-list-item">
+									<div class="comment-user clearfix">
+										<span class="l"><{$vo.nick_name}>发布了评论</span>
+										<span class="r"><{$vo.create_time}></span>
+									</div>
+									<div class="comment-user-content"><{$vo.content}></div>
 								</div>
-								<div class="comment-user-content"><{$vo.content}></div>
-							</div>
-						</volist>
-					</div>
+							</volist>
+						</div>
 
+						<p class="href-warp">
+							<a href="javascript:;" onclick="loadMoreComment();" id="load_more">查看更多</a>
+							<input type="hidden" id="more_comment" value="2">
+							<input type="hidden" id="current_page" value="1">
+						</p>
+					<else/>
 
+						<p class="href-warp">
+							<!--<a href="javascript:;" style="text-align: center; width: 100%; background-color: #afb5bf;" onclick="loadMoreComment();" id="load_more">查看更多</a>-->
+							<a href="javascript:;" id="no_more">没有更多了...</a>
 
+						</p>
+
+					</if>
 					<!--<div class="page">-->
 						<!--<span class="disabled_page">首页</span>-->
 						<!--<span class="disabled_page">上一页</span>-->
@@ -104,13 +119,13 @@
 					</div>
 					<div class="common-hot-list">
 						<div class="common-hot-item">
-							<a href="#"><img src="images/banner1.png" alt="" /></a>
+							<a href="#"><img src="__ROOT__/Resources/static/home/images/banner1.png" alt="" /></a>
 						</div>
 						<div class="common-hot-item">
-							<a href="#"><img src="images/banner2.png" alt="" /></a>
+							<a href="#"><img src="__ROOT__/Resources/static/home/images/banner2.png" alt="" /></a>
 						</div>
 						<div class="common-hot-item">
-							<a href="#"><img src="images/banner3.png" alt="" /></a>
+							<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png" alt="" /></a>
 						</div>
 					</div>
 				</div>
@@ -235,4 +250,39 @@
 			}
 		}
 
+		var content_id = "<{$Think.get.id}>";
+		function loadMoreComment(){
+			var page_num = $('#more_comment').val();
+			var current_page = $('#current_page').val();
+			start = parseInt(page_num) * parseInt(current_page);
+			//start += 1;
+			$.ajax({
+				url:'<{:U("Base/loadMoreComment")}>',
+				data:{id:content_id, start:start},
+				type:'post',
+				dataType:'json',
+				success:function(_data){
+					if(_data.status == 1){
+						var next_page = parseInt(current_page)+1;
+						$('#current_page').val(next_page);
+						var html = '';
+						//console.log(_data.data);
+						if(_data.data.length){
+
+							for(var i in _data.data){
+
+								html += '<div class="comment-list-item"> <div class="comment-user clearfix"> <span class="l">'+_data.data[i].nick_name+'发布了评论</span> <span class="r">'+_data.data[i].create_time+'</span> </div> <div class="comment-user-content">'+_data.data[i].content+'</div> </div>';
+
+							}
+
+						}
+
+						$('#comment-item-box').append(html);
+					}else{
+						$('#load_more').hide();
+						$('.href-warp').append('<a href="javascript:;" id="no_more">没有更多了...</a>');
+					}
+				}
+			});
+		}
 	</script>

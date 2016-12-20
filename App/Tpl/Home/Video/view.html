@@ -52,17 +52,20 @@
 
 
 				<!-- 下载模块-->
+
+				<notempty name="data.attach_list">
 				<div class="download-box">
 					<div class="common-hd bd-bm-1">
 						<h1>附件下载</h1>
 					</div>
 					<ul class="download-list clearfix">
-						<volist name="attach_list" id="vo">
+						<volist name="data.attach_list" id="vo">
 						<li><a href="__APP__/Uploads/<{$vo.attach_url}>"><em class="zip-icon"></em><{$vo.title}><em class="download-icon">［点击下载］</em></a></li>
 						</volist>
 						<!--<li><a href="#"><em class="zip-icon"></em>2016年最新规定什么什么的<em class="download-icon">［点击下载］</em></a></li>-->
-					<ul>
+					</ul>
 				</div>
+				</notempty>
 				<!-- 评论模块-->
 				<div class="common-comment clearfix">
 					<div class="common-hd">
@@ -119,11 +122,13 @@
 						<!--<div class="comment-user-content">有没有搞错啊，刚出的还没学完又出新的。</div>-->
 					<!--</div>-->
 
-					<div class="page">
-
-						<a href="javascript:;" style="text-align: center; width: 100%; background-color: #afb5bf;" onclick="loadMoreComment();" id="load_more">查看更多</a>
+					<p class="href-warp">
+						<!--<a href="javascript:;" style="text-align: center; width: 100%; background-color: #afb5bf;" onclick="loadMoreComment();" id="load_more">查看更多</a>-->
+						<a href="javascript:;" onclick="loadMoreComment();" id="load_more">查看更多</a>
 						<input type="hidden" id="more_comment" value="2">
 						<input type="hidden" id="current_page" value="1">
+					</p>
+					<div class="page">
 
 					</div>
 					<!--<div class="page">-->
@@ -296,7 +301,7 @@
 			return false;
 		}
 		if(id){
-			console.log(id);
+
 			$.ajax({
 				url:'<{:U("Base/sendComment")}>',
 				data:{id:id, content:comment_content},
@@ -333,11 +338,11 @@
 					var next_page = parseInt(current_page)+1;
 					$('#current_page').val(next_page);
 					var html = '';
-					console.log(_data.data);
+
 					if(_data.data.length){
 
 						for(var i in _data.data){
-							console.log(_data.data[i]);
+
 							html += '<div class="comment-list-item"> <div class="comment-user clearfix"> <span class="l">'+_data.data[i].nick_name+'发布了评论</span> <span class="r">'+_data.data[i].create_time+'</span> </div> <div class="comment-user-content">'+_data.data[i].content+'</div> </div>';
 
 						}
@@ -347,7 +352,7 @@
 					$('#comment-item-box').append(html);
 				}else{
 					$('#load_more').hide();
-					$('.page').append('<a href="javascript:;" style="text-align: center; width: 100%; background-color:#FFFFFF;" id="no_more">没有更多了...</a>');
+					$('.href-warp').append('<a href="javascript:;" id="no_more">没有更多了...</a>');
 				}
 			}
 		});

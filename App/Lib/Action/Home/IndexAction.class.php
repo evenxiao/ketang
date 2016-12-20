@@ -44,45 +44,29 @@ class IndexAction extends BaseAction {
                     $data['video'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>1))->limit(8)->select();
                 }
 
-                //$video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
-//                if($video_list){
-//                    foreach($video_list as $key=>$value){
-//                        if(count($data['video'][$value['cate_id']]['content']) < 8){
-//                            $data['video'][$value['cate_id']]['content'][] = $value;
-//                        }
-//
-//                    }
-//                }
             }
 
             if($news_cate_ids){
                 foreach($news_cate_ids as $k=>$v){
                     $data['news'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>2))->limit(16)->select();
                 }
-//                $video_list = D('Content')->field(true)->where(array('cate_id'=>array('in', $video_cate_ids)))->select();
-//                if($video_list){
-//                    foreach($video_list as $key=>$value){
-//                        if(count($data['news'][$value['cate_id']]['content']) < 16){
-//                            $data['news'][$value['cate_id']]['content'][] = $value;
-//                        }
-//
-//                    }
-//                }
+
             }
         }
 
-        //$data['video'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->select();
-        //$data['news'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->select();
-        //print_r($data);
         $this->assign('data', $data);
 
         $this->display();
     }
 
     public function tag(){
-        $id = intval(I('get.id', 0));
-        //echo $id;
-        $content = D('TagContent')->alias('tc')->field('c.*, tc.tag_id')->where(array('tc.tag_id'=>$id, 'tc.status'=>1))->join('tb_content as c on tc.content_id = c.id')->select();
+        $id = intval(I('get.tag_id', 0));
+
+        if($id){
+            $content = D('TagContent')->alias('tc')->field('c.*, tc.tag_id')->where(array('tc.tag_id'=>$id, 'tc.status'=>1))->join('tb_content as c on tc.content_id = c.id')->select();
+        }else{
+            $content = D('Content')->alias('c')->field('c.*')->where(array('c.status'=>1))->select();
+        }
         $data = array();
         if($content){
             foreach($content as $key=>$value){
@@ -95,9 +79,12 @@ class IndexAction extends BaseAction {
                 }
             }
         }
-        //print_r($data);
 
+        $data['tag'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->select();
+        //print_r($data);
+        $data['tag_id'] = $id;
         $this->assign('data', $data);
+        $this->assign('count', count($content));
         $this->display();
     }
 
@@ -111,7 +98,7 @@ class IndexAction extends BaseAction {
 
         $data = [];
         if($keyword){
-            $result = D('Content')->where(array('status'=>1,'title'=>array('like', '%'.$keyword.'%')))->select();
+            $result = D('Content')->where(array('status'=>1,'title'=>array('like', '%'.$keyword.'%')))->order('id desc')->select();
             if($result){
                 foreach($result as $key=>$value){
                     if($value['type'] == 1){
@@ -125,6 +112,7 @@ class IndexAction extends BaseAction {
         }
         $data['keyword'] = $keyword;
         $this->assign('data', $data);
+        $this->assign('count', count($result));
         $this->display();
     }
 }
