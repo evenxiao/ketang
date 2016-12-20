@@ -17,15 +17,26 @@ class ContentModel extends RelationModel
      * @param $field
      * @param array $where
      * @param bool|false $limit
+     * @param string $order
      * @return mixed
      */
-    public function getContentList($where=array(), $field='content.*, cate.name', $limit=false){
-        $data = $this->field($field)->alias('content')->join('tb_cate as cate on content.cate_id = cate.id', 'left')->where($where)->select();
+    public function getContentList($where=array(), $field='content.*, cate.name',$order = 'content.id desc',$is_page = false, $pageNum = 1,$limit = 10){
+
+        $obj = $this->field($field)->alias('content')->join('tb_cate as cate on content.cate_id = cate.id', 'left')->where($where)->order($order);
+        //$data = $obj->select();
+        if($is_page){
+            $data = $obj->page($pageNum)->limit($limit)->select();
+        }else{
+            $data = $obj->select();
+        }
+
+        echo $this->getLastSql();
+        //$data = $this->field($field)->alias('content')->join('tb_cate as cate on content.cate_id = cate.id', 'left')->where($where)->order($order)->select();
         if($data){
             foreach ($data as $key => $value) {
                 $tag_ids = $this->tagContentModel->where(array('content_id'=>$value['id'], 'status'=>1))->getField('tag_id', true);
+
                 $tag_names = D('Tag')->where(array('id'=>array('in', $tag_ids)))->getField('name', true);
-            
                 $data[$key]['tags_name'] = implode(',', $tag_names);
             }
         }
@@ -34,27 +45,33 @@ class ContentModel extends RelationModel
 
     /**
      * 返回视频列表
-     * @param bool|true $field
+     * @param string $field
      * @param array $param
-     * @param bool|false $limit
+     * @param int $limit
+     * @param string|$order
+     * @param bool|$is_page
+     * @param int|$pageNum
      * @return mixed
      */
-    public function getVideoList($param=array(), $limit = false){
+    public function getVideoList($param=array(), $field='content.*, cate.name',$order = 'content.id DESC',$is_page = false, $pageNum = 1,$limit = 10){
         $param['content.type'] = 1;
-        return $this->getContentList($param);
+        return $this->getContentList($param,$field,$order,$is_page, $pageNum,$limit);
 
     }
 
     /**
      * 返回资讯列表
-     * @param bool|true $field
+     * @param string $field
      * @param array $param
-     * @param bool|false $limit
+     * @param int $limit
+     * @param string|$order
+     * @param bool|$is_page
+     * @param int|$pageNum
      * @return mixed
      */
-    public function getNewsList($param=array(), $limit = false){
+    public function getNewsList($param=array(), $field='content.*, cate.name',$order = 'content.id DESC',$is_page = false, $pageNum = 1,$limit = 10){
         $param['content.type'] = 2;
-        return $this->getContentList($param);
+        return $this->getContentList($param,$field,$order,$is_page, $pageNum,$limit);
 
     }
 

@@ -19,7 +19,7 @@ class VideoAction extends BaseAction {
         
         if(I('param.tag_id', '')){
             $tags_id = I('param.tag_id');
-            print_r( $tags_id);
+            //print_r( $tags_id);
             if(count($tags_id) > 0){
                 $ids = $this->tagContentModel->where(array('tag_id'=>array('in', $tags_id), 'status'=>1))->getField('content_id', true);
                 $param['content.id'] = array('in', $ids);

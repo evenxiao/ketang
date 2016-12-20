@@ -82,4 +82,24 @@ class BaseAction extends Action {
         $this->ajaxReturn($result);
     }
 
+    public function loadMoreComment(){
+        $id = intval(I('param.id',0));
+        $start = trim(I('param.start', 0));
+
+        if($id && $start){
+            $result = array();
+
+            $data = D('Comment')->where(array('content_id'=>$id, 'status'=>1))->order('id desc')->limit($start, 2)->select();
+            //echo D('Comment')->getLastSql();
+            $result['status'] = !empty($data) ? 1 : 0;
+            $result['message'] =  $result['status'] ? '内容返回成功' : '暂无数据';
+            $result['data'] =  $data;
+
+            $this->ajaxReturn($result);
+
+        }
+
+        $this->ajaxReturn($result);
+    }
+
 }

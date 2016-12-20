@@ -180,3 +180,15 @@ function commentStatus($status = -1){
     }
     return $arr;
 }
+
+function ktPage($count, $show_num){
+    import('ORG.Util.Page');// 导入分页类
+
+    $Page       = new Page($count, $show_num);// 实例化分页类 传入总记录数和每页显示的记录数
+
+    $link_page_main = '%nowPage%/%totalPage% 页 %upPage% %first%  %prePage%  %linkPage%  %nextPage%  %downPage%  %end%';
+    $str = $link_page_main;
+    $Page->setConfig('theme', $str);
+    $show       = $Page->show_home();// 分页显示输出
+    return $show;
+}

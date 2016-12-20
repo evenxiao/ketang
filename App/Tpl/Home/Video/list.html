@@ -11,12 +11,12 @@
 					<div class="bd">
 						<ul class="">
 
-                            <li class="filter-nav-item on">
-                                <a href="<{:U('Video/videoList', array('cate_id'=>0,'tag_id'=>0))}>">全部课程</a>
+                            <li class="filter-nav-item <{$data['cate_id'] == 0 ? 'on' : ''}>">
+                                <a href="<{:U('Video/videoList',array('cate_id'=>0,'tag_id'=>$data['tag_id']))}>">全部课程</a>
                             </li>
 							<volist name="data.cate" id="vo">
-                             <li class="filter-nav-item">
-                                <a href="<{:U('Video/videoList')}>?cate_id=<{$vo['id']}>&tag_id=<{$Think.get.tag_id}>"><{$vo.name}></a>
+                             <li class="filter-nav-item <{$data['cate_id'] == $vo['id'] ? 'on' : ''}>">
+                                <a href="<{:U('Video/videoList',array('cate_id'=>$vo['id'],'tag_id'=>$data['tag_id']))}>"><{$vo.name}></a>
                             </li>
 							</volist>
                              <!--<li class="filter-nav-item">-->
@@ -57,12 +57,12 @@
 					<span class="hd l">标签:</span>
 					<div class="bd">
 						<ul class="">
-                            <li class="filter-nav-item on">
-                                <a href="<{:U('Video/videoList', array('tag_id'=>0,'cate_id'=>$Think['get']['cate_id']))}>">全部标签</a>
+                            <li class="filter-nav-item <{$data['tag_id'] == 0 ? 'on' : ''}>">
+                                <a href="<{:U('Video/videoList',array('cate_id'=>$data['cate_id'],'tag_id'=>0))}>">全部标签</a>
                             </li>
 							<volist name="data.tag" id="vo">
-								<li class="filter-nav-item <if condition='$Think['get']['tag_id'] eq $vo[id]'>on</if>">
-									<a href="<{:U('Video/videoList')}>?tag_id=<{$vo['id']}>&cate_id=<{$Think.get.cate_id}>"><{$vo.name}></a>
+								<li class="filter-nav-item <{$data['tag_id'] == $vo['id'] ? 'on' : ''}>">
+									<a href="<{:U('Video/videoList',array('cate_id'=>$data['cate_id'],'tag_id'=>$vo['id']))}>"><{$vo.name}></a>
 								</li>
 							</volist>
                              <!--<li class="filter-nav-item">-->
@@ -106,139 +106,142 @@
 			</div>
 			<div class="filter-list-box">
 				<div class="filter-list clearfix">
-					<a class="mv-link" href="#">
+					<volist name="data.list" id="vo">
+					<a class="mv-link" href="<{:U('Video/view', array('id'=>$vo['id']))}>" target="_blank">
 						<div class="mv-link-img">
 							<img src="__ROOT__/Resources/static/home/images/img1.png">
 						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
+						<h4><{$vo['title']}></h4>
 						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
+							<span class="score l">评分<{$vo['score']}></span>
+							<span class="number	r"><{$vo['click_num']}>人学习</span>
 						</div>
 					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
-					<a class="mv-link" href="#">
-						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
-						</div>
-						<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>
-						<div class="mv-link-bottom">
-							<span class="score l">评分9.6</span>
-							<span class="number	r">1898人学习</span>
-						</div>
-					</a>
+					</volist>
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
+					<!--<a class="mv-link" href="#">-->
+						<!--<div class="mv-link-img">-->
+							<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
+						<!--</div>-->
+						<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
+						<!--<div class="mv-link-bottom">-->
+							<!--<span class="score l">评分9.6</span>-->
+							<!--<span class="number	r">1898人学习</span>-->
+						<!--</div>-->
+					<!--</a>-->
 				</div>
 				<div class="page">
-					<span class="disabled_page">首页</span>
-					<span class="disabled_page">上一页</span>
-					<a href="javascript:void(0)" class="active text-page-tag">1</a>
-					<a class="text-page-tag" href="#">2</a>
-					<a class="text-page-tag" href="#">3</a>
-					<a class="text-page-tag" href="#">4</a>
-					<a class="text-page-tag" href="#">5</a>
-					<a class="text-page-tag" href="#">6</a>
-					<a class="text-page-tag" href="#">7</a>
-					<a href="#">下一页</a>
-					<a href="#">尾页</a>
+					<{$data.page}>
+					<!--<span class="disabled_page">首页</span>-->
+					<!--<span class="disabled_page">上一页</span>-->
+					<!--<a href="javascript:void(0)" class="active text-page-tag">1</a>-->
+					<!--<a class="text-page-tag" href="#">2</a>-->
+					<!--<a class="text-page-tag" href="#">3</a>-->
+					<!--<a class="text-page-tag" href="#">4</a>-->
+					<!--<a class="text-page-tag" href="#">5</a>-->
+					<!--<a class="text-page-tag" href="#">6</a>-->
+					<!--<a class="text-page-tag" href="#">7</a>-->
+					<!--<a href="#">下一页</a>-->
+					<!--<a href="#">尾页</a>-->
 				</div>
 			</div>
 		</div>
