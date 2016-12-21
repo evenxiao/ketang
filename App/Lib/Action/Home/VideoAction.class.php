@@ -93,6 +93,7 @@ class VideoAction extends BaseAction {
             //附件
             $data['attach_list'] = D('Attach')->where(array('content_id'=>$id, 'status'=>1))->select();
             //print_r($data['attach_list']);
+            $data['ads'] = D('Config')->where(array('status'=>1, 'is_show'=>1,'type'=>5))->select();
         }
 
         $this->assign('data',$data);

@@ -94,11 +94,22 @@ class IndexAction extends BaseAction {
     public function search(){
 
         $keyword = trim(I('param.keyword', ''));
-        $type = trim(I('param.type', ''));
+        $type = intval(trim(I('param.type', 0)));
+
+        $pageNum = intval(I('param.p', 1));
+        $limit = 1;
 
         $data = [];
         if($keyword){
-            $result = D('Content')->where(array('status'=>1,'title'=>array('like', '%'.$keyword.'%')))->order('id desc')->select();
+            $where = array('status'=>1,'title'=>array('like', '%'.$keyword.'%'));
+            if($type){
+                $where['type'] = $type;
+                $count = D('Content')->where($where)->order('id desc')->count();
+                $result = D('Content')->where($where)->page($pageNum)->limit($limit)->order('id desc')->select();
+            }else{
+                $result = D('Content')->where($where)->order('id desc')->select();
+            }
+
             if($result){
                 foreach($result as $key=>$value){
                     if($value['type'] == 1){
@@ -109,10 +120,26 @@ class IndexAction extends BaseAction {
 
                 }
             }
+            if($type){
+                import('ORG.Util.Page');// 导入分页类
+                //$count = $type == 1 ? count($data['result']['video']) : count($data['result']['news']);
+                $Page       = new Page($count, $limit);// 实例化分页类 传入总记录数和每页显示的记录数
+                $link_page_main = '%totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %first%  %prePage%  %linkPage%  %nextPage%  %downPage%  %end%';
+                $str = $link_page_main;
+                $Page->setConfig('theme', $str);
+                $show = $count > 0 ? $Page->show_home() : '暂无数据';// 分页显示输出
+                $data['pages'] = $show;
+            }
         }
+
         $data['keyword'] = $keyword;
         $this->assign('data', $data);
         $this->assign('count', count($result));
-        $this->display();
+        if($type){
+            $this->display('search_'.$type);
+        }else{
+            $this->display();
+        }
+
     }
 }

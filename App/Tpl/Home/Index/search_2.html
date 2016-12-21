@@ -1,0 +1,51 @@
+<include file="Public:header"/>
+	
+	<!-- 搜索框-->
+	<div class="search-main">
+		<div class="search-header">
+			<div class="search-form clearfix">
+				<i class="icon-search"></i>
+				<input class="search-form-ipt js-search-ipt" value="<{$data.keyword}>" placeholder="请输入想搜索的内容" type="text">
+				<span class="search-form-btn js-search-btn">搜索</span>
+			</div>
+			<ul class="hot">
+				<li>热门搜索：</li>
+				<li><a href="#" target="_blank">机场安全</a></li>
+				<li><a href="#" target="_blank">安保工作</a></li>
+				<li><a href="#" target="_blank">射击</a></li>
+				<li><a href="#" target="_blank">节日安排</a></li>
+				<li><a href="#" target="_blank">飞机安检</a></li>
+			</ul>
+		</div>
+		<div class="search-body">
+			<div class="search-nav-warp">
+				<div class="search-nav">
+					<a href="<{:U('Index/search', array('keyword'=>$data['keyword']))}>">全站</a>
+					<a href="<{:U('Index/search', array('keyword'=>$data['keyword'], 'type'=>1))}>">视频</a>
+					<a href="<{:U('Index/search', array('keyword'=>$data['keyword'], 'type'=>2))}>" class="active">资讯</a>
+				</div>
+			</div>
+			<div class="search-related">共找到 <{$count}> 个相关内容</div>
+			<h2 class="search-title">相关资讯</h2>
+			<volist name="data.result.news" id="vo">
+				<div class="news-item clearfix">
+					<div class="news-item-title">
+						<a href="<{:U('News/view', array('id'=>$vo['id']))}>" target="_blank"><{$vo.title}></a>
+					</div>
+					<div class="news-item-tag">
+						<span class="time fl"><{$vo.create_time}></span>
+						<span class="number	fr"><{$vo.click_num}>人学习</span>
+					</div>
+					<p class="content">
+						<{$vo.content|html_entity_decode|msubstr=###,0,50}>
+					</p>
+
+				</div>
+			</volist>
+		</div>
+		<div class="page">
+			<{$data.pages}>
+		</div>
+	</div>
+
+<include file="Public:footer"/>

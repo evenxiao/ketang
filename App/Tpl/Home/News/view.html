@@ -118,15 +118,14 @@
 						<h1 class="c-black">热点事件</h1>
 					</div>
 					<div class="common-hot-list">
-						<div class="common-hot-item">
-							<a href="#"><img src="__ROOT__/Resources/static/home/images/banner1.png" alt="" /></a>
-						</div>
-						<div class="common-hot-item">
-							<a href="#"><img src="__ROOT__/Resources/static/home/images/banner2.png" alt="" /></a>
-						</div>
-						<div class="common-hot-item">
-							<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png" alt="" /></a>
-						</div>
+						<volist name="data.ads" id="vo">
+							<div class="common-hot-item">
+								<a href="<{$vo.config_value}>"><img src="<{$vo.config_name}>" alt="" /></a>
+							</div>
+						</volist>
+						<!--<div class="common-hot-item">-->
+							<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png" alt="" /></a>-->
+						<!--</div>-->
 					</div>
 				</div>
 			</div>

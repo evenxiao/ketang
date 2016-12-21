@@ -89,6 +89,7 @@ class NewsAction extends BaseAction {
 //            $count = D('Comment')->where(array('content_id'=>$id,'status'=>1))->count();
 //            $count_page= ceil($count/3);
 //            $page = new Page($count, 10);
+            $data['ads'] = D('Config')->where(array('status'=>1, 'is_show'=>1,'type'=>5))->select();
         }
 
         $this->assign('data',$data);
