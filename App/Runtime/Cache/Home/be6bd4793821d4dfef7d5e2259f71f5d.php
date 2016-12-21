@@ -42,39 +42,39 @@
 						<span class="hd l c-white">定位标签:</span>
 						<div class="bd">
 							<ul class="">
-	                            <li class="filter-nav-item on">
-	                                <a href="#">全部标签</a>
+	                            <li class="filter-nav-item <?php if($data["tag_id"] == 0 ): ?>on<?php endif; ?>">
+	                                <a href="<?php echo U('Index/tag');?>">全部标签</a>
 	                            </li>
-	                             <li class="filter-nav-item">
-	                                <a href="#">机场治安</a>
-	                            </li>
-	                             <li class="filter-nav-item">
-	                                <a href="#">交通维护</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">机场安检</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">枪战</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">搏击训练</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">张教官</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">星级课程</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">十一大</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">开会内容</a>
-	                            </li>
-	                            <li class="filter-nav-item">
-	                                <a href="#">小视屏</a>
-	                            </li>
+								<?php if(is_array($data["tag"])): $i = 0; $__LIST__ = $data["tag"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="filter-nav-item <?php if($vo["id"] == $data["tag_id"]): ?>on<?php endif; ?>">
+	                                <a href="<?php echo U('Index/tag', array('tag_id'=>$vo['id']));?>" ><?php echo ($vo["name"]); ?></a>
+	                            </li><?php endforeach; endif; else: echo "" ;endif; ?>
+	                             <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">交通维护</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">机场安检</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">枪战</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">搏击训练</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">张教官</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">星级课程</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">十一大</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">开会内容</a>-->
+	                            <!--</li>-->
+	                            <!--<li class="filter-nav-item">-->
+	                                <!--<a href="#">小视屏</a>-->
+	                            <!--</li>-->
 	                        </ul>
 						</div>
 					</div>
@@ -87,13 +87,13 @@
 			<div class="search-nav-warp">
 				<div class="search-nav">
 					<a href="#" class="active">全站</a>
-					<a href="#">视频</a>
-					<a href="#">资讯</a>
+					<a href="<?php echo U('Video/videoList');?>">视频</a>
+					<a href="<?php echo U('News/newsList');?>">资讯</a>
 				</div>
 			</div>
-			<div class="search-related">共找到 2024 个相关内容</div>
+			<div class="search-related">共找到 <?php echo ($count); ?> 个相关内容</div>
 			<h2 class="search-title">相关课程</h2>
-			<?php if(is_array($data["videoList"])): $i = 0; $__LIST__ = $data["videoList"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="course-item clearfix">
+			<?php if(is_array($data["videoList"])): $i = 0; $__LIST__ = array_slice($data["videoList"],0,3,true);if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="course-item clearfix">
 					<div class="course-item-left">
 						<a href="<?php echo U('Video/view', array('id'=>$vo['id']));?>"><img src="<?php echo ($vo["thumb_img"]); ?>" alt="<?php echo ($vo["title"]); ?>" /></a>
 					</div>
@@ -152,7 +152,7 @@
 			<!-- -->
 			<h2 class="search-title">相关资讯</h2>
 
-			<?php if(is_array($data["newsList"])): $i = 0; $__LIST__ = $data["newsList"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="news-item clearfix">
+			<?php if(is_array($data["newsList"])): $i = 0; $__LIST__ = array_slice($data["newsList"],0,3,true);if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="news-item clearfix">
 				<div class="news-item-title">
 					<a href="<?php echo U('News/view', array('id'=>$vo['id']));?>"><?php echo ($vo["title"]); ?></a>
 				</div>
