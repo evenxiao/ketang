@@ -30,14 +30,15 @@ class BaseAction extends Action {
             }else{
                 $info = D('Content')->find($id);
                 $status = D('Content')->where(array('id'=>$id))->save(array('score'=>$info['score']+$score, 'score_times'=>$info['score_times']+1, 'update_time'=>date('Y-m-d H:i:s')));
-
+                if($status){
+                    D('score_log')->add(array('content_id'=>$id, 'score'=>$score,'add_time'=>date('Y-m-d H:i:s')));
+                }
                 $result['status'] = $status ? 1 : 0;
                 $result['message'] = $result['status'] ? '评分成功' : '评分失败';
                 cookie('person', $ip);
                 cookie('raty_time', time());
 
             }
-
 
         }
         $this->ajaxReturn($result);

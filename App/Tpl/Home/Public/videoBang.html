@@ -1,7 +1,7 @@
 
 		<ul>
 			<volist name="bang.bang_video" id="vo">
-			<li><em class="no<{$key+1}>"><{$key+1}></em><a href="<{:U('Video/view',array('id'=>$vo['id']))}>" title=""><{$vo.title}></a></li>
+			<li><em class="no<{$key+1}>"><{$key+1}></em><a href="<{:U('Video/view',array('id'=>$vo['id']))}>" title="<{$vo.title}>" target="_blank"><{$vo.title}></a></li>
 			</volist>
 
 		</ul>

@@ -138,7 +138,12 @@ class ContentModel extends RelationModel
     public function addNews($data){
         $result = false;
         if($data){
-            $result = $this->addContent($data,$type = 2);
+            $status = $this->addContent($data,$type = 2);
+            if($status){
+                $result['status'] = 1;
+                $result['message'] = '资讯添加成功';
+                $result['content_id'] = $this->getLastInsID();
+            }
         }
         return $result;
     }

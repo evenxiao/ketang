@@ -25,7 +25,7 @@ class IndexAction extends BaseAction {
         $data['hotVideo'] = D('Content')->where(array('status'=>1, 'type'=>1))->order('is_hot desc, create_time desc')->limit(8)->select();
         //推荐资讯
         $data['hotNews'] = D('Content')->where(array('status'=>1, 'type'=>2))->order('is_hot desc, create_time desc')->limit(9)->select();
-
+        //print_r( $data['hotNews']);
         $cate = D('Cate')->where(array('status'=>1))->select();
         if($cate){
             foreach($cate as $key=>$val){
@@ -63,16 +63,20 @@ class IndexAction extends BaseAction {
         $id = intval(I('get.tag_id', 0));
 
         if($id){
-            $content = D('TagContent')->alias('tc')->field('c.*, tc.tag_id')->where(array('tc.tag_id'=>$id, 'tc.status'=>1))->join('tb_content as c on tc.content_id = c.id')->select();
+            $content = D('TagContent')->alias('tc')->field('c.*, tc.tag_id')
+                ->where(array('tc.tag_id'=>$id, 'tc.status'=>1))
+                ->join('tb_content as c on tc.content_id = c.id')
+                ->order('c.id desc')
+                ->select();
         }else{
-            $content = D('Content')->alias('c')->field('c.*')->where(array('c.status'=>1))->select();
+            $content = D('Content')->alias('c')->field('c.*')->where(array('c.status'=>1))->order('id desc')->select();
         }
         $data = array();
         if($content){
             foreach($content as $key=>$value){
                 if($value['type'] == 1){
                     //$value['thumb_img'] = $value['thumb_img'] == '' ? '__ROOT__/Resources/static/home/images/img2.png' : $value['thumb_img'];
-                    $value['thumb_img'] ='__ROOT__/Resources/static/home/images/img2.png';
+                    $value['thumb_img'] = $value['thumb_img'] == '' ? '__ROOT__/Resources/static/home/images/img2.png' : $value['thumb_img'];
                     $data['videoList'][] = $value;
                 }elseif($value['type'] == 2){
                     $data['newsList'][] = $value;

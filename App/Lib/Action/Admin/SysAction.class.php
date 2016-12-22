@@ -394,7 +394,6 @@ class SysAction extends BaseAction {
     public function ads(){
         $where['type']=5;
         $data['adsList'] = $this->ConfigModel->getConfigList($where);
-        //print_r($data);
 
         $this->assign('data', $data);
         $this->display();
