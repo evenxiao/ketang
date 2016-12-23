@@ -56,7 +56,7 @@ class NewsAction extends BaseAction {
                 unset($data['attach_name']);
 
                 $data['create_time'] = date('Y-m-d H:i:s');
-                $result = $this->contentModel->addVideo($data);
+                $result = $this->contentModel->addNews($data);
                 //$content_id =  $this->contentModel->getInsertId();
                 if($result['status'] == 1){
                     if($tags){
