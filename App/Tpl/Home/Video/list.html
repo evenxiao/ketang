@@ -1,6 +1,6 @@
 <include file="Public:header" />
 
-	
+
 	<!-- 筛选器-->
 	<div class="outwrap">
 		<div class="wrap">
@@ -89,7 +89,7 @@
                         </ul>
 					</div>
 				</div>
-					
+
 
 				</div>
 			</div>
@@ -100,8 +100,10 @@
 		<div class="wrap">
 			<div class="filter-tool-bar clearfix">
 				<div class="tool-left l">
-					<a class="active" href="#">最新</a>
-					<a href="#">最热</a>
+					<!-- <a class="active" href="#">最新</a>
+					<a href="#">最热</a> -->
+					<a class="<if condition="$data['order_type'] eq 1">active</if>" href="<{:U('Video/videoList',array('cate_id'=>$data['cate_id'],'tag_id'=>$data['tag_id'], 'order_type'=>1))}>">最新</a>
+					<a class="<if condition="$data['order_type'] eq 2">active</if>" href="<{:U('Video/videoList',array('cate_id'=>$data['cate_id'],'tag_id'=>$data['tag_id'], 'order_type'=>2))}>">最热</a>
 				</div>
 			</div>
 			<div class="filter-list-box">
@@ -109,11 +111,11 @@
 					<volist name="data.list" id="vo">
 					<a class="mv-link" href="<{:U('Video/view', array('id'=>$vo['id']))}>" target="_blank">
 						<div class="mv-link-img">
-							<img src="__ROOT__/Resources/static/home/images/img1.png">
+							<img src="<{$vo['thumb_img']}>">
 						</div>
 						<h4><{$vo['title']}></h4>
 						<div class="mv-link-bottom">
-							<span class="score l">评分<{$vo['score']}></span>
+							<span class="score l">评分<php>echo floatval($vo['score']/$vo['score_times'])</php></span>
 							<span class="number	r"><{$vo['click_num']}>人学习</span>
 						</div>
 					</a>
@@ -252,4 +254,3 @@
 
 	$('.header-nav li').eq(1).addClass('on');
 </script>
-

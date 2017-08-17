@@ -133,7 +133,7 @@ class BaseAction extends Action {
         $fileName = $file_dir . '/' . $_FILES['file']['name'];
        // echo "<br/>";
         //echo $$uploadDir . $fileName;
-        $fileName = iconv('UTF-8', 'GBK', $fileName);
+        //$fileName = iconv('UTF-8', 'GBK', $fileName);
         //$fileName = $file_dir . '/' . date('Ymd').mt_rand() .'.' . $type;
         if(file_exists($uploadDir . $fileName)){
             unlink($uploadDir . $fileName);
@@ -146,7 +146,7 @@ class BaseAction extends Action {
             //echo 2;
              //print_r($result);
         }
-        $result['url'] = iconv('GBK', 'UTF-8', $result['url']);
+        //$result['url'] = iconv('GBK', 'UTF-8', $result['url']);
         $this->ajaxReturn($result);
         //die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
     }

@@ -2,7 +2,7 @@
  <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 评论管理<span class="c-gray en">&gt;</span>评论列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c">
-		<form action="__SELF__" method="get">
+		<form action="<{:U('Comment/commentList')}>" method="get">
 		<input type="text" class="input-text" style="width:250px" placeholder="输入关键字搜索视频/资讯" id="keyword" name="keyword" value="<{$data.param.keyword}>">
 		<span class="select-box inline">
 			<select class="select" name="type" id="type">
@@ -15,7 +15,8 @@
 		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜评论</button>
 		</form>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+	<!-- <div class="cl pd-5 bg-1 bk-gray mt-20">  -->
+		<!-- <span class="l"> -->
 		<!--<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>-->
 		<!--<a href="javascript:;" onclick="member_add('添加评论','<{:U(\'Video/addComment\')}>','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加评论</a></span> </div>-->
 	<div class="mt-20">
@@ -52,7 +53,7 @@
 
 					<a style="text-decoration:none" class="ml-5" onClick="member_check(this,'<{$vo.id}>', 2)" href="javascript:;" title="审核驳回">驳回</a>
 					</if>
-
+					<a style="text-decoration:none" class="ml-5" onClick="member_del(this,<{$vo.id}>,'900','500')" href="javascript:;">删除</a>
 					<if condition="$vo['type'] eq 1">
 						<a style="text-decoration:none" class="ml-5" href="<{:U('Home/Video/view', array('id'=>$vo['content_id']))}>" title="<{$vo.title}>" target="_blank">查看视频</a>
 					<else/>
@@ -94,7 +95,7 @@
 	function member_show(title,url,id,w,h){
 		layer_show(title,url,w,h);
 	}
-	
+
 
 	/*用户-启用*/
 	function member_start(obj,id){
@@ -135,6 +136,32 @@
 				}
 			})
 
+		});
+	}
+
+	/*用户-删除*/
+	function member_del(obj,id){
+		layer.confirm('确认要删除吗？',function(index){
+			$.ajax({
+				url: '<{:U("Comment/del")}>',
+				type: 'post',
+				dataType: 'json',
+				data: {id: id},
+				success:function(_data) {
+					if(_data.status == 1){
+						layer.msg('已删除!',{icon:1,time:1000});
+						setTimeout(function(){
+							$(obj).parents("tr").remove();
+							layer.closeAll('dialog');
+						}, 1000);
+		
+					}else{
+						layer.msg(_data.message,{icon:2,time:1000});
+						return false;
+					}
+				}
+			})
+			
 		});
 	}
 </script>

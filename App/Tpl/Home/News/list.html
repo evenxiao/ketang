@@ -100,16 +100,16 @@
 	<div class="wrap">
 		<div class="filter-tool-bar clearfix">
 			<div class="tool-left l">
-				<a class="active" href="#">最新</a>
-				<a href="#">最热</a>
+				<a class="<if condition="$data['order_type'] eq 1">active</if>" href="<{:U('News/newsList',array('cate_id'=>$data['cate_id'],'tag_id'=>$data['tag_id'], 'order_type'=>1))}>">最新</a>
+				<a class="<if condition="$data['order_type'] eq 2">active</if>" href="<{:U('News/newsList',array('cate_id'=>$data['cate_id'],'tag_id'=>$data['tag_id'], 'order_type'=>2))}>">最热</a>
 			</div>
 		</div>
 		<div class="filter-list-box">
 			<div class="filter-list clearfix">
 				<volist name="data.list" id="vo">
 					<a class="news-list" href="<{:U('News/view', array('id'=>$vo['id']))}>" target="_blank">
-						<h4><{$vo['title']}></h4>
-						<p><{$vo['content']|html_entity_decode|msubstr=###,0,50}></p>
+						<h4><{$vo['title']|msubstr=###,0,30}></h4>
+						<p><{$vo['content']|htmlspecialchars_decode|strip_tags|msubstr=###,0,150,'utf-8'}></p>
 						<div class="news-list-bottom clearfix">
 							<span class="time l"><{$vo['add_time']}></span>
 							<span class="number	r"><{$vo['click_num']}>人学习</span>
@@ -251,4 +251,3 @@
 
 	$('.header-nav li').eq(2).addClass('on');
 </script>
-

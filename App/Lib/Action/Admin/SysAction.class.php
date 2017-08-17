@@ -192,7 +192,7 @@ class SysAction extends BaseAction {
     public function daohang(){
 
         $where['type'] = 4;
-        //$where['status'] = 1;
+        $where['status'] = 1;
         $data['data'] = $this->ConfigModel->getConfigList($where);
         $this->assign($data);
         $this->display();
@@ -325,7 +325,7 @@ class SysAction extends BaseAction {
      */
     public function banner(){
         $where['type'] = 2;
-        //$where['status'] = 1;
+        $where['status'] = 1;
         $data['data'] = $this->ConfigModel->getConfigList($where);
         $this->assign($data);
         $this->display();
@@ -393,6 +393,7 @@ class SysAction extends BaseAction {
      */
     public function ads(){
         $where['type']=5;
+		$where['status'] = 1;
         $data['adsList'] = $this->ConfigModel->getConfigList($where);
 
         $this->assign('data', $data);

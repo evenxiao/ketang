@@ -9,12 +9,12 @@
 			<span class="search-form-btn js-search-btn" onclick="searchForm();">搜索</span>
 		</div>
 		<ul class="hot">
-			<li>热门搜索：</li>
+			<!-- <li>热门搜索：</li>
 			<li><a href="<{:U('Index/search', array('keyword'=>'机场安全'))}>">机场安全</a></li>
 			<li><a href="<{:U('Index/search', array('keyword'=>'安保工作'))}>">安保工作</a></li>
 			<li><a href="<{:U('Index/search', array('keyword'=>'射击'))}>" >射击</a></li>
 			<li><a href="<{:U('Index/search', array('keyword'=>'节日安排'))}>">节日安排</a></li>
-			<li><a href="<{:U('Index/search', array('keyword'=>'飞机安检'))}>">飞机安检</a></li>
+			<li><a href="<{:U('Index/search', array('keyword'=>'飞机安检'))}>">飞机安检</a></li> -->
 		</ul>
 	</div>
 	<div class="search-body">
@@ -37,11 +37,11 @@
 					<a href="<{:U('Video/view', array('id'=>$vo['id']))}>" target="_blank"><{$vo['title']}></a>
 				</div>
 				<div class="tag">
-					<span class="score fl">评分<{$vo.score}></span>
+					<span class="score fl">评分<php>echo floatval($vo['score']/$vo['score_times'])</php></span>
 					<span class="number	fr"><{$vo.click_num}>人学习</span>
 				</div>
 				<p class="content">
-					<{$vo.content|html_entity_decode|msubstr=###,0,100}>
+					<{$vo.content|htmlspecialchars_decode|strip_tags|msubstr=###,0,100}>
 				</p>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 				<span class="number	fr"><{$vo.click_num}>人学习</span>
 			</div>
 			<p class="content">
-				<{$vo.content|strip_tags|msubstr=###,0,100}>
+				<{$vo.content|htmlspecialchars_decode|strip_tags|msubstr=###,0,100}>
 			</p>
 		</div>
 		</volist>

@@ -193,4 +193,15 @@ class ContentModel extends RelationModel
         }
         return $data;
     }
+
+    /**
+    *   增加点击量
+    */
+    public function clickOne($id = 0){
+        $status = 0;
+        if ($id) {
+            $status = $this->where(array('id'=>$id))->setInc('click_num');
+        }
+        return $status;
+    }
 }

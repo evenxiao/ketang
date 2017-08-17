@@ -12,7 +12,7 @@
 						<div class="crticle-info">
 							<span><{$data.create_time}></span>
 							<span>作者:<{$data.author}></span>
-							<span>评分:<{$data.score}></span>
+							<span>评分:<php>echo floatval($data['score']/$data['score_times'])</php></span>
 							<span><{$data.click_num}>人以读</span>
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 			<div class="common-silder r">
 				<div class="common-rank">
 					<div class="common-hd">
-						<h1 class="c-black">资讯点击排行榜</h1>
+						<h1 class="c-black">文章教案排行榜</h1>
 					</div>
 					<div class="common-rank-list">
 						<include file="Public:newsBang"/>
@@ -115,7 +115,7 @@
 
 				<div class="common-hot">
 					<div class="common-hd">
-						<h1 class="c-black">热点事件</h1>
+						<h1 class="c-black">学习平台链接</h1>
 					</div>
 					<div class="common-hot-list">
 						<volist name="data.ads" id="vo">

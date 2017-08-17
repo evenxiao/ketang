@@ -4,6 +4,7 @@
 	<p>技术支持  上海嘉麟信息科技股份有限公司</p>
 </div>
 	<script>
+		/** 头部搜索方法 **/
 		function searchInfo(){
 			var keyword = $.trim($('input[name="keyword"]').val());
 
@@ -15,6 +16,14 @@
 
 			window.location.href = "<{:U('Index/search')}>" + '?keyword='+keyword;
 		}
+		/** 回车触发搜索方法 **/	
+		document.onkeydown = function(e){
+	      if(!e) e = window.event;//火狐中是 window.event
+	      if((e.keyCode || e.which) == 13){
+	        //document.getElementById("auto").click();
+	        searchInfo();
+	      }
+	    }
 	</script>
 
 	<!--<script type="text/javascript" src="__ROOT__/Resources/static/home/js/home.js"></script>-->

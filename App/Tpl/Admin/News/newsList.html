@@ -61,7 +61,7 @@
 				<td><input type="checkbox" value="<{$vo.id}>" name=""></td>
 				<td><{$vo.id}></td>
 				<td><{$vo.title}></td>
-				<td><{$vo.name}></td>			
+				<td><{$vo.name}></td>
 				<td><{$vo.author}></td>
 				<td><{$vo.tags_name}></td>
 				<td><{$vo.click_num}></td>
@@ -74,10 +74,12 @@
 				</td>
 				<td class="td-manage">
 					<!--<a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> -->
-					<a style="text-decoration:none" class="ml-5" href="<{:U('Home/News/view')}>?id=<{$vo.id}>" title="<{$vo.title}>" target="_blank">查看</a>
-					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<{:U(\'News/edit\')}>?id=<{$vo.id}>','900','500')" href="javascript:;" title="编辑">编辑</a>
-					<a style="text-decoration:none" class="ml-5" onClick="member_edit('附件','<{:U(\'News/attachList\')}>?id=<{$vo.id}>','900','500')" href="javascript:;" title="编辑">附件</a>
-					<a style="text-decoration:none" class="ml-5" onClick="member_show('评论','<{:U(\'Video/commentList\')}>?id=<{$vo.id}>','900','500')" href="javascript:;" title="评论">评论</a>
+					<a style="text-decoration:none" class="ml-5" href="<{:U('Home/News/view',array('id'=>$vo['id']))}>" title="<{$vo.title}>" target="_blank">查看</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('编辑','<{:U(\'News/edit\',array('id'=>$vo['id']))}>','900','500')" href="javascript:;" title="编辑">编辑</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_del(this,<{$vo.id}>,'900','500')" href="javascript:;">删除</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_edit('附件','<{:U(\'News/attachList\',array('id'=>$vo['id']))}>','900','500')" href="javascript:;" title="编辑">附件</a>
+					<a style="text-decoration:none" class="ml-5" onClick="member_show('评论','<{:U(\'News/commentList\',array('id'=>$vo['id']))}>','900','500')" href="javascript:;" title="评论">评论</a>
+
 				</td>
 			</tr>
 			</volist>
@@ -153,8 +155,26 @@
 	/*用户-删除*/
 	function member_del(obj,id){
 		layer.confirm('确认要删除吗？',function(index){
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!',{icon:1,time:1000});
+			$.ajax({
+				url: '<{:U("News/del")}>',
+				type: 'post',
+				dataType: 'json',
+				data: {id: id},
+				success:function(_data) {
+					if(_data.status == 1){
+						layer.msg('已删除!',{icon:1,time:1000});
+						setTimeout(function(){
+							$(obj).parents("tr").remove();
+							layer.closeAll('dialog');
+						}, 1000);
+		
+					}else{
+						layer.msg(_data.message,{icon:2,time:1000});
+						return false;
+					}
+				}
+			})
+			
 		});
 	}
 

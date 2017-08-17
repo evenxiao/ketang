@@ -9,8 +9,8 @@
 					<div class="mv-kv-info">
 						<span><{$data.create_time}></span>
 						<span>作者:<{$data.author}></span>
-						<span>评分:<{$data.score}></span>
-						<span><{$data.score_times}>人已读</span>
+						<span>评分:<php>echo floatval($data['score']/$data['score_times'])</php></span>
+						<span><{$data.click_num}>人已读</span>
 					</div>
 				</div>
 			</div>
@@ -87,51 +87,37 @@
 					<div class="common-hd bd-bm-1">
 						<h2>共<{$count}>条评论</h2>
 					</div>
-					<div id="comment-item-box">
-					<volist name="data.comment_list" id="vo">
-						<div class="comment-list-item">
-							<div class="comment-user clearfix">
-								<span class="l"><{$vo.nick_name}>发布了评论</span>
-								<span class="r"><{$vo.create_time}></span>
+					<if condition="$count gt 0">
+						<div id="comment-item-box">
+						<volist name="data.comment_list" id="vo">
+							<div class="comment-list-item">
+								<div class="comment-user clearfix">
+									<span class="l"><{$vo.nick_name}>发布了评论</span>
+									<span class="r"><{$vo.create_time}></span>
+								</div>
+								<div class="comment-user-content"><{$vo.content}></div>
 							</div>
-							<div class="comment-user-content"><{$vo.content}></div>
+						</volist>
 						</div>
-					</volist>
-					</div>
 
-					<!--<div class="comment-list-item">-->
-						<!--<div class="comment-user clearfix">-->
-							<!--<span class="l">游客2489发布了评论</span>-->
-							<!--<span class="r">2016-11-11</span>-->
-						<!--</div>-->
-						<!--<div class="comment-user-content">有没有搞错啊，刚出的还没学完又出新的。</div>-->
-					<!--</div>-->
+						<p class="href-warp">
+							<!--<a href="javascript:;" style="text-align: center; width: 100%; background-color: #afb5bf;" onclick="loadMoreComment();" id="load_more">查看更多</a>-->
+							<a href="javascript:;" onclick="loadMoreComment();" id="load_more">查看更多</a>
+							<input type="hidden" id="more_comment" value="2">
+							<input type="hidden" id="current_page" value="1">
+						</p>
+					<else/>
 
-					<!--<div class="comment-list-item">-->
-						<!--<div class="comment-user clearfix">-->
-							<!--<span class="l">游客2489发布了评论</span>-->
-							<!--<span class="r">2016-11-11</span>-->
-						<!--</div>-->
-						<!--<div class="comment-user-content">有没有搞错啊，刚出的还没学完又出新的。</div>-->
-					<!--</div>-->
+						<p class="href-warp">
+							<!--<a href="javascript:;" style="text-align: center; width: 100%; background-color: #afb5bf;" onclick="loadMoreComment();" id="load_more">查看更多</a>-->
+							<a href="javascript:;" id="no_more">没有更多了...</a>
 
-					<!--<div class="comment-list-item">-->
-						<!--<div class="comment-user clearfix">-->
-							<!--<span class="l">游客2489发布了评论</span>-->
-							<!--<span class="r">2016-11-11</span>-->
-						<!--</div>-->
-						<!--<div class="comment-user-content">有没有搞错啊，刚出的还没学完又出新的。</div>-->
-					<!--</div>-->
+						</p>
 
-					<p class="href-warp">
-						<!--<a href="javascript:;" style="text-align: center; width: 100%; background-color: #afb5bf;" onclick="loadMoreComment();" id="load_more">查看更多</a>-->
-						<a href="javascript:;" onclick="loadMoreComment();" id="load_more">查看更多</a>
-						<input type="hidden" id="more_comment" value="2">
-						<input type="hidden" id="current_page" value="1">
-					</p>
-					<div class="page">
+					</if>
+					<!-- <div class="page">
 
-					</div>
+					</div> -->
 					<!--<div class="page">-->
 						<!--<span class="disabled_page">首页</span>-->
 						<!--<span class="disabled_page">上一页</span>-->
@@ -155,7 +141,7 @@
 						<div class="common-silder r">
 				<div class="common-rank">
 					<div class="common-hd">
-						<h1 class="c-black">视频点击排行榜</h1>
+						<h1 class="c-black">微课点击排行榜</h1>
 					</div>
 					<div class="common-rank-list">
 						<include file="Public:videoBang"/>
@@ -188,7 +174,7 @@
 
 				<div class="common-hot">
 					<div class="common-hd">
-						<h1 class="c-black">热点事件</h1>
+						<h1 class="c-black">学习平台链接</h1>
 					</div>
 					<div class="common-hot-list">
 						<volist name="data.ads" id="vo">

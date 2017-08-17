@@ -1,5 +1,5 @@
 <include file="Public:header"/>
-	
+
 	<!-- 标签搜索-->
 	<div class="search-main">
 
@@ -57,8 +57,8 @@
 			<div class="search-nav-warp">
 				<div class="search-nav">
 					<a href="#" class="active">全站</a>
-					<a href="<{:U('Video/videoList')}>">视频</a>
-					<a href="<{:U('News/newsList')}>">资讯</a>
+					<a href="<{:U('Video/videoList', array('cate_id'=>0, 'tag_id'=>$data['tag_id']))}>">视频</a>
+					<a href="<{:U('News/newsList', array('cate_id'=>0,'tag_id'=>$data['tag_id']))}>">资讯</a>
 				</div>
 			</div>
 			<div class="search-related">共找到 <{$count}> 个相关内容</div>
@@ -73,7 +73,7 @@
 							<a href="<{:U('Video/view', array('id'=>$vo['id']))}>" target="_blank" title="<{$vo.title}>"><{$vo.title}></a>
 						</div>
 						<div class="tag">
-							<span class="score fl">评分<{$vo.score}></span>
+							<span class="score fl">评分<php>echo floatval($vo['score']/$vo['score_times'])</php></span>
 							<span class="number	fr"><{$vo.click_num}>人学习</span>
 						</div>
 						<p class="content">
@@ -93,14 +93,14 @@
 			<volist name="data.newsList" id="vo" offset="0" length="3">
 			<div class="news-item clearfix">
 				<div class="news-item-title">
-					<a href="<{:U('News/view', array('id'=>$vo['id']))}>"><{$vo.title}></a>
+					<a href="<{:U('News/view', array('id'=>$vo['id']))}>" target="_blank"><{$vo.title}></a>
 				</div>
 				<div class="news-item-tag">
 					<span class="time fl"><{$vo.create_time}></span>
 					<span class="number	fr"><{$vo.click_num}>人学习</span>
 				</div>
 				<p class="content">
-					<{$vo.content|html_entity_decode|msubstr=###,0,100}>
+					<{$vo.content|htmlspecialchars_decode|strip_tags|msubstr=###,0,100}>
 				</p>
 			</div>
 

@@ -38,7 +38,7 @@
 					<span class="number	fr"><{$vo.click_num}>人学习</span>
 				</div>
 				<p class="content">
-					<{$vo.content|html_entity_decode|msubstr=###,0,100}>
+					<{$vo.content|htmlspecialchars_decode|strip_tags|msubstr=###,0,100}>
 				</p>
 			</div>
 		</volist>

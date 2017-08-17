@@ -8,6 +8,7 @@
 <script type="text/javascript" src="__ROOT__/Resources/static/home/js/jquery.SuperSlide.2.1.1.js"></script>
 
 <script type="text/javascript" src="__ROOT__/Resources/static/home/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Resources/static/home/js/Xslider.js"></script>
 </head>
 
 <body>
@@ -17,9 +18,13 @@
 				<img src="__ROOT__/Resources/static/home/images/logo.png" alt="网上课堂" />
 			</a>
 			<ul class="header-nav">
-				<li><a href="__APP__">首页</a></li>
-				<li><a href="<{:U('Video/videoList')}>">视频课程</a></li>
-				<li><a href="<{:U('News/newsList')}>">新闻资讯</a></li>
+				<li><a href="__ROOT__/index.php">首页</a></li>
+				<li><a href="<{:U('Video/videoList')}>">微课视频</a></li>
+				<li><a href="<{:U('News/newsList')}>">文章教案</a></li>
+				<volist name="daohang" id="vo">
+
+					<li><a href="<{$vo.config_value}>" target="_blank"><{$vo.config_name}></a></li>
+				</volist>
 			</ul>
 			<div class="header-login"><a href="<{:U('Admin/Index/index')}>" title="管理平台" target="_blank">管理平台</a></div>
 

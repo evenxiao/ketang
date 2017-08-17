@@ -37,11 +37,11 @@
 						<a href="<{:U('Video/view', array('id'=>$vo['id']))}>" target="_blank"><{$vo.title}></a>
 					</div>
 					<div class="tag">
-						<span class="score fl">评分<{$vo.score}></span>
+						<span class="score fl">评分<php>echo floatval($vo['score']/$vo['score_times'])</php></span>
 						<span class="number	fr"><{$vo.click_num}>人学习</span>
 					</div>
 					<p class="content">
-						<{$vo.content|html_entity_decode|msubstr=###,0,100}>
+						<{$vo.content|htmlspecialchars_decode|strip_tags|msubstr=###,0,100}>
 					</p>
 				</div>
 			</div>

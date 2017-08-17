@@ -16,7 +16,7 @@ class VideoAction extends BaseAction {
         if($cate_id){
             $param['content.cate_id'] = $cate_id;
         }
-        
+
         if(I('param.tag_id', '')){
             $tags_id = I('param.tag_id');
             //print_r( $tags_id);
@@ -24,7 +24,7 @@ class VideoAction extends BaseAction {
                 $ids = $this->tagContentModel->where(array('tag_id'=>array('in', $tags_id), 'status'=>1))->getField('content_id', true);
                 $param['content.id'] = array('in', $ids);
             }
-            
+
         }
         $data['tags_select'] = json_encode(I('param.tag_id', ''));
         $data['data'] = D('Content')->getVideoList($param);
@@ -33,7 +33,7 @@ class VideoAction extends BaseAction {
         $data['cates'] = D('Cate')->getCateList(array('type'=>1, 'status'=>1));
 
         $data['tags'] = D('Tag')->where(array('status'=>1, 'type'=>1))->select();
-       
+
         $this->assign('data', $data);
         $this->display();
     }
@@ -132,7 +132,7 @@ class VideoAction extends BaseAction {
 
                 if($attachs){
                         foreach($attachs as $key=>$val){
-                            
+
                             $tmp['title'] = $attach_names[$key];
                             $tmp['attach_url'] = $val;
                             $tmp['content_id'] = $id;
@@ -147,7 +147,7 @@ class VideoAction extends BaseAction {
                 $result['message'] = $result['status'] ? '修改成功' : '修改失败';
                 $this->ajaxReturn($result);
             }else{
-                
+
                 $result['status'] = 0;
                 $result['message'] = '参数有误，请重试';
                 $this->ajaxReturn($result);
@@ -214,15 +214,70 @@ class VideoAction extends BaseAction {
     public function checkComment(){
         if(IS_AJAX){
              $id = I('param.id', 0);
-             $info = D('Comment')->where(array('id'=>$id))->find(); 
+             $info = D('Comment')->where(array('id'=>$id))->find();
              if($info['status'] != 0){
                 $this->ajaxReturn(array('status'=>0, 'message'=>'该评论已审核,无须重新审核！'));
              }
-             $status = D('Comment')->where(array('id'=>$id, 'status'=>0))->save(array('status'=>$status,'update_time'=>date('Y-m-d H:i:s')));  
+             $status = D('Comment')->where(array('id'=>$id, 'status'=>0))->save(array('status'=>$status,'update_time'=>date('Y-m-d H:i:s')));
              $result['status'] = $status ? 1 : 0;
              $result['message'] = $result['status'] == 1 ? '审核成功' : '审核失败';
              $this->ajaxReturn($result);
-        } 
-        
+        }
+
+    }
+
+    /**
+     * 添加附件
+     */
+    public function addAttach(){
+
+        $id = intval(I('param.id', 0));
+      if(IS_AJAX){
+
+        $attachs = I('post.attach');
+        $attach_names = I('post.attach_name');
+        if($attachs){
+                 foreach($attachs as $key=>$val){
+
+                     $tmp['title'] = $attach_names[$key];
+                     $tmp['attach_url'] = $val;
+                     $tmp['content_id'] = $id;
+                     $tmp['create_time'] = date('Y-m-d H:i:s');
+                     $attachData[] = $tmp;
+                 }
+                // D('Attach')->where(array('content_id'=>$id, 'status'=>1))->save(array('status'=>2, 'update_time'=>date('Y-m-d H:i:s')));
+                 $status = D('Attach')->addAll($attachData);
+                 $result['status'] = $status ? 1 : 0;
+                 $result['message'] = $result['status'] ? '添加成功' : '添加失败';
+                 $this->ajaxReturn($result);
+         }else{
+             $result['status'] = 0;
+             $result['message'] = '请上传附件';
+             $this->ajaxReturn($result);
+         }
+
+      }
+
+      $data['info'] = D('Content')->where(['status'=>1, 'id'=>$id])->find();
+      $this->assign('data', $data);
+      $this->display();
+    }
+
+    /**
+    *   删除
+    */
+    public function del(){
+       if(IS_AJAX){
+
+
+           $id = intval(I('param.id', 0));
+
+           $status = $this->contentModel->delete($id);
+
+           $result['status'] = $status ? 1 : 0;
+
+           $result['message'] = $result['status'] ? '删除成功' : '删除失败';
+           $this->ajaxReturn($result);
+       }
     }
 }

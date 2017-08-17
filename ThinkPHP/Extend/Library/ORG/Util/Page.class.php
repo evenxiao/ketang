@@ -218,13 +218,13 @@ class Page {
             $page       =   ($nowCoolPage-1)*$this->rollPage+$i;
             if($page!=$this->nowPage){
                 if($page<=$this->totalPages){
-                    $linkPage .= "<a href='".str_replace('__PAGE__',$page,$url)."'>".$page."</a>";
+                    $linkPage .= "<a class='text-page-tag' href='".str_replace('__PAGE__',$page,$url)."'>".$page."</a>";
                 }else{
                     break;
                 }
             }else{
                 if($this->totalPages != 1){
-                    $linkPage .= "<a class='current'>".$page."</a>";
+                    $linkPage .= "<a class='active text-page-tag'>".$page."</a>";
                 }
             }
         }

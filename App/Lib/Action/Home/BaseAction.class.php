@@ -4,11 +4,13 @@ class BaseAction extends Action {
     public function _initialize(){
         header('content-type:text/html;charset=utf-8;');
 
-        $bang['bang_video'] = D('Content')->field('id,title')->where(array('title'=>array('neq', ''), 'status'=>1, 'type'=>1))->order('click_num desc, create_time desc')->limit(10)->select();
-        $bang['bang_news'] = D('Content')->field('id,title')->where(array('title'=>array('neq', ''), 'status'=>1, 'type'=>2))->order('click_num desc, create_time desc')->limit(10)->select();
+        $bang['bang_video'] = D('Content')->alias('content')->field('content.id, content.title')->join('tb_cate cate on content.cate_id = cate.id', 'left')->where(array('content.title'=>array('neq', ''), 'content.status'=>1, 'content.type'=>1, 'content.cate_id'=>array('neq', 14), 'cate.status'=>1))->order('content.click_num desc, content.create_time desc')->limit(10)->select();
+        //新闻排行榜 排除cate_id=14, 民警感悟内容
+        $bang['bang_news'] = D('Content')->alias('content')->field('content.id, content.title')->where(array('content.title'=>array('neq', ''), 'content.status'=>1, 'content.type'=>2, 'content.cate_id'=>array('neq', 14)))->order('content.click_num desc, content.create_time desc')->limit(10)->select();
 
         $tag['list'] = D('Tag')->where(array('status'=>1))->order('order_num asc')->limit(15)->select();
-
+        $daohang = D('Config')->where(array('status'=>1, 'is_show'=>1, 'type'=>4))->select();
+        $this->assign('daohang', $daohang);
         $this->assign('web_name', C('WEB_NAME'));
         $this->assign('bang', $bang);
         $this->assign('tag', $tag);

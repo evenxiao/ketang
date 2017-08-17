@@ -9,7 +9,7 @@ class VideoAction extends BaseAction {
         $order_type = intval(I('param.order_type',1));
 
         $pageNum = intval(I('param.p', 1));
-        $limit = 2;
+        $limit = 12;
         $where = [];
         if($cate_id){
             $where['content.cate_id'] = $cate_id;
@@ -38,7 +38,9 @@ class VideoAction extends BaseAction {
             $order = $order_type == 1 ? 'content.id desc' : 'is_hot desc, click_num desc,id desc';
             //print_r($where);
             $where['content.type'] = 1;
-            $count = D('Content')->alias('content')->where($where)->count();
+            $where['content.status'] = 1;
+            $where['cate.status'] = 1;
+            $count = D('Content')->alias('content')->join('tb_cate cate on content.cate_id = cate.id','left')->where($where)->count();
 
             $data['list'] = D('Content')->getVideoList($where, $field='content.*, cate.name', $order, $is_page = true, $pageNum, $limit);
 
@@ -65,6 +67,7 @@ class VideoAction extends BaseAction {
 
         $data['tag_id'] = $tag_id;
         $data['cate_id'] = $cate_id;
+        $data['order_type'] = $order_type;
         $data['page'] = $show;
         $this->assign('data', $data);
         $this->display('list');
@@ -94,6 +97,8 @@ class VideoAction extends BaseAction {
             $data['attach_list'] = D('Attach')->where(array('content_id'=>$id, 'status'=>1))->select();
             //print_r($data['attach_list']);
             $data['ads'] = D('Config')->where(array('status'=>1, 'is_show'=>1,'type'=>5))->select();
+             //点击量加1
+            D('Content')->clickOne($id);
         }
 
         $this->assign('data',$data);

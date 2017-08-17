@@ -22,6 +22,7 @@ class CommentAction extends BaseAction {
         if($param['keyword']){
             $where['b.title'] = array('like', '%'.trim($param['keyword']).'%');
         }
+        
         $data['commentList'] = D('Comment')->alias('a')->field('a.*, b.title,b.type')->where($where)->join('tb_content b on a.content_id = b.id')->select();
 
         $data['contentType'] = getCateType();
@@ -43,11 +44,28 @@ class CommentAction extends BaseAction {
              if($info['status'] != 0){
                 $this->ajaxReturn(array('status'=>0, 'message'=>'该评论已审核,无须重新审核！'));
              }
-             $status = D('Comment')->where(array('id'=>$id, 'status'=>0))->save(array('status'=>$status,'update_time'=>date('Y-m-d H:i:s')));  
+             $status = D('Comment')->where(array('id'=>$id, 'status'=>0))->save(array('status'=>$status,'update_time'=>date('Y-m-d H:i:s')));
              $result['status'] = $status ? 1 : 0;
              $result['message'] = $result['status'] == 1 ? '审核成功' : '审核失败';
              $this->ajaxReturn($result);
-        } 
-        
+        }
+
+    }
+
+     /**
+    *   删除
+    */
+    public function del(){
+       if(IS_AJAX){
+
+           $id = intval(I('param.id', 0));
+
+           $status = D('Comment')->delete($id);
+
+           $result['status'] = $status ? 1 : 0;
+
+           $result['message'] = $result['status'] ? '删除成功' : '删除失败';
+           $this->ajaxReturn($result);
+       }
     }
 }

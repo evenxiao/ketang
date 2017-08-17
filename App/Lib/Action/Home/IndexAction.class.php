@@ -19,14 +19,15 @@ class IndexAction extends BaseAction {
                 if($val['type'] == 2){
                     $data['banner'][] = $val;
                 }
+    
             }
         }
         //推荐视频
-        $data['hotVideo'] = D('Content')->where(array('status'=>1, 'type'=>1))->order('is_hot desc, create_time desc')->limit(8)->select();
+        //$data['hotVideo'] = D('Content')->where(array('status'=>1, 'type'=>1))->order('is_hot desc, create_time desc')->limit(8)->select();
         //推荐资讯
-        $data['hotNews'] = D('Content')->where(array('status'=>1, 'type'=>2))->order('is_hot desc, create_time desc')->limit(9)->select();
+        //$data['hotNews'] = D('Content')->where(array('status'=>1, 'type'=>2))->order('is_hot desc, create_time desc')->limit(9)->select();
         //print_r( $data['hotNews']);
-        $cate = D('Cate')->where(array('status'=>1))->select();
+        $cate = D('Cate')->where(array('status'=>1, 'id'=>array('neq', 14)))->select(); //排除民警感悟版块
         if($cate){
             foreach($cate as $key=>$val){
                 if($val['type'] == 1 && count($data['video']) < 6){
@@ -41,18 +42,18 @@ class IndexAction extends BaseAction {
             //首页版块视频
             if($video_cate_ids){
                 foreach($video_cate_ids as $k=>$v){
-                    $data['video'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>1))->limit(8)->select();
+                    $data['video'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>1,'status'=>1))->limit(8)->order('id desc')->select();
                 }
-
             }
 
             if($news_cate_ids){
                 foreach($news_cate_ids as $k=>$v){
-                    $data['news'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>2))->limit(16)->select();
+                    $data['news'][$k]['content'] = D('Content')->field(true)->where(array('cate_id'=>$v, 'type'=>2,'status'=>1))->limit(20)->order('id desc')->select();
                 }
-
             }
         }
+        //民警感悟
+         $data['recommendNews'] = D('Content')->where(array('status'=>1, 'type'=>2, 'cate_id'=>14))->order('is_hot desc, create_time desc')->limit(8)->select();
 
         $this->assign('data', $data);
 
@@ -101,7 +102,7 @@ class IndexAction extends BaseAction {
         $type = intval(trim(I('param.type', 0)));
 
         $pageNum = intval(I('param.p', 1));
-        $limit = 1;
+        $limit = 10;
 
         $data = [];
         if($keyword){

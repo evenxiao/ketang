@@ -45,124 +45,17 @@
 		</script>
 
 	<!-- content -->
-	<div class="outwrap bg-white">
-		<div class="wrap">
-			<div class="index-rcommend-box">
-				<div class="common-hd bd-bm-1 clearfix">
-					<h1 class="c-black l">精彩推荐</h1>
-				</div>
-				<div class="rcommend-box mr-25 clearfix">
-					<!--推荐视频-->
-					<div class="rcommend-mv-box l">
-						<volist name="data.hotVideo" id="vo">
-						<a class="mv-link" href="<{:U('Video/view', array('id'=>$vo['id']))}>" title="<{$vo.title}>" target="_blank">
-							<div class="mv-link-img">
-								<img src='<if condition="$vo[thumb_img] eq ''">__ROOT__/Resources/static/home/images/img1.png<else/><{$vo['thumb_img']}></if>'/>
-							</div>
-							<h4><{$vo.title|msubstr=###,0, 14,'utf-8'}></h4>
-							<div class="mv-link-bottom">
-								<span class="score l">评分<php>echo intval($video['score']/$video['score_times'])</php></span>
-								<span class="number	r"><{$vo['click_num']}>人学习</span>
-							</div>
-						</a>
-						</volist>
-						<!--<a class="mv-link" href="#">-->
-							<!--<div class="mv-link-img">-->
-								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
-							<!--</div>-->
-							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
-							<!--<div class="mv-link-bottom">-->
-								<!--<span class="score l">评分4.9</span>-->
-								<!--<span class="number	r">1898人学习</span>-->
-							<!--</div>-->
-						<!--</a>-->
-
-						<!--<a class="mv-link" href="#">-->
-							<!--<div class="mv-link-img">-->
-								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
-							<!--</div>-->
-							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
-							<!--<div class="mv-link-bottom">-->
-								<!--<span class="score l">评分4.9</span>-->
-								<!--<span class="number	r">1898人学习</span>-->
-							<!--</div>-->
-						<!--</a>-->
-
-						<!--<a class="mv-link" href="#">-->
-							<!--<div class="mv-link-img">-->
-								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
-							<!--</div>-->
-							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
-							<!--<div class="mv-link-bottom">-->
-								<!--<span class="score l">评分4.9</span>-->
-								<!--<span class="number	r">1898人学习</span>-->
-							<!--</div>-->
-						<!--</a>-->
-
-						<!--<a class="mv-link" href="#">-->
-							<!--<div class="mv-link-img">-->
-								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
-							<!--</div>-->
-							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
-							<!--<div class="mv-link-bottom">-->
-								<!--<span class="score l">评分4.9</span>-->
-								<!--<span class="number	r">1898人学习</span>-->
-							<!--</div>-->
-						<!--</a>-->
-
-						<!--<a class="mv-link" href="#">-->
-							<!--<div class="mv-link-img">-->
-								<!--<img src="__ROOT__/Resources/static/home/images/img1.png">-->
-							<!--</div>-->
-							<!--<h4>媒体：新战车被扣或是苦肉计 借机退出星光计划</h4>-->
-							<!--<div class="mv-link-bottom">-->
-								<!--<span class="score l">评分4.9</span>-->
-								<!--<span class="number	r">1898人学习</span>-->
-							<!--</div>-->
-						<!--</a>-->
-					</div>
-
-				<!--推荐文章-->
-
-					<div class="rcommend-news-box l">
-						<div class="rcommend-top-new bd-bm-1">
-							<h1><a href="<{:U('News/view', array('id'=>$data['hotNews'][0]['id']))}>" title="<{$data['hotNews'][0]['title']}>" target="_blank"><{$data['hotNews'][0]['title']}></a></h1>
-							<p>
-								<if condition="$data['hotNews'][0]['content'] neq ''">
-								<{$data['hotNews'][0]['content']|htmlspecialchars_decode|strip_tags|msubstr=###, 0, 100}>
-								</if>
-							</p>
-						</div>
-						<div class="rcommend-bottom-news">
-							<ul vaule="compact">
-								<volist name="data.hotNews" id="vo" offset="1">
-								<li><a href="<{:U('News/view', array('id'=>$vo['id']))}>" title="<{$vo.title}>" target="_blank"><{$vo.title}></a></li>
-								</volist>
-								<!--<li><a href="#" title="">杜特尔特遭袭谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
-								<!--<li><a href="#" title="">杜特凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
-								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 A没有直接联系凶手 ...</a></li>-->
-								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
-								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何与CIA没有直接联系凶手 ...</a></li>-->
-								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>-->
-								<!--<li><a href="#" title="">杜特尔特遭袭击谁是凶手 为何没有直接联系凶手 ...</a></li>-->
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	
 	<!-- 视频tab框架-->
 
-	<div class="outwrap bg-gray clearfix">
+	<div class="outwrap bai clearfix">
 		<div class="wrap">
 			<div class="index-tab-wrap l">
 
 				<div class="mv-slideTxtBox">
 					<div class="hd clearfix">
 						<div class="common-tab-hd clearfix">
-							<h1 class="c-black l">精选视频</h1>
+							<h1 class="c-black l">微课视频</h1>
 						</div>
 						<ul>
 							<volist name="data.video" id="vo">
@@ -188,7 +81,7 @@
 								</div>
 								<h4><{$video.title|msubstr=###,0, 14,'utf-8'}></h4>
 								<div class="mv-link-bottom">
-									<span class="score l">评分<php>echo intval($video['score']/$video['score_times'])</php></span>
+									<span class="score l">评分<php>echo floatval($video['score']/$video['score_times'])</php></span>
 									<span class="number	r"><{$video.click_num}>人学习</span>
 								</div>
 							</a>
@@ -358,7 +251,7 @@
 			<!--视频点击排行榜-->
 			<div class="index-rank-wrap r">
 				<div class="common-hd">
-					<h1 class="c-black">视频点击排行榜</h1>
+					<h1 class="c-black">微课点击排行榜</h1>
 				</div>
 				<div class="common-rank-list">
 					<include file="Public:videoBang"/>
@@ -371,7 +264,7 @@
 
 	<!-- 新闻tab框架-->
 
-	<div class="outwrap bai clearfix">
+	<div class="outwrap bg-gray clearfix">
 		<div class="wrap">
 			<div class="index-tab-wrap l">
 				<div class="new-slideTxtBox">
@@ -529,7 +422,7 @@
 
 			<div class="index-rank-wrap r">
 				<div class="common-hd">
-					<h1 class="c-black">资讯点击排行榜</h1>
+					<h1 class="c-black">文章教案排行榜</h1>
 				</div>
 				<div class="common-rank-list">
 					<include file="Public:newsBang"/>
@@ -538,21 +431,149 @@
 		</div>
 	</div>
 	
+	<!--民警感悟-->
+	<div class="outwrap bg-white clearfix">
+		<div class="wrap gw-slide">
+			<div class="common-hd clearfix">
+				<h1 class="c-black l">学习感悟</h1>
+				<a class="common-more c-block r" href="<{:U('News/newsList', array('cate_id'=>14,'tag_id'=>0))}>">更多&gt;&gt;</a>
+			</div>
+			<div class="gw-wrap">
+				<ul class="gw-wrap-list" style="top: -350px;">
+				<volist name="data.recommendNews" id="vo">
+					<li class="gw-item clearfix">
+						<a href="<{:U('News/view', array('id'=>$vo['id']))}>" target="_blank">
+							<div class="gw-img l">
+								<img src="<if condition="$vo[thumb_img] eq ''">__ROOT__/Resources/static/home/images/gw-img.jpg<else/><{$vo['thumb_img']}></if>">
+							</div>
+							<div class="gw-content r">
+								<h4><{$vo.title|msubstr=###,0,14,'utf-8'}></h4>
+								<p><{$vo.content|htmlspecialchars_decode|strip_tags|msubstr=###,0,150}></p>
+							</div>
+						</a>
+					</li>
+				</volist>	
+
+					<!-- <li class="gw-item clearfix">
+						<a href="#">
+							<div class="gw-img l">
+								<img src="__ROOT__/Resources/static/home/images/gw-img.jpg">
+							</div>
+							<div class="gw-content r">
+								<h4>关于进一步加强上海机场单位内部治安保卫工作的思考</h4>
+								<p>自虹桥西警务区成立以来，从我们受理的虹桥机场航空“托盗”案件来看，2010年共受理“托盗”案件23起，2011年共受理“托盗”案件25起，2012年共受理“托盗”案件34起（不含排除掉的6起），2013年共受理“托盗”案件32起（不含排除掉的9起），2014年前11个月共受理“托盗”案件15起（不含排除掉的11起），前四年呈持续增长的态势。今年以来，为有效打防此类案件，切实维护旅客的财产安全，虹桥西警务区结合“平安机场建设”专项行动，主动转变工作思路、创新工作方法，专题研究案件发案规律及原因，细化制定打防措施，健全完善针对“托盗”案件的打防机制，使得此类案件得到有效遏制，这也为我们今后加强此类案件的打击防范提供了参考。</p>
+							</div>
+						</a>
+					</li>
+					
+					<li class="gw-item clearfix">
+						<a href="#">
+							<div class="gw-img l">
+								<img src="__ROOT__/Resources/static/home/images/gw-img.jpg">
+							</div>
+							<div class="gw-content r">
+								<h4>关于进一步加强上海机场单位内部治安保卫工作的思考</h4>
+								<p>自虹桥西警务区成立以来，从我们受理的虹桥机场航空“托盗”案件来看，2010年共受理“托盗”案件23起，2011年共受理“托盗”案件25起，2012年共受理“托盗”案件34起（不含排除掉的6起），2013年共受理“托盗”案件32起（不含排除掉的9起），2014年前11个月共受理“托盗”案件15起（不含排除掉的11起），前四年呈持续增长的态势。今年以来，为有效打防此类案件，切实维护旅客的财产安全，虹桥西警务区结合“平安机场建设”专项行动，主动转变工作思路、创新工作方法，专题研究案件发案规律及原因，细化制定打防措施，健全完善针对“托盗”案件的打防机制，使得此类案件得到有效遏制，这也为我们今后加强此类案件的打击防范提供了参考。</p>
+							</div>
+						</a>
+					</li>
+
+					<li class="gw-item clearfix">
+						<a href="#">
+							<div class="gw-img l">
+								<img src="__ROOT__/Resources/static/home/images/gw-img.jpg">
+							</div>
+							<div class="gw-content r">
+								<h4>关于进一步加强上海机场单位内部治安保卫工作的思考</h4>
+								<p>自虹桥西警务区成立以来，从我们受理的虹桥机场航空“托盗”案件来看，2010年共受理“托盗”案件23起，2011年共受理“托盗”案件25起，2012年共受理“托盗”案件34起（不含排除掉的6起），2013年共受理“托盗”案件32起（不含排除掉的9起），2014年前11个月共受理“托盗”案件15起（不含排除掉的11起），前四年呈持续增长的态势。今年以来，为有效打防此类案件，切实维护旅客的财产安全，虹桥西警务区结合“平安机场建设”专项行动，主动转变工作思路、创新工作方法，专题研究案件发案规律及原因，细化制定打防措施，健全完善针对“托盗”案件的打防机制，使得此类案件得到有效遏制，这也为我们今后加强此类案件的打击防范提供了参考。</p>
+							</div>
+						</a>
+					</li>
+
+					<li class="gw-item clearfix">
+						<a href="#">
+							<div class="gw-img l">
+								<img src="__ROOT__/Resources/static/home/images/gw-img.jpg">
+							</div>
+							<div class="gw-content r">
+								<h4>关于进一步加强上海机场单位内部治安保卫工作的思考</h4>
+								<p>自虹桥西警务区成立以来，从我们受理的虹桥机场航空“托盗”案件来看，2010年共受理“托盗”案件23起，2011年共受理“托盗”案件25起，2012年共受理“托盗”案件34起（不含排除掉的6起），2013年共受理“托盗”案件32起（不含排除掉的9起），2014年前11个月共受理“托盗”案件15起（不含排除掉的11起），前四年呈持续增长的态势。今年以来，为有效打防此类案件，切实维护旅客的财产安全，虹桥西警务区结合“平安机场建设”专项行动，主动转变工作思路、创新工作方法，专题研究案件发案规律及原因，细化制定打防措施，健全完善针对“托盗”案件的打防机制，使得此类案件得到有效遏制，这也为我们今后加强此类案件的打击防范提供了参考。</p>
+							</div>
+						</a>
+					</li>
+
+					<li class="gw-item clearfix">
+						<a href="#">
+							<div class="gw-img l">
+								<img src="__ROOT__/Resources/static/home/images/gw-img.jpg">
+							</div>
+							<div class="gw-content r">
+								<h4>关于进一步加强上海机场单位内部治安保卫工作的思考</h4>
+								<p>自虹桥西警务区成立以来，从我们受理的虹桥机场航空“托盗”案件来看，2010年共受理“托盗”案件23起，2011年共受理“托盗”案件25起，2012年共受理“托盗”案件34起（不含排除掉的6起），2013年共受理“托盗”案件32起（不含排除掉的9起），2014年前11个月共受理“托盗”案件15起（不含排除掉的11起），前四年呈持续增长的态势。今年以来，为有效打防此类案件，切实维护旅客的财产安全，虹桥西警务区结合“平安机场建设”专项行动，主动转变工作思路、创新工作方法，专题研究案件发案规律及原因，细化制定打防措施，健全完善针对“托盗”案件的打防机制，使得此类案件得到有效遏制，这也为我们今后加强此类案件的打击防范提供了参考。</p>
+							</div>
+						</a>
+					</li>
+					<li class="gw-item clearfix">
+						<a href="#">
+							<div class="gw-img l">
+								<img src="__ROOT__/Resources/static/home/images/gw-img.jpg">
+							</div>
+							<div class="gw-content r">
+								<h4>关于进一步加强上海机场单位内部治安保卫工作的思考</h4>
+								<p>自虹桥西警务区成立以来，从我们受理的虹桥机场航空“托盗”案件来看，2010年共受理“托盗”案件23起，2011年共受理“托盗”案件25起，2012年共受理“托盗”案件34起（不含排除掉的6起），2013年共受理“托盗”案件32起（不含排除掉的9起），2014年前11个月共受理“托盗”案件15起（不含排除掉的11起），前四年呈持续增长的态势。今年以来，为有效打防此类案件，切实维护旅客的财产安全，虹桥西警务区结合“平安机场建设”专项行动，主动转变工作思路、创新工作方法，专题研究案件发案规律及原因，细化制定打防措施，健全完善针对“托盗”案件的打防机制，使得此类案件得到有效遏制，这也为我们今后加强此类案件的打击防范提供了参考。</p>
+							</div>
+						</a>
+					</li>
+					<li class="gw-item clearfix">
+						<a href="#">
+							<div class="gw-img l">
+								<img src="__ROOT__/Resources/static/home/images/gw-img.jpg">
+							</div>
+							<div class="gw-content r">
+								<h4>关于进一步加强上海机场单位内部治安保卫工作的思考</h4>
+								<p>自虹桥西警务区成立以来，从我们受理的虹桥机场航空“托盗”案件来看，2010年共受理“托盗”案件23起，2011年共受理“托盗”案件25起，2012年共受理“托盗”案件34起（不含排除掉的6起），2013年共受理“托盗”案件32起（不含排除掉的9起），2014年前11个月共受理“托盗”案件15起（不含排除掉的11起），前四年呈持续增长的态势。今年以来，为有效打防此类案件，切实维护旅客的财产安全，虹桥西警务区结合“平安机场建设”专项行动，主动转变工作思路、创新工作方法，专题研究案件发案规律及原因，细化制定打防措施，健全完善针对“托盗”案件的打防机制，使得此类案件得到有效遏制，这也为我们今后加强此类案件的打击防范提供了参考。</p>
+							</div>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+			 <a class="abtn aleft" href="#up"></a>
+			 <a class="abtn aright agrayright" href="#down"></a>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$(".gw-slide").Xslider({
+			unitdisplayed:4,
+			numtoMove:4,
+			// loop:"cycle",
+			dir:"V",
+			autoscroll:8000,
+			speed:500,
+			scrollobjSize:Math.ceil($(".gw-slide").find("li").length/4)*350
+		});
+		$("a").focus(function(){this.blur();});
+	})
+	</script>
+
 	<!-- 快捷标签-->
 	<div class="outwrap banner-img clearfix">
 		<div class="wrap">
+			<notempty name="data.tag">
 			<div class="common-hd clearfix">
 				<h1 class="c-white l">热门标签</h1>
 				<a class="common-more c-white r" href="<{:U('Index/tag')}>" target="_blank">更多>></a>
 			</div>
 			<div class="label-box">
 				<volist name="data.tag" id="vo">
-					<a href="<{:U('Index/tag', array('id'=>$vo['id']))}>"><{$vo.name}></a>
+					<a href="<{:U('Index/tag', array('tag_id'=>$vo['id']))}>"><{$vo.name}></a>
 				</volist>
 
 			</div>
+			</notempty>
+			<notempty name="data.ads">
 			<div class="common-hd clearfix">
-				<h1 class="c-white l">热点事件</h1>
+				<h1 class="c-white l">学习平台链接</h1>
 			</div>
 			<div class="hot-banner-box clearfix">
 				<volist name="data.ads" id="vo">
@@ -567,6 +588,7 @@
 					<!--<a href="#"><img src="__ROOT__/Resources/static/home/images/banner3.png"></a>-->
 				<!--</div>-->
 			</div>
+			</notempty>
 		</div>
 	</div>
 	
